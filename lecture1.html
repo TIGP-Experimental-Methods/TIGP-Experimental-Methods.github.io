@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 1 – AI | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Lecture 1 — AI 101: build it, ship it, log it — then your instrument · Fri 11 Sep 2026 · 14:20–16:20 · R311, IAMS</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a class="active" href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · Electronics</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="lecture1-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>AI 101 — build it, ship it, log it — then your instrument</h1>
+      <p><strong>Goal.</strong> By the break you have built an inverted-pendulum simulator with an AI coding agent from a five-line spec you wrote yourself, checked it against
+        physics, put it on the public web with your name on it, and written your first Markdown log entry. By the end of the two hours <strong>your own phone app talks to the ESP32 in your hand</strong> —
+        one button that acts on the board, one live number coming back — flashed by you, verified on your phone, shipped as a pull request. You also know which block of the <a href="projects.html">class board</a> is yours.</p>
+      <p><strong>Learning goals:</strong> work with an AI coding agent from a spec you wrote · verify AI output with a <em>physical</em> check, not by looking at it · put a program
+        on the public web and open it on your phone · keep a Markdown log the next session can resume from · <strong>build a phone app that talks to your ESP32, flash it, ship it as a PR</strong> · know your block.</p>
+      <p class="callout"><strong>Why we start away from the project.</strong> AI-assisted work is a general skill. The same three moves serve a simulation, a website, a video, a report,
+        a KiCad board and a firmware driver: <strong>build</strong> something from a written spec, <strong>ship</strong> it where others can see it, <strong>log</strong> what you did in plain text.
+        Today you practise the three moves twice: first on something every physicist already understands — a pendulum — with no hardware in the way; then on the ESP32 in your hand, with a phone app of your own.
+        Electronics design is one application of AI, not the syllabus.</p>
+      <p class="callout"><strong>The one-sentence thesis:</strong> an AI agent is a junior engineer with no memory — it is exactly as good as the project documentation,
+        the task specification and the verification you give it. Everything below follows from that sentence.</p>
+      <p>Prerequisite: the <a href="preparation.html">preparation checklist</a> (workbook ch. 0, at most one hour, not counted in the 10 hours of homework) — including a free
+        Cloudflare account connected to GitHub. Bring your laptop and a USB cable; the dev board (ESP32-S3) is handed to you at the start, already flashed with the skeleton — you flash your own build at 15:35, so the PlatformIO toolchain must be downloaded at home.</p>
+    </section>
+
+    <section class="card">
+      <h2>How we work: your own repo for your own things, one class repo for the instrument, a tutor on every screen</h2>
+      <div class="grid">
+        <div class="tile"><h3>Build</h3><p>A written spec first — five lines, yours. Then a plan, then code. Today: an inverted pendulum in one <code>index.html</code> (canvas + JavaScript, no framework, no build).
+          The agent writes the boilerplate; you set the parameters and you do the check.</p></div>
+        <div class="tile"><h3>Ship</h3><p>Your own GitHub repo <code>pendulum</code>, deployed on <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages</a>
+          straight from git — no build command, a public <code>*.pages.dev</code> URL, redeployed on every push. GitHub Pages is the fallback. This repo becomes your personal course page.</p></div>
+        <div class="tile"><h3>Log — in Markdown</h3><p><code>PROGRESS.md</code> at the end of every session: done / verified / next / gotchas. Plain text next to the code: it diffs, it is searchable,
+          the AI reads it at the start of the next session, and it <em>is</em> your lab notebook for this course. Specs, logs, notes, READMEs, slides — Markdown is the lingua franca of AI work.</p></div>
+        <div class="tile"><h3>The Claude tutor</h3><p>In Claude Code, <code>/tutor L1</code> runs today's workbook chapter with you, in English or Mandarin: it checks your toolchain, paces every step,
+          refuses to write code before your <code>SPEC.md</code> exists, asks "what did you measure?" before you commit, and writes your <code>PROGRESS.md</code> with you. Later: <code>/tutor HW1</code>, <code>/tutor L2</code>, …</p></div>
+        <div class="tile"><h3>The instrument — the same moves on hardware</h3><p>One class repo <code>TIGP-Experimental-Methods/class-board-2026</code>: <code>firmware/</code> (PlatformIO), <code>host/</code> (phone app + <code>instrument.py</code>),
+          <code>hardware/</code> (KiCad), <code>workbook/</code>, <code>tutor/</code> and your folder <code>docs/students/&lt;name&gt;/</code>. Firmware on the ESP32-S3 ↔ WebSocket ↔ a phone web app ↔ Python. The board is its own WiFi access point.
+          <code>main</code> is protected; you work on branches and pull requests; the instructor merges.</p></div>
+        <div class="tile"><h3>Your block</h3><p>The class board has five student blocks — B1 inputs · B2 power · B3 outputs · B4 switching · B5 digital/TRIG — and five students. At the end
+          of today each of you owns one: you read it, route it, write its driver and demo it.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>The five working practices (the spine of the course)</h2>
+      <ol>
+        <li><strong>Spec first.</strong> Requirements live in a file (<code>SPEC.md</code>), not in chat scrollback; ask for a plan before code. Today's spec is five lines long and you write it yourself.</li>
+        <li><strong>Teach the repo, not the session: <code>CLAUDE.md</code>.</strong> Conventions, pinout, build/flash commands, how to test — written once, loaded every session.</li>
+        <li><strong>Small, fresh sessions.</strong> One task = one session; finish, commit, start clean. Long sessions rot.</li>
+        <li><strong>Handover notes — in Markdown.</strong> Every session ends by updating <code>PROGRESS.md</code>: done / verified / next / gotchas. Lab-notebook discipline applied to AI work.</li>
+        <li><strong>AI writes, you verify.</strong> No verification plan → the output is not yours to ship. In this course "verify" means a number or an observation: <em>does the swing period match 2π√(L/g)? what do you see on the phone / in DRC / on the scope?</em></li>
+      </ol>
+      <p>The class repo is built the same way: the course documents, the workbook and the tutor skill are the course's own <code>CLAUDE.md</code> and handover log.</p>
+    </section>
+
+    <section class="card">
+      <h2>Session plan (120 min)</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Time</th><th>Block</th><th>What happens</th></tr>
+        <tr><td>0:00</td><td>Welcome (5 min)</td><td>What we build together; today's two promises — a simulator on the web by the break, your own app talking to your ESP32 by the end; the 10-hour promise. Boards handed out.</td></tr>
+        <tr><td>0:05</td><td>Tutor on (7 min)</td><td>Open Claude Code in the class repo and type <code>/tutor L1</code>. The tutor greets you in your language, asks what you have built before, and runs the toolchain check
+          (<code>git --version</code>, <code>gh auth status</code>, <code>pio --version</code>, board on a port, Cloudflare signed in?). Done when every screen shows "toolchain OK".</td></tr>
+        <tr><td>0:12</td><td>Lecture: working with an AI agent (10 min)</td><td>The five practices above; Markdown as the lab notebook; today's two exercises as the whole loop in miniature.</td></tr>
+        <tr><td>0:22</td><td><strong>Exercise E1a: build — the inverted pendulum</strong> (25 min)</td><td><code>gh repo create &lt;user&gt;/pendulum --public --clone</code>. <strong>You write <code>SPEC.md</code></strong>, five lines: what it shows · two controls (push the cart left/right by key or touch; toggle a balancing controller) ·
+          the parameters L, m, g · <strong>the check: controller off, pole hanging, small-swing period = 2π√(L/g) within 5 %</strong>. Ask for a plan; let Claude write one <code>index.html</code>; open it; time ten swings with a stopwatch; commit.
+          Changing L to see the √L scaling is the stretch goal; at minute 20 you may fork the instructor's reference repo instead. <em>Alternatives with one checkable number:</em> bouncing ball (coefficient of restitution), two-body orbit (Kepler's third law), Pong (the ball speed you specified).</td></tr>
+        <tr><td>0:47</td><td><strong>Exercise E1b: ship + log</strong> (10 min)</td><td>Push. Cloudflare dashboard → Workers &amp; Pages → Pages → Connect to Git → <code>pendulum</code> → no build command, output <code>/</code> → Deploy.
+          Open the <code>*.pages.dev</code> URL on your phone. Then <strong>you write the <code>PROGRESS.md</code> entry</strong> (done / verified / next / gotchas), commit, push, and watch the site redeploy itself.
+          Fallback if Cloudflare blocks: GitHub Pages (Settings → Pages → branch <code>main</code>).</td></tr>
+        <tr><td>0:57</td><td>Break (5 min)</td><td></td></tr>
+        <tr><td>1:02</td><td>The instrument on your phone (10 min)</td><td>Your pre-flashed board is an access point <code>instrument-&lt;id&gt;</code>: join it, open <code>http://192.168.4.1</code>, tap the LED button, watch the live chart — everyone, now.
+          The software-shape slide (firmware ↔ WebSocket ↔ PWA ↔ <code>instrument.py</code>) and <strong>the two files a control touches</strong>: a handler in <code>firmware/src/blocks/base/</code> and a widget in <code>host/pwa/</code>, with the one message that crosses the WebSocket.</td></tr>
+        <tr><td>1:12</td><td><strong>Exercise E2: your phone app talks to your ESP32</strong> (33 min)</td><td><strong>One button out, one live number back.</strong> Pick a button action (LED colour, blink pattern, a GPIO high/low, a beep on a spare pin) and a readout
+          (chip temperature via <code>temperatureRead()</code>, a touch pad, a counter of your presses, an ADC pin). With the tutor: add the handler and the status field in <code>blocks/base/</code>, add the widget and the number to your panel in the app;
+          <strong><code>pio run -t upload</code></strong>; your phone reconnects; press the button, watch the number. <code>git switch -c e2-&lt;name&gt;</code>, commit, push, <strong>PR with a phone screenshot</strong>. The tutor writes the boilerplate from the worked example but you edit the message name,
+          the handler body and the widget label. Done when your app on your phone drives your board and shows a live number from it — nobody leaves without it.</td></tr>
+        <tr><td>1:45</td><td>The class board (10 min)</td><td>Schematic PDF page 1 (block diagram); one sentence per block (B1 inputs · B2 power · B3 outputs · B4 switching · B5 digital/TRIG); the 3 × 4 SMA front-panel drawing;
+          <strong>block assignment</strong> — volunteers first, then lots. The tutor records your block in <code>PROGRESS.md</code>. Done when five names sit on five blocks.</td></tr>
+        <tr><td>1:55</td><td>Homework (5 min)</td><td>Homework 1 as five checkboxes; the LINE group; office hour Wednesday 16:00. The tutor schedules your checkpoints (Tue/Thu) and ends the session with your <code>PROGRESS.md</code> update.</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Homework 1 (assessed, 2.5 h) — Exercise E2 (finish) + E3–E5</h2>
+      <ul>
+        <li><strong>E2 finish + merge (0.5 h).</strong> If your app did not fully work in class, finish it with <code>/tutor HW1</code> (Wednesday office hour if flashing is the problem). The instructor reviews PRs on Monday; address one comment and merge. <em>Teaches:</em> the PR loop.</li>
+        <li><strong>E3 (0.5 h) Read your block.</strong> The tutor shows your block's PDF page and asks two questions (B1 "why is there a 1 kΩ in series with each input?" ·
+          B2 "what happens if USB and the jack are both plugged in?" · B3 "what sets the ±10 V swing?" · B4 "what does the diode across the relay coil do?" · B5 "why can't a GPIO drive 5 V TTL directly?").
+          Answers go in <code>docs/students/&lt;name&gt;/notes.md</code>. Watch V3. <em>Teaches:</em> schematic reading, the purpose of your block.</li>
+        <li><strong>E4 (0.5 h) KiCad ready.</strong> Install KiCad 10; unzip the library package into the repo; open <code>class-board.kicad_pro</code>; find your rule area; screenshot it. Watch V4. <em>Teaches:</em> KiCad orientation.</li>
+        <li><strong>E5 (0.5 h) Your SPEC paragraph.</strong> One paragraph in <code>docs/students/&lt;name&gt;/SPEC.md</code>: what your block must do, one number, how you will show it on demo day — the pendulum spec, one level up. <em>Teaches:</em> spec first.</li>
+        <li>Videos V3 + V4 (16 min) and the workbook ch. 1 reading fill the rest of the 2.5 h. Every work session ends with a <code>PROGRESS.md</code> entry and a commit — in your pendulum repo and in the class repo alike. This rule holds for the whole course.</li>
+      </ul>
+      <p>Assessed at the end of the week: your pendulum URL and its <code>PROGRESS.md</code> (from class), the merged E2 (your app), the two answers in <code>notes.md</code>, the zone screenshot and <code>SPEC.md</code> — all in a repo, all by commit or PR.</p>
+    </section>
+
+    <section class="card">
+      <h2>Where the three moves go next</h2>
+      <ul>
+        <li><strong>Build:</strong> your part of the board (Lecture 2), your block's driver and app panel (Lecture 3, <em>Firmware and Mechanical 101</em>) — the E2 app grown into a real block panel; same spec → plan → boilerplate → <em>you</em> edit the lines that matter → verify.</li>
+        <li><strong>Ship:</strong> the class board is ordered on 28 Sep from everyone's pull requests; your panel ships in the instrument's app; your pendulum site is already public.</li>
+        <li><strong>Log:</strong> <code>PROGRESS.md</code> at the end of every session; <code>SPEC.md</code> grows a measured number in the wrap-up.</li>
+        <li><strong>Your personal page:</strong> the pendulum repo <em>is</em> your course page. In the wrap-up you add your 60-second video and your measured number to it; the <a href="teams.html">Showcase</a> links to it next to your block. Same site, more on it every week — that is "show your work".</li>
+        <li><strong>Videos, slides, reports with AI (optional, from Lecture 3):</strong> the lab's <a href="https://github.com/iams-yb-lab/show-your-work" target="_blank" rel="noopener">show-your-work</a> skills for Claude Code —
+          <code>education-video</code>, <code>slide-deck</code>, <code>technical-report</code>, <code>natural-voice</code>, <code>showoff-render</code> — install into any repo with <code>python tools/install_skills.py &lt;repo&gt;</code>. Use them for your 60-second video or your demo slides if you like; a phone video is equally acceptable.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Materials</h2>
+      <p class="callout">Videos: V0 <em>Build, ship, log: a pendulum on the web</em> (6 min, optional preview / replay) · V1 <em>Setup: VS Code, Claude Code, PlatformIO, git, clone the repo</em> (8 min, pre-class) · V2 <em>Flash the skeleton and open the app on your phone</em> (5 min, pre-class) ·
+        V3 <em>Our schematic in 8 minutes, block by block</em> (8 min, Homework 1) · V4 <em>KiCad: unzip the library, place a missing part, get a part from LCSC</em> (8 min, Homework 1). Materials: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch1-day-1-week-1.md" target="_blank" rel="noopener">workbook ch. 1</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">ch. 0</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/blocks" target="_blank" rel="noopener">your block page</a> · slides <a href="slides/L1.html" target="_blank" rel="noopener">L1 (HTML)</a> / <a href="slides/L1.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">reference pendulum repo</a> (<a href="https://tigp-experimental-methods.github.io/pendulum-example/" target="_blank" rel="noopener">live</a>) · the tutor: <code>/tutor L1</code> in the class repo. Video recordings follow here.</p>
+      <p class="callout">The instructor's reference <code>pendulum</code> repo and site (fork it if your session stalls); workbook ch. 0 <em>Before day 1</em> and ch. 1 <em>Day 1 + week 1: build it, ship it, log it — then your instrument</em> (with the five-line spec template, the four log questions, the E2 recipe — two files, one message, flash, screenshot — and one page per block: its PDF excerpt, the two questions, its zone);
+        the L1 slides; the tutor (<code>/tutor L1</code>, <code>/tutor HW1</code>) in the class repo. Materials: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch1-day-1-week-1.md" target="_blank" rel="noopener">workbook ch. 1</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">ch. 0</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/blocks" target="_blank" rel="noopener">your block page</a> · slides <a href="slides/L1.html" target="_blank" rel="noopener">L1 (HTML)</a> / <a href="slides/L1.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">reference pendulum repo</a> (<a href="https://tigp-experimental-methods.github.io/pendulum-example/" target="_blank" rel="noopener">live</a>) · the tutor: <code>/tutor L1</code> in the class repo. Video recordings follow here.</p>
+      <p>See also the <a href="resources.html#ai">AI resources</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

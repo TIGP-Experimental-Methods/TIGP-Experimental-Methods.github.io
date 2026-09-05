@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern Experimental Techniques – Physics | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Basic skills for experimentalists: AI-assisted coding, electronics &amp; PCBs, mechanical design<br>
+          <span class="brand-zh">現代實驗技術－物理 · TIGP, Academia Sinica · PHT048 / TIGP722300</span></p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a class="active" href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · Electronics</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="index-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card hero">
+      <div style="flex: 2 1 420px;">
+        <h1>Build a real lab instrument in one month</h1>
+        <p>This is a hands-on short course for graduate students in experimental physics. In three two-hour workshops you learn the
+          three skill sets needed to ship one small, genuinely useful device for a real lab: <strong>firmware and software written
+          with an AI coding agent</strong>, an <strong>electronic circuit on a professionally assembled PCB</strong>, and an
+          <strong>enclosure designed from a parametric CAD template</strong> and 3D-printed.</p>
+        <p>Alongside the workshops — <strong>about three hours a week for three weeks, ten hours of homework in total, and that is a promise</strong> — you build
+          your part of the <strong>class instrument</strong>: one board, five blocks, five students, one repository. The board plugs onto an ESP32-S3 dev board and gives it what
+          the dev board cannot do: 2 × ±10 V 16-bit waveform outputs, 8 × ±10 V 16-bit inputs, 4 relays, 2 isolated fast inputs, 8 TTL outputs and 2 fast trigger outputs, a switchable TRIG,
+          a phone app, a Python API and an OLED — all from one USB-C cable. You route your block's zone of the PCB, review a classmate's, write your block's driver and app panel,
+          and personalise the box. In the demo week (preliminary: 26–30 October) you give a <strong>5-minute live demonstration</strong> from the class checklist — waveform out, seen on the scope
+          and on the instrument's own input · change it from the phone · alarm → relay → notification · your block — with your 60-second video as the safety net.</p>
+        <p>The message of the course: <em>AI lets a physicist operate at roughly 80 % of a competent electrical, mechanical and software
+          engineer — but only if you can specify what you want and verify what you get.</em> Specification and verification are the real
+          skills we teach.</p>
+        <p class="callout">Before the first class, please complete the <a href="preparation.html">Preparation</a> checklist
+          (workbook ch. 0, at most one hour — not counted in the ten). You need to bring your own laptop; the dev board is handed to you at the door.</p>
+      </div>
+      <div class="facts">
+        <dl>
+          <dt>Course</dt><dd>Modern Experimental Techniques – Physics (2 credits)<br>現代實驗技術－物理（2 學分）</dd>
+          <dt>Codes</dt><dd>PHT048 · TIGP722300 · 222 D5400</dd>
+          <dt>Program</dt><dd><a href="https://tigp.iams.sinica.edu.tw/#course_schedule" target="_blank" rel="noopener">TIGP</a>, Institute of Atomic and Molecular Sciences, Academia Sinica</dd>
+          <dt>When</dt><dd>Fridays 14:20–16:20 (first class 11 Sep 2026)</dd>
+          <dt>Where</dt><dd>Room R311, IAMS, Academia Sinica<br>中研院原分所311室</dd>
+          <dt>Format</dt><dd>3 × 2 h interactive workshops + 10 hours of homework in total (about three hours a week for three weeks, plus a short wrap-up)</dd>
+          <dt>Instructor</dt><dd>Shayne Bennetts (IAMS)<br><a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a></dd>
+          <dt>Language</dt><dd>English — instruction and presentation materials (using AI to prepare them is encouraged); the Claude tutor answers in English or Mandarin</dd>
+          <dt>Assessment</dt><dd>Block works 40 % · PR quality incl. your review of a peer 30 % · demo clarity 20 % · box 10 %</dd>
+          <dt>Bring</dt><dd>Laptop (Windows / macOS / Linux) with the <a href="preparation.html">preparation</a> done</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Schedule</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>#</th><th>Session</th><th>What you will be able to do afterwards</th><th>Deliverable</th></tr>
+        <tr><td>0</td><td><a href="preparation.html">Preparation</a> (at home, at most 1 h, before 11 Sep)</td>
+          <td>Tools working: VS Code + Claude Code signed in to the course organization, PlatformIO, git, GitHub organization accepted, the class repo <code>class-board-2026</code> cloned, a free Cloudflare account connected to GitHub, videos V1 + V2 watched. KiCad 10 follows in week 1.</td>
+          <td>Check-in on the LINE group: a screenshot of the cloned repo open in VS Code</td></tr>
+        <tr><td>1</td><td><a href="lecture1.html">AI 101 – build it, ship it, log it; then your instrument</a><br><small>Fri 11 Sep 2026 · 14:20–16:20 · R311 IAMS</small></td>
+          <td>Work with an AI coding agent from a spec you wrote (an inverted-pendulum simulator), verify it against physics, deploy it to the public web (Cloudflare Pages), log it in Markdown; build your own phone app that talks to your ESP32 (one button out, one live number back), flash it, open a pull request; know which block of the class board is yours.</td>
+          <td>Your pendulum on a public URL with its <code>PROGRESS.md</code>; your phone app ↔ ESP32 PR open (E2); your block assigned. <strong>Homework 1 (2.5 h):</strong> merge E2; E3–E5 — read your block, KiCad ready, one-paragraph <code>SPEC.md</code></td></tr>
+        <tr><td>2</td><td><a href="lecture2.html">Electronics 101 – from the dev board to the class board</a><br><small>Fri 18 Sep 2026 · 14:20–16:20 · R311 IAMS</small></td>
+          <td>The six ideas needed to read our schematic; place parts and route in KiCad; DRC; open and review a pull request; why the class board exists.</td>
+          <td>Your schematic sheet ERC-clean, your zone half routed. <strong>Homework 2 (3 h):</strong> E7–E10 — finish routing, one part from LCSC, <strong>PR by Wed 23 Sep</strong>, review a peer by Fri 25 Sep, fix yours by Sun 27 Sep</td></tr>
+        <tr><td>—</td><td>Fri 25 Sep 2026 — public holiday<br><small>no session</small></td>
+          <td>Peer-review deadline (homework, not a session).</td>
+          <td>—</td></tr>
+        <tr><td>—</td><td><strong>Mon 28 Sep 2026 — class PCB order</strong><br><small>instructor</small></td>
+          <td>The five zones are merged, the full DRC run, Gerbers/BOM/CPL exported and the JLCPCB order placed: 5 assembled boards + 2 bare boards + 6 front panels. The week of 28 Sep carries no homework.</td>
+          <td>Your zone in the class order</td></tr>
+        <tr><td>3</td><td><a href="lecture3.html">Firmware and Mechanical 101 – polish, box, and what else</a><br><small>Fri 2 Oct 2026 · 14:20–16:20 · R311 IAMS</small></td>
+          <td>How a block driver and an app panel fit the skeleton; work against hardware that is not there yet (sim mode); design a printable enclosure from a template; what to do next.</td>
+          <td>Driver + panel running in sim, PR open; box STL exported. <strong>Homework 3 (3 h):</strong> E11–E12 — driver + panel + one alarm rule, <strong>PR by Fri 9 Oct</strong>; <code>box.stl</code></td></tr>
+        <tr><td>—</td><td>≈ Mon 12 Oct 2026 — boards back<br><small>instructor</small></td>
+          <td>The instructor flashes and bench-checks every assembled board (rails, LED, WiFi) and prints the five boxes. No student homework.</td>
+          <td>—</td></tr>
+        <tr><td>—</td><td>Wrap-up (1.5 h)<br><small>week of 19 Oct 2026</small></td>
+          <td>E13: flash your build without <code>SIM</code> and see your panel move real hardware; one measured number for your block; a 60-second phone video.</td>
+          <td>The number in <code>SPEC.md</code>; the video linked from your <a href="teams.html">Showcase</a> card</td></tr>
+        <tr><td>4</td><td><a href="projects.html#day">Demo week</a><br><small>preliminary: 26–30 Oct 2026, scheduled 5-minute slots, no extra prep</small></td>
+          <td>E14: waveform out, seen on the scope and on the instrument's own input · change it from the phone · alarm → relay → notification · your block. Optional: present at the <a href="https://iamsquantum.github.io/sail-club/index.html" target="_blank" rel="noopener">SAIL Club</a> lunch.</td>
+          <td>The demo: block works 40 % · PR quality 30 % · clarity 20 % · box 10 %</td></tr>
+      </table>
+      </div>
+      <p class="callout warn"><strong>Hard deadline:</strong> your zone must be in the <strong>class JLCPCB order on Monday 28 September</strong> — the boards come back fully assembled about two weeks later (≈ 12 October), so a late zone cannot be on the board. Note Friday 25 September is a public holiday (the peer-review deadline is homework, not a session). Demo-week dates are preliminary and will be confirmed in class.</p>
+    </section>
+
+    <section class="card">
+      <h2>How the course works</h2>
+      <div class="grid">
+        <div class="tile"><h3>One project, three lenses</h3><p>The lectures are not separate topics — they are the three skills needed to ship one device: the <a href="projects.html">class instrument</a>. Every exercise is done once, on your own block of the one class board, and your block's panel and your box make it yours.</p></div>
+        <div class="tile"><h3>Workshop, not seminar</h3><p>Each lecture runs as short demo → hands-on → debrief blocks, repeated, and a Claude tutor (<code>/tutor</code> in Claude Code) paces you through every hands-on step and the homework, in English or Mandarin. Theory appears only when it unblocks a decision ("what do ±10 V and 16 bits buy?").</p></div>
+        <div class="tile"><h3>AI writes, you verify</h3><p>We use <strong>VS Code + Claude Code</strong> agentically inside the class repository. You learn the working practices — spec first, project conventions file, fresh sessions, handover notes, parallel agents — that make AI-assisted engineering reliable.</p></div>
+        <div class="tile"><h3>Do each step once, for real</h3><p>Every step of shipping hardware is done once and for real — place the missing parts, download a part from LCSC, route your zone, open a PR, review a peer — and your zone goes into a professionally assembled board that you demo in a box. Ten hours of homework, maximum: cover less, well.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Assessment (project-based)</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Component</th><th>Weight</th><th>When</th></tr>
+        <tr><td>Block works: your panel drives your block's real hardware</td><td>40 %</td><td>Demo week (preliminary: 26–30 Oct)</td></tr>
+        <tr><td>PR quality, including your review of a peer — E2 (week 1), your zone (<strong>PR Wed 23 Sep</strong>, review Fri 25 Sep, fixes Sun 27 Sep), driver + panel (PR Fri 9 Oct)</td><td>30 %</td><td>23 Sep · 25 Sep · 27 Sep · 9 Oct</td></tr>
+        <tr><td>Demo clarity: the 5-minute demo from the class checklist, with your 60-second video as the safety net</td><td>20 %</td><td>Demo week (preliminary: 26–30 Oct)</td></tr>
+        <tr><td>Box: your STL from the Onshape template, printed by the instructor</td><td>10 %</td><td>With Homework 3 (by Fri 9 Oct)</td></tr>
+      </table>
+      </div>
+      <p>A simple block executed and documented well beats an ambitious one that half-works. Evidence of <em>verification</em>
+        — what you saw on the phone, in DRC, on the scope; your one measured number in <code>SPEC.md</code> — is explicitly rewarded.</p>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>Contact</h2>
+      <p>Shayne Bennetts 肖恩 — <a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a><br>
+        Institute of Atomic and Molecular Sciences, Academia Sinica. Group website: <a href="https://iamsquantum.github.io/new/index.html" target="_blank" rel="noopener">IAMS Quantum</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div>
+        <p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p>
+        <p>No. 1, Roosevelt Rd. Sec. 4, Taipei 10617, Taiwan</p>
+      </div>
+      <p><a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener">github.com/TIGP-Experimental-Methods</a></p>
+    </div>
+  </footer>
+</body>
+</html>

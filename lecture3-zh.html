@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第三講 韌體與機械｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">第三講 — 韌體與機械 101 · 2026年10月2日（五）14:20–16:20 · 中研院原分所 R311</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · 電子</a></li>
+      <li><a class="active" href="lecture3-zh.html">3 · 韌體與機械</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="lecture3.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>韌體與機械 101 — 收尾、裝盒，還有接下來呢</h1>
+      <p><strong>目標。</strong>電路板已經下單（9月28日（一）送出，約 10月12日 回來），所以<strong>今天所有東西都在開發板上以模擬模式（sim mode）執行</strong>。
+        你要為你的區塊寫好驅動程式與 App 面板、接上一條警報規則，並且——在 40 分鐘的加碼時段裡——用授課教師的 Onshape 範本為儀器設計一個可列印的外殼。
+        五個外殼全部由授課教師列印。</p>
+      <p><strong>學習目標：</strong>區塊驅動程式與 App 面板如何嵌進骨架 · 在硬體還沒到手時工作（模擬模式）· 從範本設計一個可列印的外殼 · 知道接下來可以怎麼運用這一切。</p>
+      <p>先修條件：作業 2 已完成、你的區域已合併；一個 <a href="preparation-zh.html">Onshape 帳號</a>（免費教育方案，在瀏覽器中執行）。請帶筆電與你的開發板。</p>
+      <p class="callout"><strong>機械是一段短短的加碼，不是工作坊。</strong>CAD 使用 Onshape（免費教育方案、瀏覽器執行、不用安裝）。授課教師負責一個參數式外殼範本，
+        裡面已經有電路板的 STEP 檔與前面板開孔；你複製它、改一個地方、匯出 STL，授課教師在 Bambu 上依序列印。
+        所內的雷射切割機只佔一張投影片，作為平面面板的替代方案；外殼不用它。</p>
+    </section>
+
+    <section class="card">
+      <h2>主題</h2>
+      <div class="grid">
+        <div class="tile"><h3>區塊驅動程式介面</h3><p>每個區塊是一個資料夾 <code>firmware/src/blocks/b&lt;N&gt;_&lt;name&gt;/</code>，實作 <code>begin() / loop() / handle(cmd) / status(out)</code>。你從 <code>blocks/template/</code> 開始。</p></div>
+        <div class="tile"><h3>通訊協定</h3><p>WebSocket 訊息：進來的是 <code>{block, cmd, args}</code>，出去的是 <code>{block, status}</code>；每個區塊一個面板模組 <code>host/pwa/panels/b&lt;N&gt;.js</code>；<code>instrument.py</code> 在 Python 端鏡射同一組指令。</p></div>
+        <div class="tile"><h3>模擬模式</h3><p><code>SIM</code> 旗標假造硬體，讓整個 App 在光板的開發板上就能跑——你比電路板早兩週開工，板子到了再把旗標關掉。</p></div>
+        <div class="tile"><h3>每個面板一條警報規則</h3><p>你的區塊的狀態 → 基底警報引擎 → 繼電器＋通知：B1「AI1 超過門檻」· B2「某條電軌超出範圍」· B3「輸出削波」· B4「光耦計數跳動」· B5「看到 TRIG 邊緣」。成果展的警報步驟，每位學生都親手做過。</p></div>
+        <div class="tile"><h3>電子產品的外殼</h3><p>FDM 公差（孔加大 0.3 mm）、2 mm 壁厚、熱熔銅螺母、層方向、為什麼 PCB 前面板讓開孔變得極簡單、從 KiCad 匯出 STEP。</p></div>
+        <div class="tile"><h3>Onshape 範本</h3><p>三個參數（高度、壁厚、腳墊樣式）與一個「讓它成為你的」改動——通風孔圖案、浮凸名字、腳墊、顏色註記——然後匯出 STL 到 <code>docs/students/&lt;name&gt;/box.stl</code>。</p></div>
+        <div class="tile"><h3>訣竅與接下來呢</h3><p>從警報引擎發出的機器人通知（LINE/Telegram）、用 <code>instrument.py</code> 寫腳本掃描、60 秒影片、無線更新（OTA），以及可以把這些帶去哪裡：你自己實驗室的儀器。</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>課程流程（120 分鐘）</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>時間</th><th>時段</th><th>內容</th></tr>
+        <tr><td>0:00</td><td>目前進度（5 分鐘）</td><td>合併後的電路板 3D 檢視；訂單狀態；成果展檢查清單。</td></tr>
+        <tr><td>0:05</td><td>軟體架構（15 分鐘）</td><td>區塊驅動程式介面 <code>begin/loop/handle/status</code>；WebSocket 訊息 <code>{block, cmd, args}</code> 與 <code>{block, status}</code>；每個區塊一個面板模組；<code>instrument.py</code> 鏡射同一組指令；<code>SIM</code> 旗標；基底警報引擎；OTA。開啟 <code>blocks/template/</code>。</td></tr>
+        <tr><td>0:20</td><td><strong>練習 E11：模擬模式下的驅動程式＋面板</strong>（40 分鐘）</td><td><code>/tutor L3</code>：把範本複製到 <code>blocks/b&lt;N&gt;_&lt;name&gt;/</code>；填入你區塊的指令（B1 <code>read_all</code>、<code>set_range</code> · B2 <code>rails</code> 狀態 · B3 <code>set_dc</code>、<code>sine</code> · B4 <code>relay</code>、<code>opto_count</code> · B5 <code>dio</code>、<code>trig_dir</code>）；讓 SIM 分支回傳合理的數值；加上面板與一條警報規則；燒錄；在手機上看到面板有反應；開 PR。家教產生骨架，你替指令命名、寫 SIM 數值，並在燒錄前解釋一次訊息的往返。區塊之間會互相對話的學生兩兩配對（B3 ↔ B1、B5 ↔ B4）。面板能在模擬模式下控制區塊、PR 已開啟即完成。</td></tr>
+        <tr><td>1:00</td><td>休息（5 分鐘）</td><td></td></tr>
+        <tr><td>1:05</td><td>電子產品的外殼（10 分鐘）</td><td>FDM 公差（孔加大 0.3 mm）、壁厚 2 mm、熱熔銅螺母、層方向、為什麼 PCB 前面板讓開孔變得極簡單、從 KiCad 匯出的 STEP。</td></tr>
+        <tr><td>1:15</td><td><strong>練習 E12（開始）：你的外殼</strong>（30 分鐘）</td><td>投影機上的 Onshape 範本：複製、匯入電路板 STEP、三個參數（高度、壁厚、腳墊樣式）、那一個「讓它成為你的」改動、匯出 STL。你把範本複製到自己的 Onshape 帳號、匯入、改一個地方（通風孔圖案、浮凸名字、腳墊、顏色註記）。STL 匯出即完成。</td></tr>
+        <tr><td>1:45</td><td>訣竅與接下來呢（15 分鐘）</td><td>機器人通知（LINE/Telegram）、用 <code>instrument.py</code> 寫腳本掃描、60 秒影片、OTA，以及可以把這些帶去哪裡：你自己實驗室的儀器。</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>作業 3（列入評分，3 小時）— 完成練習 E11–E12</h2>
+      <ul>
+        <li><strong>E11（1.8 小時）10月9日（五）前開驅動程式＋面板的 PR。</strong>完成所有指令、繪出一個狀態值、<strong>一條接到基底警報引擎的警報規則</strong>（你區塊狀態的門檻 → 繼電器 → 通知）、CI 綠燈；由你的環狀審查者審查（只留意見，不做第二輪修正）。<em>學到：</em>韌體結構、通訊協定、App 控制元件、每個人都會展示的警報路徑、在硬體之前先行開工。</li>
+        <li><strong>E12（0.75 小時）外殼 STL</strong> 放到 <code>docs/students/&lt;name&gt;/box.stl</code>；授課教師在接下來一週把五個全部印出來。<em>學到：</em>從範本出發的 CAD、列印的限制。</li>
+        <li>觀看 V6＋V7（0.3 小時）；workbook 第 3 章（0.15 小時）。</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>收尾（1.5 小時，10月19日當週；電路板約 10月12日 回來）— 練習 E13</h2>
+      <p>10月12日當週，授課教師為每塊板子燒錄並在工作檯上檢查（電軌、LED、WiFi），並列印外殼。然後：</p>
+      <ul>
+        <li><strong>E13a（0.5 小時）真實硬體。</strong>燒錄不帶 <code>SIM</code> 的你自己的版本、打開你的面板、看到你的區塊驅動真實硬體（B1 AI1 上的一個電壓 · B2 電軌 LED 與狀態面板 · B3 從 AO1 輸出正弦波進 AI1 · B4 繼電器咔一聲與一次光耦計數 · B5 一條 TTL 線與 TRIG 方向）。和家教一起修好一個地方。</li>
+        <li><strong>E13b（0.5 小時）一個量測數字</strong>，連同你的量測方法寫進 <code>SPEC.md</code>：B1 一路輸入的雜訊底（LSB rms）· B2 四條電軌電壓與 USB 電流 · B3 ±5 V、1 kHz 正弦波的振幅準確度 · B4 由光耦時間戳記得到的繼電器切換時間 · B5 示波器上的 TTL 邊緣速率。</li>
+        <li><strong>E13c（0.5 小時）60 秒手機影片</strong>，上傳到 <code>docs/students/&lt;name&gt;/</code>，並從你的<a href="teams-zh.html">成果展</a>卡片連結過去。</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>成果展週（10月26–30日，排定的 5 分鐘時段，不需額外準備）— 練習 E14</h2>
+      <p>依班級檢查清單：(1) 輸出波形，在示波器上與儀器自己的輸入上都看得到 · (2) 從手機改變它 · (3) 某路輸入的警報 → 繼電器 → 通知 ·
+        (4) <strong>你的區塊</strong>：它的面板與它做的一件事——現場失敗就播放你的 60 秒影片。</p>
+      <p><strong>評分表：</strong>區塊能運作 <strong>40 %</strong> · PR 品質（含你對同學的審查）<strong>30 %</strong> · 展示清晰度 <strong>20 %</strong> · 外殼 <strong>10 %</strong>。</p>
+    </section>
+
+    <section class="card">
+      <h2>教材</h2>
+      <p class="callout">影片：V6 <em>一個區塊驅動程式＋App 面板，在模擬模式下從頭到尾</em>（10 分鐘，作業 3）· V7 <em>外殼：從範本到 STL 到 Bambu</em>（6 分鐘，作業 3）。教材：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch3-day-3-week-3.md" target="_blank" rel="noopener">workbook 第 3 章</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch4-wrap-up-demo.md" target="_blank" rel="noopener">第 4 章 收尾＋成果展（檢查清單、評分表）</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chB-how-the-software-works.md" target="_blank" rel="noopener">第 B 章 儀器的軟體如何運作</a> · 投影片 <a href="slides/L3.html" target="_blank" rel="noopener">L3（HTML）</a> / <a href="slides/L3.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/PROTOCOL.md" target="_blank" rel="noopener">PROTOCOL.md</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/src/blocks/template" target="_blank" rel="noopener">blocks/template</a> 與 <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/host/pwa/panels/template.js" target="_blank" rel="noopener">panels/template.js</a>。Onshape 外殼範本於 9月30日（三）前提供；影片錄影將放在此處。</p>
+      <p class="callout">含 SIM 分支與警報引擎掛鉤的 <code>blocks/template/</code>、面板範本、含合併後電路板 STEP 的 Onshape 外殼範本；workbook 第 3 章<em>第三天＋第三週：讓它能動，讓它成為你的</em>、
+        第 4 章<em>收尾＋成果展</em>（點亮檢查清單、60 秒影片說明、5 分鐘展示腳本、評分表）與第 B 章<em>儀器的軟體是怎麼運作的</em>（自學）；第三講投影片；家教（<code>/tutor L3</code>、<code>/tutor HW3</code>）。教材：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch3-day-3-week-3.md" target="_blank" rel="noopener">workbook 第 3 章</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch4-wrap-up-demo.md" target="_blank" rel="noopener">第 4 章 收尾＋成果展（檢查清單、評分表）</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chB-how-the-software-works.md" target="_blank" rel="noopener">第 B 章 儀器的軟體如何運作</a> · 投影片 <a href="slides/L3.html" target="_blank" rel="noopener">L3（HTML）</a> / <a href="slides/L3.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/PROTOCOL.md" target="_blank" rel="noopener">PROTOCOL.md</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/src/blocks/template" target="_blank" rel="noopener">blocks/template</a> 與 <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/host/pwa/panels/template.js" target="_blank" rel="noopener">panels/template.js</a>。Onshape 外殼範本於 9月30日（三）前提供；影片錄影將放在此處。</p>
+      <p>另請參閱<a href="resources-zh.html#mechanical">機械資源</a>。</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

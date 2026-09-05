@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Showcase | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>
+    .team-card { display: flex; flex-direction: column; }
+    .team-card .members { color: var(--muted); font-size: 0.9em; margin: 0 0 6px; }
+    .team-card .links { margin-top: auto; padding-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .team-card .links a {
+      font-size: 0.85em; font-weight: 600; text-decoration: none;
+      padding: 4px 12px; border-radius: 999px;
+      border: 1px solid var(--line); color: var(--accent-ink); background: #f2f7fa;
+    }
+    .team-card .links a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .team-card .links span.pending {
+      font-size: 0.85em; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+      border: 1px dashed #c3ccda; color: #8b97a8;
+    }
+    .placeholder { opacity: 0.75; border-style: dashed; border-top-style: solid; }
+    .placeholder .thumb { filter: grayscale(0.3); }
+    .thumb {
+      font-size: 2rem; line-height: 1; margin-bottom: 8px;
+      width: 56px; height: 56px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #e8f0fa, #dff0f2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Project showcase — every instrument, its website, and its code</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · Electronics</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a class="active" href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="teams-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Class of 2026</h1>
+      <p>Every instrument, linked to its <strong>project website</strong> (photos, spec sheet, video) and its <strong>GitHub repository</strong>
+        (firmware, host software, PCB, CAD — everything a stranger needs to rebuild it).
+        This page fills up during the first class as blocks are assigned and repos go live.</p>
+      <p class="callout todo">Placeholder cards below — replaced with real names, project names and links after lecture 1 (Fri 11 Sep).</p>
+    </section>
+
+    <section class="card">
+      <h2>Instruments 2026</h2>
+      <div class="grid">
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">🎛️</div>
+          <h3>Project 1 — <em>instrument name</em></h3>
+          <p class="members">Student A &amp; Student B</p>
+          <p>Software directions: <em>e.g. phone app + alarm engine</em>. One line on what makes this unit special.</p>
+          <div class="links">
+            <span class="pending">🌐 Website — soon</span>
+            <span class="pending">📦 Repo — soon</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">📡</div>
+          <h3>Project 2 — <em>instrument name</em></h3>
+          <p class="members">Student C &amp; Student D</p>
+          <p>Software directions: <em>e.g. Python API + calibration spec sheet</em>.</p>
+          <div class="links">
+            <span class="pending">🌐 Website — soon</span>
+            <span class="pending">📦 Repo — soon</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">🔔</div>
+          <h3>Project 3 — <em>instrument name</em></h3>
+          <p class="members">Student E</p>
+          <p>Software directions: <em>e.g. multi-instrument MQTT dashboard</em>.</p>
+          <div class="links">
+            <span class="pending">🌐 Website — soon</span>
+            <span class="pending">📦 Repo — soon</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">⏱️</div>
+          <h3>Project 4 — <em>instrument name</em></h3>
+          <p class="members">Student F &amp; Student G</p>
+          <p>Software directions: <em>e.g. triggers &amp; sequencing for a pump–probe rig</em>.</p>
+          <div class="links">
+            <span class="pending">🌐 Website — soon</span>
+            <span class="pending">📦 Repo — soon</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">🐍</div>
+          <h3>Project 5 — <em>instrument name</em></h3>
+          <p class="members">Student H &amp; Student I</p>
+          <p>Software directions: <em>e.g. scripted sweeps + transfer-function plots</em>.</p>
+          <div class="links">
+            <span class="pending">🌐 Website — soon</span>
+            <span class="pending">📦 Repo — soon</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">✨</div>
+          <h3>Your project</h3>
+          <p class="members">…could be here</p>
+          <p>Claim your block in lecture 1, put your repo in the <a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener">class organization</a>, publish your project page — and this card becomes yours.</p>
+          <div class="links">
+            <span class="pending">🌐 Website — soon</span>
+            <span class="pending">📦 Repo — soon</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How a card gets filled in</h2>
+      <p>Each card links to the project website (on the owner's <code>github.io</code> Pages site) and the project repo in the
+        <a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener">class GitHub organization</a>. A filled-in card looks like:</p>
+      <div class="grid" style="max-width:420px;">
+        <div class="tile team-card">
+          <div class="thumb">🎛️</div>
+          <h3>Example — "WaveBuddy"</h3>
+          <p class="members">A. Physicist</p>
+          <p>Phone-app-first AWG with a latching flow-alarm relay for the BEC lab's cooling loop.</p>
+          <div class="links">
+            <a>🌐 Website</a>
+            <a>📦 Repo</a>
+            <a>▶ Video</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

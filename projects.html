@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">The class project: a lab instrument everyone builds, and makes their own in software</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · Electronics</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a class="active" href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="projects-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>The class instrument: function generator / AWG &amp; lab controller</h1>
+      <p>Everyone builds the <strong>same instrument platform</strong> — a bench "Swiss-army-knife" every lab can use. In 2026 it is <strong>one class board in five blocks, one block per student</strong>.
+        The hardware is deliberately standardised so the lectures, the design review and the class PCB order all pull in one direction;
+        <strong>where you excel is the software</strong>: the interfaces, automation and polish that turn a circuit board into an instrument people love.</p>
+
+      <h2>What the box does</h2>
+      <ul>
+        <li><strong>Generates signals:</strong> a 16-bit two-channel arbitrary-waveform generator — DC levels, ramps, sines and arbitrary tables to about 50 kHz at ±10 V (AO1, AO2) — plus two hardware-timed trigger/clock outputs at 5 V TTL to tens of MHz.</li>
+        <li><strong>Monitors signals:</strong> eight 16-bit ±10 V inputs on SMA connectors (AI1–AI8), with software-selectable ranges down to ±0.64 V for sensor work, logged and plotted. An instrumentation-amplifier / programmable-gain conditioning chain is reserved on the board as an instructor option feeding inputs 7 and 8.</li>
+        <li><strong>Switches things:</strong> four low-voltage relays, eight 5 V TTL outputs, two fast opto-isolated inputs and a firmware-switchable TRIG connector (in or out) — alarms, interlocks, sequenced actions.</li>
+        <li><strong>Talks to everything:</strong> native USB to Python, WiFi to a web page, your phone and messaging bots. Your phone is the front panel (a small OLED shows status); an optional camera node streams pictures into the same app.</li>
+      </ul>
+
+      <h2>The architecture</h2>
+      <pre><code>   ┌──────  the CLASS BOARD: base (instructor) + 5 blocks (one per student) · one design, JLCPCB-assembled ×5, nothing to solder  ──────┐
+ AO1 AO2 ◄── ±10 V stages ◄── DAC8563 16-bit AWG ───────┐          ┌─── ADS8688 8 × 16-bit ±10 V ◄── AI1–AI8 (SMA)
+              [block 3: signal generation]              │          │         [block 1: precision inputs]
+                                                 ESP32-S3 dev board (socketed, u.FL antenna → SMA)
+ USB-C 5 V + data (or 5 V jack) ──► ±12 V · 5 VA · 3V3 ─┤          ├─── 4 relays · 2 fast opto inputs           [block 4: isolated switching]
+              [block 2: power &amp; rails]                  │          └─── 8 TTL out · 2 fast trigger/clock out · TRIG in/out (5 V TTL)  [block 5: digital I/O &amp; timing]
+                                                        │
+   (instructor option, unpopulated: in-amp · PGA · filter · TIA footprints → inputs 7–8, AUX SMA)
+                                                        └──────────── WiFi (phone/web app · WebSocket · OTA) · native USB (Python API)
+                    │                                                              │
+       [Python host: API, logging, plots]                    [PWA on your phone · bot alerts · optional camera node]
+                    └──────────────── GitHub class repo + your page + 60-s video ───────────────┘
+        + base: dev-board socket, buses, 2 × Qwiic, 2×10 header   + front-panel PCB: 12 SMAs (3 × 4), OLED, 3 LEDs   + 3D-printed box</code></pre>
+      <p><strong>MCU choice (frozen for 2026):</strong> an ESP32-S3 N16R8 dev board with the standard DevKitC-1 pinout and an external-antenna connector (Jinhua, NT$400), socketed on the class board and running the Arduino framework. WiFi unlocks the web/phone/bot directions; the u.FL antenna goes to an SMA bulkhead so WiFi works inside a closed metal or acrylic case; the dev board leaves 31 usable GPIO and an 80 MHz SPI bus for the converters. The core circuit is standardised so the class order and design reviews stay manageable — but you still do real hardware work on it (next paragraph), and your creativity also goes into firmware, host software, interfaces and the enclosure.</p>
+      <p><strong>One class board, five blocks — you own one.</strong> The board is a single KiCad project in one class repo. The instructor builds the <strong>complete</strong> board first — the base (dev-board socket, buses, expansion header, the front-panel PCB with its 12 SMA connectors) and all five blocks — and hands you the full schematic as a PDF plus a <em>gapped</em> copy of your block's sheet with a few parts deleted. The blocks: <em>precision inputs</em> (ADS8688, AI1–AI8), <em>power &amp; rails</em> (USB-C / 5 V jack, ±12 V isolated modules, regulators), <em>signal generation</em> (DAC8563 + ±10 V output stages), <em>isolated switching</em> (relays + fast opto inputs) and <em>digital I/O &amp; timing</em> (TTL outputs, fast trigger outputs, the TRIG connector). Your work, each step done once with Claude as your tutor: <strong>place the deleted parts</strong> from the PDF, <strong>fetch one part from LCSC</strong> into the library, <strong>route your zone</strong> of the board (ICs and connectors are pre-placed), open a <strong>pull request</strong> and <strong>review one classmate's</strong>, then write your block's <strong>firmware driver and app panel</strong> from the template — in simulation mode first, on the real board when it arrives. The merged design goes into the class order on Mon 28 Sep and is manufactured five times — one assembled instrument each. <strong>Homework is capped at about 10 hours in total</strong> (3 h a week for three weeks + 1 h wrap-up); your zone, your PR and your review of a peer are what is assessed.</p>
+      <p><strong>Rules:</strong> low-voltage only — the instrument runs from USB-C or a 5 V supply, relays switch signal-level and ≤ 30 V DC loads, never mains. Parts JLCPCB-stocked; dev board provided by the course. <strong>Cost:</strong> the class board is one design manufactured ×5, and the parts were chosen for learning per dollar — about <strong>NT$3.2k per student</strong> (≈ US$100) all-in: dev board, parts, 4-layer PCB, front-panel PCB and <strong>complete assembly by JLCPCB</strong>, so there is nothing to solder. Every part must earn its place, and the JLC quote is checked before the order.</p>
+    </section>
+
+
+    <section class="card">
+      <h2>Make it yours in hardware: the option-block menu</h2>
+      <p>Hardware, like software, is where an instrument becomes <em>yours</em> — after the course, or as a stretch if you are clearly ahead. The class board carries a 2×10 expansion header, two Qwiic connectors and reserved footprints so it can grow; the 2026 core is frozen for the class order, and everything below is an <strong>option, not a deliverable</strong> (the 10-hour budget has no room for an extra block).
+        Pick something your own lab would actually use. All suggestions use JLCPCB-stocked parts:</p>
+      <div class="grid">
+        <div class="tile"><h3>🏎 Fast capture</h3><p><strong>Option.</strong> ADS9224R dual 16-bit 3 MSPS, or an AD9235 40 MSPS on the free LCD_CAM parallel port: capture fast transients — the tier the 2026 core dropped for cost and time.</p></div>
+        <div class="tile"><h3>〰 DDS sine source</h3><p><strong>Option.</strong> AD9833 direct digital synthesis to 1 MHz on the expansion header's SPI: complements the 16-bit AWG and pushes the source's frequency ceiling up.</p></div>
+        <div class="tile"><h3>🧮 Precision ADC</h3><p>ADS1115 / ADS1256: 16–24 <em>real</em> bits for µV-level and sensor measurements. See what the MCU's own ADC can't — then prove it with a noise-floor plot.</p></div>
+        <div class="tile"><h3>🔢 More channels</h3><p>MCP23017 (+16 GPIO) and CD74HC4067 (16 analog inputs into one pin): beyond an Arduino Mega with two cheap chips on one bus.</p></div>
+        <div class="tile"><h3>🎚 Programmable gain / autorange</h3><p>PGA113 or digipot-set gain: an input stage that re-ranges itself so weak and strong signals both land on scale. The class board reserves an unpopulated PGA113 footprint on inputs 7–8 — fit it and write the driver.</p></div>
+        <div class="tile"><h3>⚖️ Instrumentation-amp input</h3><p>INA826/INA333-class differential front-end: bridges, thermocouples and small signals riding on noisy grounds — measured cleanly. An INA826 footprint is reserved on the class board's conditioning zone.</p></div>
+        <div class="tile"><h3>🌡 Precision temperature channel</h3><p>MAX31865 + PT100/PT1000 or a thermistor bridge: mK-resolution thermometry — the sensing half of a lab PID.</p></div>
+        <div class="tile"><h3>🔥 Heater / TEC driver</h3><p>MOSFET PWM stage with INA current sense: the actuating half — closed-loop temperature control of a laser mount or sample stage.</p></div>
+        <div class="tile"><h3>🚶 Motion driver</h3><p>A4988/DRV8825 stepper driver or servo headers: shutters, filter wheels, choppers — motion under your trigger engine.</p></div>
+        <div class="tile"><h3>⏰ Real timebase</h3><p>TCXO (±1–2 ppm) and an external 10 MHz reference input: turn the generator into a metrology-grade source — then measure the improvement by beating two boards together. The class board carries an unpopulated TCXO footprint.</p></div>
+        <div class="tile"><h3>🔗 Isolated RS-485 / CAN</h3><p>A proper multi-drop instrument bus across the lab, galvanically isolated — how real facilities wire their boxes together.</p></div>
+        <div class="tile"><h3>🖥 Touch-screen front panel</h3><p><strong>Option block.</strong> The phone/web app is the instrument's face and a small OLED on the class board shows status; if you want a stand-alone panel, add a 3.5″ 480×320 TFT (ILI9488, SPI) with capacitive touch (FT6236/GT911, I²C) on the front-panel PCB, driven by LVGL. Lightweight version: OLED + rotary encoder.</p></div>
+        <div class="tile"><h3>💾 Logging + clock</h3><p>microSD slot + DS3231 RTC: weeks of time-stamped data with no host PC — retrieve it over WiFi when you visit.</p></div>
+        <div class="tile"><h3>🔋 Battery power</h3><p>TP4056 charger + boost converter: portable field measurements, and logging that survives a power cut.</p></div>
+        <div class="tile"><h3>💡 Photodiode / TIA input</h3><p>A transimpedance light-measurement channel: laser power monitor, fluorescence pickup — analog design where layout genuinely matters. An OPA2156 TIA footprint is reserved on the class board's conditioning zone.</p></div>
+        <div class="tile"><h3>⚡ Power monitor</h3><p>INA226 on your own rails: the instrument measures its own current, voltage and energy — self-diagnostics for free.</p></div>
+        <div class="tile"><h3>🔊 Audio-band codec</h3><p>I²S ADC/DAC: a hi-fi analog path that upgrades the digital-filter and software lock-in directions to 24-bit quality.</p></div>
+        <div class="tile"><h3>🛡 More switching</h3><p>Extra relays or high-side switches with proper flyback and isolation: grow the alarm/interlock fan-out to a whole rack.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Make it yours: the software excellence menu</h2>
+      <p>The minimum demo (below) is the same for everyone. Distinction comes from how far you push one or two of these directions — pick what would genuinely help your own lab:</p>
+      <div class="grid">
+        <div class="tile"><h3>📱 Phone app / web UI</h3><p>The ESP32 serves a polished web app (installable PWA): waveform controls, live readings, dark mode, multi-user. Control your instrument from the seminar room.</p></div>
+        <div class="tile"><h3>🔔 Monitoring, alarms &amp; relays</h3><p>Threshold rules on the analog inputs: trip a relay, latch an interlock, push a Telegram/LINE alert. Fail-safe defaults, manual reset, event log with timestamps.</p></div>
+        <div class="tile"><h3>⏱ Triggers &amp; sequencing</h3><p>Trigger input → waveform burst or relay action; programmable sequences and schedules; sync two units. Turn the generator into an experiment conductor.</p></div>
+        <div class="tile"><h3>🐍 Python API &amp; scripting</h3><p>A clean <code>instrument.sine(1e3, 0.5)</code> API; automated sweeps; measure a filter's transfer function with your own generator + ADC and plot it.</p></div>
+        <div class="tile"><h3>📈 Calibration &amp; characterisation</h3><p>Calibrate amplitude and frequency; measure bandwidth, distortion, output impedance on the scope; publish a datasheet-style spec page. The physics content lives here.</p></div>
+        <div class="tile"><h3>🌐 Multi-instrument systems</h3><p>MQTT or REST across several units; one dashboard for the whole lab; a classmate's box as a client. Systems engineering in miniature.</p></div>
+        <div class="tile"><h3>🛠 Firmware craft</h3><p>Robust state machine, watchdog, settings that survive reboot, OTA updates (ESP32), self-test on boot. The difference between a demo and a product.</p></div>
+        <div class="tile"><h3>🎛 Front-panel &amp; enclosure polish</h3><p>PCB front panel with silkscreen labels, light pipes, the OLED status display and — optionally — a touch UI (LVGL) that speaks the same API as your phone app; an enclosure that looks bought, not built.</p></div>
+      </div>
+      <p class="callout">Have a different software direction from your own lab's needs? Great — pitch it in your spec; it needs instructor sign-off only if it changes the board.</p>
+    </section>
+
+    <section class="card">
+      <h2>Minimum demo (the same short checklist for everyone)</h2>
+      <ol>
+        <li>Generate a requested waveform (frequency + amplitude) and show it on the oscilloscope.</li>
+        <li>Change the output from your chosen interface (phone / web page / Python / bot).</li>
+        <li>Set an alarm threshold on an analog input; show the relay trip and the notification.</li>
+        <li>Show <strong>your block</strong>: its app panel and one thing it does — and your page in the class repo.</li>
+      </ol>
+      <p><strong>Fallback:</strong> the firmware's simulation mode runs the app and every panel on the bare dev board from day 1 — if the board is late or dead, you demo that, no stigma; your 60-second video is the second safety net.</p>
+      <p><strong>Video:</strong> in the wrap-up week, record a 60-second phone video of your panel moving real hardware. It goes on your page in the class repo, is linked from the Showcase, and plays if the live demo misbehaves.</p>
+    </section>
+
+    <section class="card">
+      <h2>Build plan (alongside the lectures)</h2>
+      <p>The project runs during the lecture weeks — <strong>about 10 hours of homework in total</strong> (3 h a week for three weeks + 1 h wrap-up), alongside your research, not a second job after the course. Every session ends with a commit and a handover note; Claude walks you through each chapter as your tutor.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>When (2026)</th><th>Milestone</th></tr>
+        <tr><td>Fri 11 Sep · L1</td><td>Flash the skeleton; control the board from your phone; add one control end to end and open your first pull request. <strong>Blocks assigned.</strong></td></tr>
+        <tr><td>Wk of 14 Sep · homework 1 (3 h)</td><td>Merge your first PR; read your block's page of the schematic with the tutor; install KiCad and the library package, find your zone; a one-paragraph <code>SPEC.md</code>.</td></tr>
+        <tr><td>Fri 18 Sep · L2</td><td>Electronics essentials on our schematic; KiCad live; place your block's deleted parts; start routing your zone.</td></tr>
+        <tr><td>Wk of 21 Sep · homework 2 (3 h)<br><small>(Fri 25 Sep: public holiday)</small></td><td>Finish routing, DRC clean, one part fetched from LCSC. <strong>PR by Wed 23 Sep</strong> · <strong>review one classmate's PR by Fri 25 Sep</strong> · fix yours by Sun 27 Sep.</td></tr>
+        <tr><td><strong>Mon 28 Sep</strong></td><td><strong>The instructor merges the five zones and places the class JLCPCB order — hard cutoff Monday 28 September.</strong></td></tr>
+        <tr><td>Fri 2 Oct · L3</td><td>Software architecture; your block's driver and app panel in simulation mode; your box from the Onshape template.</td></tr>
+        <tr><td>Wk of 5 Oct · homework 3 (3 h)</td><td>Driver + panel PR by Fri 9 Oct; box STL exported (the instructor prints all five).</td></tr>
+        <tr><td>≈ Mon 12 Oct</td><td>Assembled boards arrive; the instructor flashes and bench-checks every one.</td></tr>
+        <tr><td>Wk of 19 Oct · wrap-up (1 h)</td><td>Flash your build on the real board; see your panel move real hardware; record the 60-second video.</td></tr>
+        <tr><td>Wk of 26–30 Oct</td><td><strong>Demos</strong>, 5 minutes each, in scheduled slots.</td></tr>
+      </table>
+      </div>
+      <p>Fabrication lead time is the hard constraint: PCB fabrication, assembly and shipping to Taiwan take about <strong>2 weeks</strong> (boards back ≈ 12 Oct), so the <strong>Monday 28 September class-order cutoff</strong> is non-negotiable. The boxes are printed in-house by the instructor — no second order.</p>
+    </section>
+
+    <section class="card" id="day">
+      <h2>Demo week (26–30 October 2026)</h2>
+      <p>Demo slots are scheduled individually during the week of 26–30 October (confirmed in class). You demo to the class and invited PIs, <strong>in English</strong> — using AI to prepare is encouraged, and no preparation beyond the wrap-up hour is budgeted.</p>
+      <ul>
+        <li><strong>5-minute demo</strong> from the class checklist: a waveform out, seen on the scope and on the instrument's own input · change it from the phone · alarm on an input → relay → notification · <strong>your block</strong>: its panel and one thing it does.</li>
+        <li><strong>Your page</strong> in the class repo (<code>docs/students/&lt;name&gt;/</code>): your SPEC, progress notes, your pull requests, your box STL and your video — linked from the Showcase.</li>
+        <li><strong>Your 60-second video</strong> from the wrap-up week — plays if the live demo misbehaves.</li>
+        <li><strong>Score sheet:</strong> block works 40 % · pull-request quality, including your review of a peer, 30 % · demo clarity 20 % · box 10 %.</li>
+        <li><strong>Optional:</strong> present your instrument at a <a href="https://iamsquantum.github.io/sail-club/index.html" target="_blank" rel="noopener">SAIL Club</a> lunch to the whole institute.</li>
+      </ul>
+      <p>Finished projects are showcased on the <a href="teams.html">Showcase page</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>The idea archive</h2>
+      <p>Earlier drafts of this course had a menu of sixteen instrument projects — flow interlocks, beam shutters, PID controllers, lock-ins and more.
+        We standardised on one platform for practicality, but the archive is worth browsing: it is a quarry of <em>software directions</em>
+        (many map straight onto this instrument's inputs, relays and triggers) and of ideas for what you might build <em>after</em> the course.
+        → <a href="project-archive.html">Browse the project idea archive</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 2 – Electronics | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Lecture 2 — Electronics 101: from the dev board to the class board · Fri 18 Sep 2026 · 14:20–16:20 · R311, IAMS</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a class="active" href="lecture2.html">2 · Electronics</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="lecture2-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Electronics 101 — add capability: from the dev board to the class board</h1>
+      <p><strong>Goal.</strong> Learn the six ideas needed to read our schematic, then do each step of making a PCB once, on your own block of the
+        <a href="projects.html">class board</a>: place the few parts missing from your schematic sheet, route your zone in KiCad, get a clean DRC, open a pull request
+        and review a classmate's. Your zone enters the class order on Monday 28 September.</p>
+      <p><strong>Learning goals:</strong> the six ideas needed to read our schematic · place parts and route in KiCad · DRC · open and review a PR ·
+        understand why the class board exists (what the dev board cannot do).</p>
+      <p>Prerequisite: Homework 1 done — E2 merged, your block's two questions answered, <a href="preparation.html">KiCad 10 installed</a> with the library package unzipped
+        into the repo, and your <code>SPEC.md</code> paragraph.</p>
+    </section>
+
+    <section class="card">
+      <h2>The hardware model: dev board + carrier, assembled by JLCPCB</h2>
+      <p>The MCU stays on the proven ESP32-S3 dev board; the <strong>class board is a carrier it plugs into</strong> — the analog front end done properly, isolation, buffers,
+        robust connectors. One design, five units, one order. <strong>JLCPCB assembles everything, surface-mount and through-hole</strong>; the front panel is a second small PCB.
+        You solder nothing, and the dev board alone keeps running the app as the permanent fallback. Fully assembled, the board costs about US$100 per student.</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Block</th><th>Owner</th><th>What is in the zone</th></tr>
+        <tr><td>Base</td><td>instructor</td><td>dev-board socket, bus distribution, RGB LED, 2 Qwiic, 2×10 header, OLED and the <strong>front panel: 3 × 4 SMA at 20 mm</strong> — AO1 AO2 TRIG AUX / AI1 AI2 AI3 AI4 / AI5 AI6 AI7 AI8</td></tr>
+        <tr><td><strong>B1 Precision inputs</strong></td><td>student</td><td>ADS8688 + 8 identical protection networks (R + BAV99 + C) → AI1–AI8; ±10 V, 16 bit, 500 kSPS aggregate</td></tr>
+        <tr><td><strong>B2 Power &amp; rails</strong></td><td>student</td><td>USB-C, 5 V jack, Schottky ORing, 2 polyfuses, 2 TVS, 2 × 2 W isolated modules → ±12 V, 78L05 (5 VA), AMS1117 (3V3), rail LEDs, test points</td></tr>
+        <tr><td><strong>B3 Signal generation</strong></td><td>student</td><td>DAC8563 + OPA2192 ±10 V + 2 × (49.9 Ω + clamp) → AO1, AO2</td></tr>
+        <tr><td><strong>B4 Isolated switching</strong></td><td>student</td><td>4 SPDT relays on direct GPIO via ULN2003, 2 × 6N137 fast isolated inputs, terminals, LEDs</td></tr>
+        <tr><td><strong>B5 Digital I/O &amp; timing</strong></td><td>student</td><td>74AHCT541 (8 × 5 V TTL outputs), 2 fast trigger outputs, 74LVC1T45 (switchable 5 V TRIG SMA, direction from a GPIO), TCXO footprint (not populated), terminals</td></tr>
+      </table>
+      </div>
+      <p>Every IC on the board is met in class today. Signal conditioning (in-amp, PGA, filter) is not a student block: it stays an instructor-owned, do-not-populate option.</p>
+    </section>
+
+    <section class="card">
+      <h2>Topics — the six ideas, each pointed at our schematic PDF</h2>
+      <div class="grid">
+        <div class="tile"><h3>(a) Rails, decoupling, ground</h3><p>Where the power comes from and how it is cleaned up next to every chip; the one place analog and digital ground meet. Block B2.</p></div>
+        <div class="tile"><h3>(b) What ±10 V and 16 bits buy</h3><p>Range and resolution on the input and output side, and why the dev board's own ADC and DAC are not enough. Blocks B1 and B3.</p></div>
+        <div class="tile"><h3>(c) The op-amp stage as a black box</h3><p>Gain and offset without the internals: how the DAC's output becomes a ±10 V swing. Block B3.</p></div>
+        <div class="tile"><h3>(d) Isolation</h3><p>Relay, opto-coupler, creepage distance: switching and sensing things that must not share your ground. Block B4.</p></div>
+        <div class="tile"><h3>(e) 3.3 V vs 5 V logic</h3><p>Why a GPIO cannot drive 5 V TTL directly and what the buffers do. Block B5.</p></div>
+        <div class="tile"><h3>(f) The buses</h3><p>SPI and I²C tie the blocks to the MCU; which pins carry the fastest signals in your block.</p></div>
+        <div class="tile"><h3>KiCad: the only six operations</h3><p>Place a part and wire it · annotate · <em>Update PCB from schematic</em> · drag footprints into place · route · DRC (then the 3D view). Shown live once; V4 and V5 replay them.</p></div>
+        <div class="tile"><h3>Where parts come from</h3><p>LCSC part numbers on every symbol; <code>easyeda2kicad</code> pulls symbol, footprint and 3D model; JLCPCB places what LCSC stocks.</p></div>
+        <div class="tile"><h3>PR + peer review</h3><p>One PR for your zone, one review of a classmate's from the checklist, one round of fixes — the same list the instructor uses at merge.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Session plan (120 min)</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Time</th><th>Block</th><th>What happens</th></tr>
+        <tr><td>0:00</td><td>Electronics essentials, on our schematic (20 min)</td><td>Twenty slides, each pointed at the PDF: (a) rails, decoupling, ground — B2 · (b) what ±10 V and 16 bits buy — B1/B3 · (c) the op-amp stage as a black box — B3 · (d) isolation: relay, opto, creepage — B4 · (e) 3.3 V vs 5 V logic, why buffers — B5 · (f) the SPI/I²C buses that tie it together.</td></tr>
+        <tr><td>0:20</td><td>Read your block, again (10 min)</td><td>The tutor asks two harder block questions ("which pins carry the fastest signal in your block?", "where does your block's ground join the rest?"); then a 3-minute chat with the neighbour who will review your PR.</td></tr>
+        <tr><td>0:30</td><td><strong>KiCad live</strong> (15 min)</td><td>On the projector, in the base sheet: place a 100 nF + 10 µF pair and wire it, annotate, <em>Update PCB from schematic</em>, drag the two footprints, route three tracks, run DRC, show the 3D view. The only six operations you need.</td></tr>
+        <tr><td>0:45</td><td><strong>Exercise E6: schematic gaps</strong> (20 min)</td><td>Open your gapped sheet; from the PDF, place the 3–4 missing parts (values and footprints from the project library), wire them, run ERC. The tutor names the parts and checks each placement ("does the footprint field say 0603?"). Done when ERC shows 0 errors.</td></tr>
+        <tr><td>1:05</td><td>Break (5 min)</td><td></td></tr>
+        <tr><td>1:10</td><td><strong>Exercise E7 (start): route your zone</strong> (30 min)</td><td><em>Update PCB from schematic</em>; the new footprints land in your zone; route; DRC. The tutor reminds the rules (nothing on layer 2, stay inside <code>ZONE_B&lt;N&gt;</code>, decoupling next to the pin) and reads the DRC output with you. The instructor fixes the two classic problems live (wrong layer, unconnected net). About half the zone is routed by the end.</td></tr>
+        <tr><td>1:40</td><td>PR + peer review, live (10 min)</td><td>The instructor opens a PR from a student branch, requests the ring reviewer, writes one comment against the checklist, shows "request changes" vs "approve".</td></tr>
+        <tr><td>1:50</td><td>Homework (10 min)</td><td>The timeline to 28 September: PR Wed 23 Sep · review Fri 25 Sep · fixes Sun 27 Sep · order Mon 28 Sep. The tutor schedules your checkpoints.</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Homework 2 (assessed, 3 h) — Exercises E7–E10</h2>
+      <ul>
+        <li><strong>E7 (1.25 h) Finish routing.</strong> DRC 0 errors, 3D screenshot. <em>Teaches:</em> layout, ground pours, DRC discipline.</li>
+        <li><strong>E8 (0.25 h) One part from LCSC.</strong> <code>easyeda2kicad --full --lcsc_id C474881</code> (the 2-pin screw terminal; or your LED); add it to the project library; swap it in. <em>Teaches:</em> where parts come from, the LCSC → JLCPCB pipeline.</li>
+        <li><strong>E9 (0.25 h) PR by Wednesday 23 September.</strong> Branch <code>b&lt;N&gt;-&lt;name&gt;</code>, commit, PR with the 3D screenshot; request your ring reviewer (A→B→C→D→E→A). <em>Teaches:</em> the one-repo workflow; your zone enters the class order.</li>
+        <li><strong>E10 (0.75 h) Review your peer by Friday 25 September, fix yours by Sunday 27 September.</strong> Walk the checklist below on their PR; leave at least two comments; approve or request changes (0.5 h). Then address the comments on your own PR (0.25 h). Watch V5 (10 min).</li>
+      </ul>
+      <p><strong>Peer-review checklist</strong> (workbook ch. C — the same list the instructor uses at merge): ERC 0 / DRC 0 · <code>LCSC</code> field on every part · values match the PDF · decoupling next to the pins ·
+        nothing on layer 2 · nothing outside your rule area · pin 1 marked · ground pour joined · B4 creepage ≥ 2.5 mm · silkscreen label on every connector · CI green.</p>
+      <p class="callout warn"><strong>Gates:</strong> PRs <strong>Wed 23 Sep</strong> · reviews <strong>Fri 25 Sep</strong> (a public holiday — homework, not a session) · fixes <strong>Sun 27 Sep</strong> ·
+        <strong>Mon 28 Sep</strong> the instructor paste-merges the five zones into <code>main</code>, runs the full DRC, exports Gerbers/BOM/CPL and <strong>orders</strong> five assembled boards plus two bare boards and six front panels.
+        A slip here is a slip everywhere; the week of 28 September carries no homework.</p>
+    </section>
+
+    <section class="card">
+      <h2>Materials</h2>
+      <p class="callout">Videos: V3 <em>Our schematic in 8 minutes, block by block</em> (8 min, Homework 1) · V4 <em>KiCad: unzip the library, place a missing part, get a part from LCSC</em> (8 min, Homework 1) ·
+        V5 <em>KiCad: route your zone, DRC, 3D view, open the PR, review a PR</em> (10 min, Homework 2). Materials: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch2-day-2-week-2.md" target="_blank" rel="noopener">workbook ch. 2</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chA-electronics-from-zero.md" target="_blank" rel="noopener">ch. A Electronics from zero</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chC-cheat-sheets.md" target="_blank" rel="noopener">ch. C cheat-sheets (KiCad keys, review checklist)</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/blocks" target="_blank" rel="noopener">block pages</a> · slides <a href="slides/L2.html" target="_blank" rel="noopener">L2 (HTML)</a> / <a href="slides/L2.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/hardware/lib/README.md" target="_blank" rel="noopener">KiCad library package</a> (in the repo, nothing to unzip). Schematic PDF, gapped sheets and the pre-placed PCB follow by Tue 16 Sep; video recordings follow here.</p>
+      <p class="callout">The full schematic PDF, your gapped sheet, the KiCad library package, the PCB with pre-placed footprints and zones, the review checklist and reviewer ring;
+        workbook ch. 2 <em>Day 2 + week 2: your part of the board</em>, ch. A <em>Electronics from zero</em> (self-study) and ch. C <em>Cheat-sheets</em>; the L2 slides; the tutor (<code>/tutor L2</code>, <code>/tutor HW2</code>). Materials: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch2-day-2-week-2.md" target="_blank" rel="noopener">workbook ch. 2</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chA-electronics-from-zero.md" target="_blank" rel="noopener">ch. A Electronics from zero</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chC-cheat-sheets.md" target="_blank" rel="noopener">ch. C cheat-sheets (KiCad keys, review checklist)</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/blocks" target="_blank" rel="noopener">block pages</a> · slides <a href="slides/L2.html" target="_blank" rel="noopener">L2 (HTML)</a> / <a href="slides/L2.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/hardware/lib/README.md" target="_blank" rel="noopener">KiCad library package</a> (in the repo, nothing to unzip). Schematic PDF, gapped sheets and the pre-placed PCB follow by Tue 16 Sep; video recordings follow here.</p>
+      <p>See also the <a href="resources.html#electronics">electronics resources</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

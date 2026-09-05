@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>成果展｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>
+    .team-card { display: flex; flex-direction: column; }
+    .team-card .members { color: var(--muted); font-size: 0.9em; margin: 0 0 6px; }
+    .team-card .links { margin-top: auto; padding-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .team-card .links a {
+      font-size: 0.85em; font-weight: 600; text-decoration: none;
+      padding: 4px 12px; border-radius: 999px;
+      border: 1px solid var(--line); color: var(--accent-ink); background: #f2f7fa;
+    }
+    .team-card .links a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .team-card .links span.pending {
+      font-size: 0.85em; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+      border: 1px dashed #c3ccda; color: #8b97a8;
+    }
+    .placeholder { opacity: 0.75; border-style: dashed; border-top-style: solid; }
+    .placeholder .thumb { filter: grayscale(0.3); }
+    .thumb {
+      font-size: 2rem; line-height: 1; margin-bottom: 8px;
+      width: 56px; height: 56px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #e8f0fa, #dff0f2);
+    }
+  </style>
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">專題成果展——每一台儀器、它的網站與它的程式碼</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · 電子</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與機械</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a class="active" href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="teams.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>2026 年班</h1>
+      <p>每一台儀器，都連結到它的<strong>專題網站</strong>（照片、規格表、影片）與 <strong>GitHub 倉庫</strong>
+        （韌體、主機端軟體、PCB、CAD——陌生人重建它所需要的一切）。
+        這個頁面會在第一堂課隨著區塊分配完成、倉庫上線而陸續填滿。</p>
+      <p class="callout todo">下方是佔位卡片——第 1 講（9 月 11 日星期五）之後會換成真正的姓名、專題名稱與連結。</p>
+    </section>
+
+    <section class="card">
+      <h2>2026 年的儀器</h2>
+      <div class="grid">
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">🎛️</div>
+          <h3>專題 1——<em>儀器名稱</em></h3>
+          <p class="members">學生 A 與學生 B</p>
+          <p>軟體方向：<em>例如手機 App＋警報引擎</em>。用一句話說明這台裝置的特別之處。</p>
+          <div class="links">
+            <span class="pending">🌐 網站——即將上線</span>
+            <span class="pending">📦 倉庫——即將上線</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">📡</div>
+          <h3>專題 2——<em>儀器名稱</em></h3>
+          <p class="members">學生 C 與學生 D</p>
+          <p>軟體方向：<em>例如 Python API＋校正規格表</em>。</p>
+          <div class="links">
+            <span class="pending">🌐 網站——即將上線</span>
+            <span class="pending">📦 倉庫——即將上線</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">🔔</div>
+          <h3>專題 3——<em>儀器名稱</em></h3>
+          <p class="members">學生 E</p>
+          <p>軟體方向：<em>例如多儀器 MQTT 儀表板</em>。</p>
+          <div class="links">
+            <span class="pending">🌐 網站——即將上線</span>
+            <span class="pending">📦 倉庫——即將上線</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">⏱️</div>
+          <h3>專題 4——<em>儀器名稱</em></h3>
+          <p class="members">學生 F 與學生 G</p>
+          <p>軟體方向：<em>例如泵浦–探測（pump–probe）實驗裝置的觸發與序列控制</em>。</p>
+          <div class="links">
+            <span class="pending">🌐 網站——即將上線</span>
+            <span class="pending">📦 倉庫——即將上線</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">🐍</div>
+          <h3>專題 5——<em>儀器名稱</em></h3>
+          <p class="members">學生 H 與學生 I</p>
+          <p>軟體方向：<em>例如腳本化掃描＋轉移函數圖</em>。</p>
+          <div class="links">
+            <span class="pending">🌐 網站——即將上線</span>
+            <span class="pending">📦 倉庫——即將上線</span>
+          </div>
+        </div>
+
+        <div class="tile team-card placeholder">
+          <div class="thumb">✨</div>
+          <h3>你的專題</h3>
+          <p class="members">……可能就在這裡</p>
+          <p>在第 1 講認領你的區塊，把你的倉庫放進<a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener">班級組織</a>，發布你的專題頁面——這張卡片就是你的了。</p>
+          <div class="links">
+            <span class="pending">🌐 網站——即將上線</span>
+            <span class="pending">📦 倉庫——即將上線</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>卡片是怎麼填上內容的</h2>
+      <p>每張卡片都連結到該專題的網站（放在作者的 <code>github.io</code> Pages 上），以及
+        <a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener">班級 GitHub 組織</a>裡的專題倉庫。填好的卡片長這樣：</p>
+      <div class="grid" style="max-width:420px;">
+        <div class="tile team-card">
+          <div class="thumb">🎛️</div>
+          <h3>範例——「WaveBuddy」</h3>
+          <p class="members">物理學家 A 與工程師 B</p>
+          <p>以手機 App 為主的 AWG，附鎖定式流量警報繼電器，供 BEC 實驗室的冷卻水迴路使用。</p>
+          <div class="links">
+            <a>🌐 網站</a>
+            <a>📦 倉庫</a>
+            <a>▶ 影片</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

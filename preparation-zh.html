@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>課前準備｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">課前準備——請在第一堂課前完成（workbook 第 0 章，最多一小時）<br>
+          <span class="brand-zh">Modern Experimental Techniques – Physics</span></p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a class="active" href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · 電子</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與機械</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="preparation.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>第 1 講（AI）之前——workbook 第 0 章</h1>
+      <p>第一堂課從最初幾分鐘就開始動手實作：14:25 每個人輸入 <code>/tutor L1</code>，14:42 每個人寫一份規格並和 Claude 一起做出一個倒立擺模擬器，15:10 每個人把它部署到公開網路，15:35 每個人把自己的韌體燒錄到 ESP32——所以這些工具與帳號必須事先在你的筆電上正常運作。
+        這份清單最多花一小時，不計入十小時的作業時數。以下每個步驟都附有一個
+        <span class="check">✔ 檢查</span>，讓你確認該步驟是否成功。如果哪裡出了問題，不要花超過 15 分鐘去解決——
+        記下錯誤訊息，在課程 LINE 群組發問，並且第一堂課提早 20 分鐘到場。</p>
+      <p class="callout">小提示：一旦裝好 VS Code 與 Claude Code（步驟 2–3），你就可以請 Claude 幫你完成其餘步驟。
+        這不是作弊——這正是本課程的重點。例如你可以這樣問它：<em>「幫我在 Windows 上安裝 uv 和 Python，並確認它們能正常運作。」</em></p>
+
+      <ol class="steps">
+        <li>
+          <h3>一台可以自行安裝軟體的筆電</h3>
+          <p>Windows 10/11、macOS 或 Linux。你需要管理員權限與大約 10 GB 的可用磁碟空間，以及一個 USB-A 埠（或 USB-C 轉接頭）以連接開發板——開發板會在第一天於教室門口發給你。</p>
+        </li>
+
+        <li>
+          <h3>安裝 Visual Studio Code</h3>
+          <p>從 <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a> 下載，並以預設選項安裝
+            （在 Windows 上，出現選項時請勾選「Add to PATH」與「Open with Code」）。</p>
+          <p><span class="check">✔ 檢查：</span>VS Code 能開啟。選單 <em>Help → About</em> 顯示版本編號。</p>
+        </li>
+
+        <li>
+          <h3>安裝 Claude Code 擴充功能並登入課程組織</h3>
+          <p>在 VS Code 中按 <code>Ctrl+Shift+X</code>（macOS 為 <code>Cmd+Shift+X</code>），搜尋 <strong>Claude Code</strong>（發行者：Anthropic）並點選 Install——
+            或從 <a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code" target="_blank" rel="noopener">marketplace 頁面</a>安裝。
+            文件：<a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">Claude Code in VS Code</a>。</p>
+          <p>開課前你會收到本課程 <strong>Claude 組織</strong>的電子郵件邀請；請接受邀請，並在擴充功能要求登入時使用該帳號登入。
+            （若邀請尚未寄達，你仍可先安裝擴充功能，之後再登入。）上課時 Claude Code 就是你的家教（tutor）：
+            <code>/tutor L1</code> 會用英文或中文帶你走過 workbook 的章節。</p>
+          <p><span class="check">✔ 檢查：</span>VS Code 側邊欄出現 Claude 圖示；登入後輸入「hello」可以得到回應。</p>
+        </li>
+
+        <li>
+          <h3>安裝 git</h3>
+          <p>Windows：<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git for Windows</a>（預設選項即可）。macOS：開啟「終端機」輸入 <code>git --version</code>，出現安裝開發者工具的提示時請接受。
+            Linux：<code>sudo apt install git</code>（或你的發行版對應的指令）。</p>
+          <p>接著告訴 git 你是誰（請使用與你 GitHub 帳號相同的電子郵件，見步驟 6）。在終端機中：</p>
+          <pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre>
+          <p><span class="check">✔ 檢查：</span><code>git --version</code> 會印出版本編號。</p>
+        </li>
+
+        <li>
+          <h3>透過 <code>uv</code> 安裝 Python</h3>
+          <p>我們使用 <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener">uv</a>——一個快速的 Python 安裝與套件管理工具——而非 python.org 的安裝程式或 Anaconda。
+            課程後段，儀器的 Python 端（<code>instrument.py</code>）會在它上面執行。請依照<a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener">安裝頁面</a>操作；簡而言之：</p>
+          <pre><code># Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+          <p>關閉並重新開啟終端機，然後安裝 Python：<code>uv python install 3.13</code></p>
+          <p><span class="check">✔ 檢查：</span><code>uv run python -c "print(2**10)"</code> 會印出 <code>1024</code>。</p>
+          <p>也請在 VS Code 中安裝 <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" target="_blank" rel="noopener">Python 擴充功能</a>（搜尋「Python」，發行者為 Microsoft）。</p>
+        </li>
+
+        <li>
+          <h3>建立個人 GitHub 帳號</h3>
+          <p>到 <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> 註冊。請選一個專業的使用者名稱——它會出現在你公開作品的網址中，一用就是很多年。
+            系統詢問時請開啟雙重驗證（two-factor authentication）。身為學生，你也可以申請免費的 <a href="https://education.github.com/pack" target="_blank" rel="noopener">GitHub Student Developer Pack</a>。</p>
+          <p>將筆電上的 git 連上 GitHub：最簡單的方式是安裝 <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a> 並執行 <code>gh auth login</code>
+            （選擇 GitHub.com → HTTPS → 以網頁瀏覽器登入）。或者安裝 <a href="https://desktop.github.com/" target="_blank" rel="noopener">GitHub Desktop</a> 並登入。</p>
+          <p><span class="check">✔ 檢查：</span><code>gh auth status</code> 顯示你已登入。</p>
+        </li>
+
+        <li>
+          <h3>加入課程的 GitHub 組織</h3>
+          <p>將你的 GitHub 使用者名稱寄給授課教師（電子郵件，或第一堂課提供的表單）。你會收到課程組織的邀請——
+            請從郵件中或到 <a href="https://github.com/settings/organizations" target="_blank" rel="noopener">github.com/settings/organizations</a> 接受邀請。</p>
+          <p>該組織是 <a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener"><strong>TIGP-Experimental-Methods</strong></a>（github.com/TIGP-Experimental-Methods）。它獨立於任何研究團隊之外，用途是逐年收藏本課程的專題成果。</p>
+          <p><span class="check">✔ 檢查：</span>該組織出現在你 GitHub 帳號的組織清單中。</p>
+        </li>
+
+        <li>
+          <h3>安裝 PlatformIO 擴充功能</h3>
+          <p>我們用 PlatformIO 從 VS Code 為開發板寫入程式。在 VS Code 中按 <code>Ctrl+Shift+X</code>，搜尋 <strong>PlatformIO IDE</strong> 並安裝
+            （或依照 <a href="https://platformio.org/install/ide?install=vscode" target="_blank" rel="noopener">platformio.org</a> 的說明）。第一次啟動時它會下載自己的工具鏈——請等它完成，並在提示時重新啟動 VS Code。
+            使用某些開發板時，Windows 使用者可能還需要 <a href="https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener">CP210x</a>
+            或 <a href="https://ftdichip.com/drivers/vcp-drivers/" target="_blank" rel="noopener">FTDI</a> USB 轉序列埠驅動程式。</p>
+          <p><span class="check">✔ 檢查：</span>側邊欄出現 PlatformIO（外星人頭）圖示；在它的 <em>PlatformIO Core CLI</em> 終端機中，<code>pio --version</code> 會印出版本編號。這是第一天家教最先檢查的東西。</p>
+        </li>
+
+        <li>
+          <h3>Clone 班級儲存庫</h3>
+          <p>整門課的工作都放在同一個儲存庫 <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026" target="_blank" rel="noopener"><strong>TIGP-Experimental-Methods/class-board-2026</strong></a>：
+            <code>firmware/</code>、<code>host/</code>（手機 App＋<code>instrument.py</code>）、<code>hardware/</code>（KiCad）、<code>workbook/</code>、<code>tutor/</code>，以及你自己的資料夾 <code>docs/students/&lt;name&gt;/</code>。
+            你在分支上工作並開 pull request；<code>main</code> 受保護，由授課教師合併。若還看不到這個儲存庫，請先接受步驟 7 的邀請。</p>
+          <p>把它 clone 到你的筆電：在 VS Code 中，<em>File → New Window</em>，然後 <em>Clone Git Repository…</em>，貼上 <code>https://github.com/TIGP-Experimental-Methods/class-board-2026</code>，選擇一個資料夾，例如 <code>Documents/tigp</code>。</p>
+          <p><span class="check">✔ 檢查：</span>儲存庫資料夾已在 VS Code 中開啟，且在其終端機中 <code>git status</code> 顯示 <code>On branch main</code>。</p>
+        </li>
+
+        <li>
+          <h3>建立免費的 Cloudflare 帳號並連上 GitHub</h3>
+          <p>第一天你會用 <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages</a> 把你的第一個程式直接從 GitHub 儲存庫部署到公開網路，不需要建置步驟。
+            到 <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener">dash.cloudflare.com/sign-up</a> 註冊（免費方案；驗證電子郵件）。然後連上 GitHub 一次：在儀表板進入
+            <em>Workers &amp; Pages → Create → Pages → Connect to Git</em>，授權 Cloudflare 存取你的 GitHub 帳號，到這裡就停——專案本身在課堂上建立。</p>
+          <p><span class="check">✔ 檢查：</span>已登入 Cloudflare 儀表板；「Connect to Git」畫面列出你的 GitHub 帳號。（若 Cloudflare 註冊失敗，課堂上的備案是 GitHub Pages——不需要再裝任何東西。）</p>
+        </li>
+
+        <li>
+          <h3>觀看 V1 與 V2（13 分鐘）</h3>
+          <p class="callout">V1 <em>環境設定：VS Code、Claude Code、PlatformIO、git、clone 儲存庫</em>（8 分鐘）帶你走過上面的步驟 2–9；V2 <em>燒錄骨架韌體並在手機上開啟 App</em>（5 分鐘）示範第一天 15:35 你要做的事。選看：V0 <em>做出來、上線、記下來：網頁上的倒立擺</em>（6 分鐘）預覽第一個練習。請依 <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">workbook 第 0 章</a> 進行——同一份清單，附完整指令；<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/README.md" target="_blank" rel="noopener">workbook 目錄</a>列出後續章節。影片錄影將放在此處。</p>
+        </li>
+
+        <li>
+          <h3>在 LINE 群組報到</h3>
+          <p>在課程 LINE 群組貼一張在 VS Code 中開著已 clone 儲存庫的截圖。這讓授課教師知道你的筆電已就緒；課程期間 LINE 群組也是你求助的地方（卡住超過 15 分鐘時，家教會請你到那裡發問）。</p>
+          <p><span class="check">✔ 檢查：</span>你的截圖已在群組裡。</p>
+        </li>
+
+        <li>
+          <h3>知道你要做什麼</h3>
+          <p>每個人做的都是同一台<a href="projects-zh.html">班級儀器</a>：一塊班級板、五個區塊（block）——B1 輸入 · B2 電源 · B3 輸出 · B4 切換 · B5 數位／TRIG——每位學生一個區塊。
+            你的區塊會在第 1 講結束時分配（先自願，再抽籤），所以事前沒有什麼需要選擇。不過，請帶著來自你自己實驗室的想法：有了這樣一個盒子，你會想監測、
+            觸發、切換或自動化什麼？可到<a href="project-archive-zh.html">點子庫</a>找靈感。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>第一週需要、第一天不需要（作業 1，練習 E4）</h1>
+      <ol class="steps">
+        <li>
+          <h3>安裝 KiCad 10</h3>
+          <p>從 <a href="https://www.kicad.org/download/" target="_blank" rel="noopener">kicad.org/download</a> 下載目前的穩定版（第 10 版），連同預設程式庫一併安裝。
+            安裝後先啟動一次，讓它完成符號庫與封裝庫的設定。作業 1 中你會把課程零件庫套件解壓到儲存庫、開啟 <code>class-board.kicad_pro</code> 並找到你的規則區域——影片 V4 有示範。</p>
+          <p><span class="check">✔ 檢查：</span>KiCad 能開啟；<em>File → New Project</em> 可用，且能開啟 Schematic Editor（電路圖編輯器）。</p>
+        </li>
+        <li>
+          <h3>建立 JLCPCB 與 LCSC 帳號</h3>
+          <p><a href="https://jlcpcb.com/" target="_blank" rel="noopener">JLCPCB</a> 負責製造與組裝班級板；<a href="https://www.lcsc.com/" target="_blank" rel="noopener">LCSC</a> 是與它配套的零件目錄，設計時我們使用其料號。
+            請建立免費帳號（兩者可用同一組登入）。現在不需要付款。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>第 3 講（韌體與機械）之前</h1>
+      <ol class="steps">
+        <li>
+          <h3>建立 Onshape 帳號</h3>
+          <p>外殼加碼使用 <a href="https://www.onshape.com/en/education/" target="_blank" rel="noopener">Onshape</a>（免費教育方案，在瀏覽器中執行，無需安裝，任何筆電都能用）。
+            請以你的大學電子郵件註冊 <em>Education</em> 方案。第 3 講時，你會把授課教師的外殼範本——裡面已有電路板的 STEP 檔與前面板開孔——複製到自己的帳號、改一個地方、匯出 STL；由授課教師列印。</p>
+          <p><span class="check">✔ 檢查：</span>你能建立新文件並畫出一個矩形草圖。</p>
+        </li>
+        <li>
+          <h3>可選：安裝切片軟體</h3>
+          <p>本課程的 3D 印表機是 Bambu，而且所有外殼都由授課教師列印，所以切片軟體不是必需的。若你想預覽自己的 STL 會怎麼列印，可安裝 <a href="https://bambulab.com/en/download/studio" target="_blank" rel="noopener">Bambu Studio</a>。</p>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div>
+        <p>台灣國際研究生學程（TIGP）· 中央研究院原子與分子科學研究所</p>
+      </div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

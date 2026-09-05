@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preparation | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Preparation — do this before the first class (workbook ch. 0, at most one hour)</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a class="active" href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · Electronics</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="preparation-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Before lecture 1 (AI) — workbook chapter 0</h1>
+      <p>The first class is hands-on from the first minutes: at 14:25 everyone types <code>/tutor L1</code>, at 14:42 everyone writes a spec and builds a pendulum simulator with Claude, at 15:10 everyone deploys it to the public web, and at 15:35 everyone flashes their own firmware to their ESP32 — so the tools and accounts must already work on your laptop.
+        This checklist takes at most an hour and is not counted in the ten hours of homework. Every step below has a
+        <span class="check">✔ check</span> that tells you it worked. If anything fails, don't spend more than 15 minutes on it —
+        note the error message, ask in the course LINE group, and come 20 minutes early to the first class.</p>
+      <p class="callout">Tip: once you have VS Code and Claude Code installed (steps 2–3) you can ask Claude to help you with the remaining steps.
+        That is not cheating — it is the point of the course. Ask it, for example: <em>"Help me install uv and Python on Windows and check that it works."</em></p>
+
+      <ol class="steps">
+        <li>
+          <h3>A laptop you can install software on</h3>
+          <p>Windows 10/11, macOS or Linux. You need administrator rights and about 10 GB of free disk space. A USB-A port (or a USB-C adapter) for the dev board, which you receive at the door on day 1.</p>
+        </li>
+
+        <li>
+          <h3>Install Visual Studio Code</h3>
+          <p>Download from <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a> and install with default options
+            (on Windows, tick "Add to PATH" and "Open with Code" when offered).</p>
+          <p><span class="check">✔ check:</span> VS Code opens. In the menu <em>Help → About</em> shows a version number.</p>
+        </li>
+
+        <li>
+          <h3>Install the Claude Code extension and sign in to the course organization</h3>
+          <p>In VS Code press <code>Ctrl+Shift+X</code> (macOS <code>Cmd+Shift+X</code>), search for <strong>Claude Code</strong> (publisher: Anthropic) and click Install —
+            or install from the <a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code" target="_blank" rel="noopener">marketplace page</a>.
+            Documentation: <a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">Claude Code in VS Code</a>.</p>
+          <p>You will receive an invitation to the course's <strong>Claude organization</strong> by email before the first class; accept it and sign in with that account
+            when the extension asks. (If the invitation has not arrived, you can still install the extension now and sign in later.) In class, Claude Code is your tutor:
+            <code>/tutor L1</code> paces you through the workbook chapter, in English or Mandarin.</p>
+          <p><span class="check">✔ check:</span> A Claude icon appears in the VS Code side bar; after signing in you can type "hello" and get an answer.</p>
+        </li>
+
+        <li>
+          <h3>Install git</h3>
+          <p>Windows: <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git for Windows</a> (defaults are fine). macOS: open Terminal and type <code>git --version</code>; accept the prompt to install the developer tools.
+            Linux: <code>sudo apt install git</code> (or your distribution's equivalent).</p>
+          <p>Then tell git who you are (use the same email as your GitHub account, step 6). In a terminal:</p>
+          <pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre>
+          <p><span class="check">✔ check:</span> <code>git --version</code> prints a version.</p>
+        </li>
+
+        <li>
+          <h3>Install Python via <code>uv</code></h3>
+          <p>We use <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener">uv</a>, a fast Python installer and package manager, rather than python.org installers or Anaconda.
+            The Python side of the instrument (<code>instrument.py</code>) runs on it later in the course. Follow <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener">the installation page</a>; in short:</p>
+          <pre><code># Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+          <p>Close and reopen the terminal, then install Python: <code>uv python install 3.13</code></p>
+          <p><span class="check">✔ check:</span> <code>uv run python -c "print(2**10)"</code> prints <code>1024</code>.</p>
+          <p>Also install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" target="_blank" rel="noopener">Python extension</a> in VS Code (search "Python", publisher Microsoft).</p>
+        </li>
+
+        <li>
+          <h3>Create a personal GitHub account</h3>
+          <p>Sign up at <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a>. Choose a professional username — it will be in the URL of your public work for years.
+            Turn on two-factor authentication when asked. As a student you can also apply for the free <a href="https://education.github.com/pack" target="_blank" rel="noopener">GitHub Student Developer Pack</a>.</p>
+          <p>Connect git on your laptop to GitHub: the simplest way is to install the <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a> and run <code>gh auth login</code>
+            (choose GitHub.com → HTTPS → login with a web browser). Alternatively install <a href="https://desktop.github.com/" target="_blank" rel="noopener">GitHub Desktop</a> and sign in.</p>
+          <p><span class="check">✔ check:</span> <code>gh auth status</code> says you are logged in.</p>
+        </li>
+
+        <li>
+          <h3>Join the class GitHub organization</h3>
+          <p>Send your GitHub username to the instructor (email or the form given in the first class). You will receive an invitation to the class organization —
+            accept it from the email or at <a href="https://github.com/settings/organizations" target="_blank" rel="noopener">github.com/settings/organizations</a>.</p>
+          <p>The organization is <a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener"><strong>TIGP-Experimental-Methods</strong></a> (github.com/TIGP-Experimental-Methods). It is separate from any research group and exists to collect the class projects year after year.</p>
+          <p><span class="check">✔ check:</span> The organization appears in your list of organizations on GitHub.</p>
+        </li>
+
+        <li>
+          <h3>Install the PlatformIO extension</h3>
+          <p>We program the dev board from VS Code with PlatformIO. In VS Code press <code>Ctrl+Shift+X</code>, search for <strong>PlatformIO IDE</strong> and install it
+            (or follow <a href="https://platformio.org/install/ide?install=vscode" target="_blank" rel="noopener">platformio.org</a>). On first start it downloads its own toolchain — let it finish and restart VS Code when asked.
+            Windows users may also need the <a href="https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener">CP210x</a>
+            or <a href="https://ftdichip.com/drivers/vcp-drivers/" target="_blank" rel="noopener">FTDI</a> USB-serial drivers for some boards.</p>
+          <p><span class="check">✔ check:</span> The PlatformIO (alien head) icon appears in the side bar; in its <em>PlatformIO Core CLI</em> terminal, <code>pio --version</code> prints a version. This is the first thing the tutor checks on day 1.</p>
+        </li>
+
+        <li>
+          <h3>Clone the class repository</h3>
+          <p>All course work lives in one repository, <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026" target="_blank" rel="noopener"><strong>TIGP-Experimental-Methods/class-board-2026</strong></a>:
+            <code>firmware/</code>, <code>host/</code> (phone app + <code>instrument.py</code>), <code>hardware/</code> (KiCad), <code>workbook/</code>, <code>tutor/</code>, and your own folder <code>docs/students/&lt;name&gt;/</code>.
+            You work on branches and open pull requests; <code>main</code> is protected and the instructor merges. If the repository is not visible yet, accept the invitation from step 7 first.</p>
+          <p>Clone it to your laptop: in VS Code, <em>File → New Window</em>, then <em>Clone Git Repository…</em>, paste <code>https://github.com/TIGP-Experimental-Methods/class-board-2026</code>, choose a folder such as <code>Documents/tigp</code>.</p>
+          <p><span class="check">✔ check:</span> The repo folder is open in VS Code and <code>git status</code> in its terminal says <code>On branch main</code>.</p>
+        </li>
+
+        <li>
+          <h3>Create a free Cloudflare account and connect it to GitHub</h3>
+          <p>On day 1 you deploy your first program to the public web with <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages</a>, straight from a GitHub repository, no build step.
+            Sign up at <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener">dash.cloudflare.com/sign-up</a> (free plan; verify the email). Then, once, connect GitHub: in the dashboard go to
+            <em>Workers &amp; Pages → Create → Pages → Connect to Git</em>, authorise Cloudflare for your GitHub account, and stop there — you create the project itself in class.</p>
+          <p><span class="check">✔ check:</span> Signed in to the Cloudflare dashboard; the "Connect to Git" screen lists your GitHub account. (If Cloudflare sign-up fails, GitHub Pages is the fallback in class — nothing else to install.)</p>
+        </li>
+
+        <li>
+          <h3>Watch V1 and V2 (13 minutes)</h3>
+          <p class="callout">V1 <em>Setup: VS Code, Claude Code, PlatformIO, git, clone the repo</em> (8 min) walks through steps 2–9 above; V2 <em>Flash the skeleton and open the app on your phone</em> (5 min) shows exactly what you will do at 15:35 on day 1. Optional preview: V0 <em>Build, ship, log: a pendulum on the web</em> (6 min) shows the first exercise. Follow <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">workbook chapter 0</a> — the same list with the exact commands; the <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/README.md" target="_blank" rel="noopener">workbook index</a> shows what comes next. Video recordings follow here.</p>
+        </li>
+
+        <li>
+          <h3>Check in on the LINE group</h3>
+          <p>Post a screenshot of the cloned repository open in VS Code to the course LINE group. That tells the instructor your laptop is ready, and the LINE group is where you ask for help during the course (the tutor will send you there when you are stuck for more than 15 minutes).</p>
+          <p><span class="check">✔ check:</span> Your screenshot is in the group.</p>
+        </li>
+
+        <li>
+          <h3>Know what you are going to build</h3>
+          <p>Everyone builds the same <a href="projects.html">class instrument</a>: one class board with five blocks — B1 inputs · B2 power · B3 outputs · B4 switching · B5 digital/TRIG — and one block per student.
+            Your block is assigned at the end of lecture 1 (volunteers first, then lots), so there is nothing to choose beforehand. Do come with an idea from your own lab, though: what would you monitor,
+            trigger, switch or automate with a box like this? For inspiration, browse the <a href="project-archive.html">idea archive</a>.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>Needed in week 1, not on day 1 (Homework 1, exercise E4)</h1>
+      <ol class="steps">
+        <li>
+          <h3>Install KiCad 10</h3>
+          <p>Download the current stable release (version 10) from <a href="https://www.kicad.org/download/" target="_blank" rel="noopener">kicad.org/download</a>. Install with the default libraries.
+            Start it once so it finishes configuring the symbol and footprint libraries. In Homework 1 you then unzip the course library package into the repo, open <code>class-board.kicad_pro</code> and find your rule area — video V4 shows it.</p>
+          <p><span class="check">✔ check:</span> KiCad opens; <em>File → New Project</em> works and you can open the Schematic Editor.</p>
+        </li>
+        <li>
+          <h3>Create accounts at JLCPCB and LCSC</h3>
+          <p><a href="https://jlcpcb.com/" target="_blank" rel="noopener">JLCPCB</a> manufactures and assembles the class board; <a href="https://www.lcsc.com/" target="_blank" rel="noopener">LCSC</a> is the associated parts catalogue whose part numbers we use during design.
+            Create free accounts (same login works for both). No payment needed now.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>Before lecture 3 (Firmware and Mechanical)</h1>
+      <ol class="steps">
+        <li>
+          <h3>Create an Onshape account</h3>
+          <p>The box add-on uses <a href="https://www.onshape.com/en/education/" target="_blank" rel="noopener">Onshape</a> (free education plan, runs in the browser, no installation, works on any laptop).
+            Sign up with your university email under the <em>Education</em> plan. In lecture 3 you copy the instructor's box template — it already contains the board STEP and the front-panel cutouts — into your account, change one thing, and export an STL; the instructor prints it.</p>
+          <p><span class="check">✔ check:</span> You can create a new document and sketch a rectangle.</p>
+        </li>
+        <li>
+          <h3>Optional: install a slicer</h3>
+          <p>The course 3D printers are Bambu and the instructor prints all the boxes, so a slicer is not required. If you want to preview how your STL will print, install <a href="https://bambulab.com/en/download/studio" target="_blank" rel="noopener">Bambu Studio</a>.</p>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div>
+        <p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p>
+      </div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

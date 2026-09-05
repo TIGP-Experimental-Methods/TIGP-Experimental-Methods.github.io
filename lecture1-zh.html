@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第一講 AI｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">第一講 — AI 101：做出來、上線、記下來——然後是你的儀器 · 2026年9月11日（五）14:20–16:20 · 中研院原分所 R311</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a class="active" href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · 電子</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與機械</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="lecture1.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>AI 101 — 做出來、上線、記下來——然後是你的儀器</h1>
+      <p><strong>目標。</strong>休息之前，你已經用 AI 程式代理（coding agent），從一份你自己寫的五行規格做出一個倒立擺模擬器、用物理檢驗過它、把它放上公開的網路掛著你的名字，並寫下第一則 Markdown 工作紀錄。
+        兩小時結束時，<strong>你自己的手機 App 已經在和你手上的 ESP32 對話</strong>——一個按鈕作用在開發板上、一個即時數字回傳——由你燒錄、在你的手機上驗證、以 pull request 交付。你也知道<a href="projects-zh.html">班級板</a>上哪一個區塊（block）是你的。</p>
+      <p><strong>學習目標：</strong>從你自己寫的規格出發與 AI 程式代理合作 · 用<em>物理</em>檢驗 AI 的產出，而不是看起來像就好 · 把程式放上公開網路並在手機上打開 · 保持一份下一個 session 能接續的 Markdown 紀錄 · <strong>做出一個和你的 ESP32 對話的手機 App、燒錄、以 PR 交付</strong> · 知道你的區塊。</p>
+      <p class="callout"><strong>為什麼從專題以外的東西開始。</strong>AI 輔助工作是一種通用技能。同樣的三個動作可以用在模擬、網站、影片、報告、KiCad 電路板與韌體驅動程式上：
+        從一份寫下來的規格<strong>做出來</strong>（build）、<strong>上線</strong>到別人看得到的地方（ship）、用純文字<strong>記下來</strong>你做了什麼（log）。
+        今天把這三個動作練兩次：先在每位物理人都懂的東西——單擺——上，沒有硬體礙事；再用在你手上的 ESP32 上，做一個你自己的手機 App。電子設計只是 AI 的一種應用，不是課綱本身。</p>
+      <p class="callout"><strong>一句話核心論點：</strong>AI 代理就像一位沒有記憶的菜鳥工程師——它的表現，完全取決於你給它的專案文件、
+        任務規格與驗證方式。以下所有內容都由這句話推導而來。</p>
+      <p>先修條件：<a href="preparation-zh.html">課前準備檢查清單</a>（workbook 第 0 章，最多一小時，不計入 10 小時的作業時數）——包括一個已連上 GitHub 的免費 Cloudflare 帳號。
+        請帶筆電與 USB 線；開發板（ESP32-S3）一開始就發給你，已預先燒錄骨架韌體——15:35 你要燒錄自己的版本，所以 PlatformIO 的工具鏈必須在家先下載好。</p>
+    </section>
+
+    <section class="card">
+      <h2>我們的工作方式：自己的東西放自己的儲存庫，儀器放一個班級儲存庫，每個螢幕上都有家教</h2>
+      <div class="grid">
+        <div class="tile"><h3>做出來（Build）</h3><p>先寫規格——五行，你自己寫。然後是計畫，然後才是程式碼。今天：一個倒立擺，寫在單一個 <code>index.html</code> 裡（canvas＋JavaScript，不用框架、不用建置）。
+          代理寫樣板程式碼；參數由你設定，檢驗由你來做。</p></div>
+        <div class="tile"><h3>上線（Ship）</h3><p>你自己的 GitHub 儲存庫 <code>pendulum</code>，直接從 git 部署到 <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages</a>——
+          不需要建置指令，一個公開的 <code>*.pages.dev</code> 網址，每次 push 自動重新部署。備案是 GitHub Pages。這個儲存庫會成為你個人的課程頁面。</p></div>
+        <div class="tile"><h3>記下來（Log）——用 Markdown</h3><p>每次 session 結束都寫 <code>PROGRESS.md</code>：已完成／已驗證／下一步／注意事項。純文字，放在程式碼旁邊：可以 diff、可以搜尋、
+          AI 在下一個 session 開始時會讀它，而且它<em>就是</em>你這門課的實驗記錄本。規格、紀錄、筆記、README、投影片——Markdown 是 AI 工作的共通語言。</p></div>
+        <div class="tile"><h3>Claude 家教（tutor）</h3><p>在 Claude Code 中輸入 <code>/tutor L1</code>，它會用英文或中文陪你走完今天的 workbook 章節：檢查你的工具鏈、掌控每一步的節奏、
+          在你的 <code>SPEC.md</code> 存在之前拒絕寫程式碼、在你 commit 之前先問「你量到什麼？」，並和你一起寫 <code>PROGRESS.md</code>。之後還有 <code>/tutor HW1</code>、<code>/tutor L2</code>……</p></div>
+        <div class="tile"><h3>儀器——同樣的動作，用在硬體上</h3><p>一個班級儲存庫 <code>TIGP-Experimental-Methods/class-board-2026</code>：<code>firmware/</code>（PlatformIO）、<code>host/</code>（手機 App＋<code>instrument.py</code>）、
+          <code>hardware/</code>（KiCad）、<code>workbook/</code>、<code>tutor/</code>，以及你的資料夾 <code>docs/students/&lt;name&gt;/</code>。ESP32-S3 上的韌體 ↔ WebSocket ↔ 手機網頁 App ↔ Python。開發板本身就是一個 WiFi 存取點。
+          <code>main</code> 受保護；你在分支與 pull request 上工作；由授課教師合併。</p></div>
+        <div class="tile"><h3>你的區塊</h3><p>班級板有五個學生區塊——B1 輸入 · B2 電源 · B3 輸出 · B4 切換 · B5 數位／TRIG——以及五位學生。今天結束時
+          每個人都擁有一個：你會讀懂它、佈線它、寫它的驅動程式，並在成果展上展示它。</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>五大工作方法（本課程的主軸）</h2>
+      <ol>
+        <li><strong>規格先行。</strong>需求寫在檔案裡（<code>SPEC.md</code>），而不是留在聊天紀錄中；先要求計畫，再要求程式碼。今天的規格只有五行，由你自己寫。</li>
+        <li><strong>教會儲存庫，而不是教會 session：<code>CLAUDE.md</code>。</strong>慣例、腳位定義、建置／燒錄指令、如何測試——寫一次，每個 session 都會載入。</li>
+        <li><strong>小而新的 session。</strong>一個任務＝一個 session；做完、commit、重新開始。太長的 session 會腐壞。</li>
+        <li><strong>交接紀錄——用 Markdown。</strong>每次 session 結束都要更新 <code>PROGRESS.md</code>：已完成／已驗證／下一步／注意事項。把實驗記錄本的紀律套用到 AI 工作上。</li>
+        <li><strong>AI 動手寫，你來驗證。</strong>沒有驗證計畫 → 產出就不是你能交付的東西。在本課程中，「驗證」指的是一個數字或一個觀察：<em>擺動週期符合 2π√(L/g) 嗎？你在手機上／在 DRC 裡／在示波器上看到什麼？</em></li>
+      </ol>
+      <p>班級儲存庫本身也是這樣建起來的：課程文件、workbook 與家教 skill，就是這門課自己的 <code>CLAUDE.md</code> 與交接日誌。</p>
+    </section>
+
+    <section class="card">
+      <h2>課程流程（120 分鐘）</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>時間</th><th>時段</th><th>內容</th></tr>
+        <tr><td>0:00</td><td>開場（5 分鐘）</td><td>我們要一起做什麼；今天的兩個承諾——休息前模擬器上線，結束前你自己的 App 和你的 ESP32 對話；10 小時的承諾。發開發板。</td></tr>
+        <tr><td>0:05</td><td>啟動家教（7 分鐘）</td><td>在班級儲存庫中開啟 Claude Code，輸入 <code>/tutor L1</code>。家教用你的語言打招呼、問你以前做過什麼，並執行工具鏈檢查
+          （<code>git --version</code>、<code>gh auth status</code>、<code>pio --version</code>、開發板出現在連接埠上、Cloudflare 登入了嗎？）。每個螢幕都顯示「toolchain OK」即完成。</td></tr>
+        <tr><td>0:12</td><td>講課：與 AI 代理合作（10 分鐘）</td><td>上面的五大工作方法；Markdown 作為實驗記錄本；今天的兩個練習如何就是整個循環的縮影。</td></tr>
+        <tr><td>0:22</td><td><strong>練習 E1a：做出來——倒立擺</strong>（25 分鐘）</td><td><code>gh repo create &lt;user&gt;/pendulum --public --clone</code>。<strong>你自己寫 <code>SPEC.md</code></strong>，五行：它顯示什麼 · 兩個控制項（用鍵盤或觸控左右推小車；切換平衡控制器）·
+          參數 L、m、g · <strong>檢驗：控制器關閉、擺桿下垂時，小角度擺動週期＝2π√(L/g)，誤差 5 % 以內</strong>。要求計畫；讓 Claude 寫一個 <code>index.html</code>；打開它；用秒表量十次擺動；commit。
+          改變 L 看 √L 的關係是加分題；第 20 分鐘起可以改 fork 教師的參考儲存庫。<em>可替代的題目（都要有一個可檢驗的數字）：</em>彈跳球（恢復係數）、二體軌道（克卜勒第三定律）、Pong（你在規格中指定的球速）。</td></tr>
+        <tr><td>0:47</td><td><strong>練習 E1b：上線＋記下來</strong>（10 分鐘）</td><td>Push。Cloudflare 儀表板 → Workers &amp; Pages → Pages → Connect to Git → <code>pendulum</code> → 不填建置指令、輸出目錄 <code>/</code> → Deploy。
+          在手機上打開 <code>*.pages.dev</code> 網址。然後<strong>你自己寫 <code>PROGRESS.md</code> 那一則</strong>（已完成／已驗證／下一步／注意事項）、commit、push，看網站自己重新部署。
+          Cloudflare 卡住時的備案：GitHub Pages（Settings → Pages → 分支 <code>main</code>）。</td></tr>
+        <tr><td>0:57</td><td>休息（5 分鐘）</td><td></td></tr>
+        <tr><td>1:02</td><td>儀器在你的手機上（10 分鐘）</td><td>你那塊預先燒錄的開發板是一個存取點 <code>instrument-&lt;id&gt;</code>：加入它、開啟 <code>http://192.168.4.1</code>、按下 LED 按鈕、看即時圖表動起來——每個人，現在。
+          軟體架構投影片（韌體 ↔ WebSocket ↔ PWA ↔ <code>instrument.py</code>），以及<strong>一個控制項會碰到的兩個檔案</strong>：<code>firmware/src/blocks/base/</code> 裡的處理函式與 <code>host/pwa/</code> 裡的控制元件，還有那一則穿過 WebSocket 的訊息。</td></tr>
+        <tr><td>1:12</td><td><strong>練習 E2：你的手機 App 和你的 ESP32 對話</strong>（33 分鐘）</td><td><strong>一個按鈕出去、一個即時數字回來。</strong>挑一個按鈕動作（LED 顏色、閃爍模式、一支 GPIO 高／低、閒置腳位上的蜂鳴）和一個讀值
+          （晶片溫度 <code>temperatureRead()</code>、觸控腳位、按鈕次數計數器、ADC 腳位）。和家教一起：在 <code>blocks/base/</code> 加入處理函式與狀態欄位、在 App 的你的面板加入控制元件與數字；
+          <strong><code>pio run -t upload</code></strong>；手機重新連上；按下按鈕、看數字。<code>git switch -c e2-&lt;name&gt;</code>、commit、push、<strong>開 PR 並附手機截圖</strong>。家教依範例寫樣板程式碼，但訊息名稱、處理函式內容與控制元件標籤由你親手改。
+          你的 App 在你的手機上驅動你的開發板並顯示來自它的即時數字即完成——沒做到的人不下課。</td></tr>
+        <tr><td>1:45</td><td>班級板（10 分鐘）</td><td>電路圖 PDF 第 1 頁（方塊圖）；每個區塊一句話（B1 輸入 · B2 電源 · B3 輸出 · B4 切換 · B5 數位／TRIG）；3 × 4 SMA 前面板圖；
+          <strong>區塊分配</strong>——先自願，再抽籤。家教把你的區塊記進 <code>PROGRESS.md</code>。五個名字對上五個區塊即完成。</td></tr>
+        <tr><td>1:55</td><td>作業說明（5 分鐘）</td><td>作業 1 的五個勾選框；LINE 群組；週三 16:00 的辦公時間。家教替你排好檢查點（週二／週四），並以你的 <code>PROGRESS.md</code> 更新結束這個 session。</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>作業 1（列入評分，2.5 小時）— 練習 E2（完成）＋E3–E5</h2>
+      <ul>
+        <li><strong>E2 完成＋合併（0.5 小時）。</strong>如果你的 App 在課堂上沒有完全做好，用 <code>/tutor HW1</code> 完成它（燒錄有問題就到週三辦公時間）。授課教師週一審查 PR；回應一則意見並合併。<em>學到：</em>PR 循環。</li>
+        <li><strong>E3（0.5 小時）讀懂你的區塊。</strong>家教展示你區塊的 PDF 頁面並問兩個問題（B1「為什麼每個輸入都串了一個 1 kΩ？」·
+          B2「USB 和電源插座同時插上會發生什麼？」· B3「±10 V 的擺幅是由什麼決定的？」· B4「跨在繼電器線圈上的二極體是做什麼的？」· B5「為什麼 GPIO 不能直接驅動 5 V TTL？」）。
+          答案寫進 <code>docs/students/&lt;name&gt;/notes.md</code>。觀看 V3。<em>學到：</em>電路圖閱讀、你的區塊的用途。</li>
+        <li><strong>E4（0.5 小時）KiCad 就位。</strong>安裝 KiCad 10；把零件庫套件解壓到儲存庫裡；開啟 <code>class-board.kicad_pro</code>；找到你的規則區域（rule area）；截圖。觀看 V4。<em>學到：</em>認識 KiCad。</li>
+        <li><strong>E5（0.5 小時）你的 SPEC 段落。</strong>在 <code>docs/students/&lt;name&gt;/SPEC.md</code> 寫一段：你的區塊必須做到什麼、一個數字、成果展當天你要怎麼展示它——就是倒立擺的規格，再往上一層。<em>學到：</em>規格先行。</li>
+        <li>影片 V3＋V4（16 分鐘）與 workbook 第 1 章的閱讀填滿其餘的 2.5 小時。每次工作 session 結束都要寫一筆 <code>PROGRESS.md</code> 並 commit——在你的 pendulum 儲存庫和班級儲存庫都一樣。這條規則貫穿整個課程。</li>
+      </ul>
+      <p>本週結束時的評分依據：你的倒立擺網址與它的 <code>PROGRESS.md</code>（課堂上完成）、已合併的 E2（你的 App）、<code>notes.md</code> 裡的兩個答案、區域截圖與 <code>SPEC.md</code>——全部在儲存庫裡，全部透過 commit 或 PR。</p>
+    </section>
+
+    <section class="card">
+      <h2>這三個動作接下來去哪裡</h2>
+      <ul>
+        <li><strong>做出來：</strong>你在電路板上的那一部分（第二講）、你區塊的驅動程式與 App 面板（第三講《韌體與機械 101》）——E2 的 App 長成真正的區塊面板；同樣是規格 → 計畫 → 樣板 → <em>你</em>改最關鍵的幾行 → 驗證。</li>
+        <li><strong>上線：</strong>9 月 28 日班級板從大家的 pull request 下單；你的面板隨儀器的 App 出貨；你的倒立擺網站早已公開。</li>
+        <li><strong>記下來：</strong>每次 session 結束寫 <code>PROGRESS.md</code>；總結週時 <code>SPEC.md</code> 多一個量到的數字。</li>
+        <li><strong>你的個人頁面：</strong>pendulum 儲存庫<em>就是</em>你的課程頁面。總結週時你把 60 秒影片與量到的數字加進去；<a href="teams-zh.html">成果展</a>把它連結在你的區塊旁邊。同一個網站，每週多一點——這就是「show your work」。</li>
+        <li><strong>用 AI 做影片、投影片、報告（可選，第三講起）：</strong>本實驗室的 <a href="https://github.com/iams-yb-lab/show-your-work" target="_blank" rel="noopener">show-your-work</a> Claude Code skills——
+          <code>education-video</code>、<code>slide-deck</code>、<code>technical-report</code>、<code>natural-voice</code>、<code>showoff-render</code>——用 <code>python tools/install_skills.py &lt;repo&gt;</code> 一行裝進任何儲存庫。想用它們做 60 秒影片或成果展投影片都可以；手機拍的影片同樣合格。</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>教材</h2>
+      <p class="callout">影片：V0 <em>做出來、上線、記下來：網頁上的倒立擺</em>（6 分鐘，課前選看／課後重播）· V1 <em>環境設定：VS Code、Claude Code、PlatformIO、git、clone 儲存庫</em>（8 分鐘，課前）· V2 <em>燒錄骨架韌體並在手機上開啟 App</em>（5 分鐘，課前）·
+        V3 <em>8 分鐘看懂我們的電路圖，逐區塊介紹</em>（8 分鐘，作業 1）· V4 <em>KiCad：解壓零件庫、放上缺少的零件、從 LCSC 取得零件</em>（8 分鐘，作業 1）。教材：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch1-day-1-week-1.md" target="_blank" rel="noopener">workbook 第 1 章</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">第 0 章</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/blocks" target="_blank" rel="noopener">你的區塊頁面</a> · 投影片 <a href="slides/L1.html" target="_blank" rel="noopener">L1（HTML）</a> / <a href="slides/L1.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">參考 pendulum 儲存庫</a>（<a href="https://tigp-experimental-methods.github.io/pendulum-example/" target="_blank" rel="noopener">線上版</a>）· 家教：在班級儲存庫中輸入 <code>/tutor L1</code>。影片錄影將放在此處。</p>
+      <p class="callout">教師的參考 <code>pendulum</code> 儲存庫與網站（你的 session 卡住時可以 fork）；workbook 第 0 章<em>第一天之前</em>與第 1 章<em>第一天＋第一週：做出來、上線、記下來——然後是你的儀器</em>（含五行規格範本、四個紀錄問題，以及每個區塊一頁：它的 PDF 節錄、兩個問題、它的區域）；
+        第一講投影片；班級儲存庫中的家教（<code>/tutor L1</code>、<code>/tutor HW1</code>）。教材：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch1-day-1-week-1.md" target="_blank" rel="noopener">workbook 第 1 章</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">第 0 章</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/blocks" target="_blank" rel="noopener">你的區塊頁面</a> · 投影片 <a href="slides/L1.html" target="_blank" rel="noopener">L1（HTML）</a> / <a href="slides/L1.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">參考 pendulum 儲存庫</a>（<a href="https://tigp-experimental-methods.github.io/pendulum-example/" target="_blank" rel="noopener">線上版</a>）· 家教：在班級儲存庫中輸入 <code>/tutor L1</code>。影片錄影將放在此處。</p>
+      <p>另請參閱 <a href="resources-zh.html#ai">AI 資源</a>。</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

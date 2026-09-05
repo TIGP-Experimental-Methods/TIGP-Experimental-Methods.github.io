@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 3 – Firmware and Mechanical | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Lecture 3 — Firmware and Mechanical 101 · Fri 2 Oct 2026 · 14:20–16:20 · R311, IAMS</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · Electronics</a></li>
+      <li><a class="active" href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="lecture3-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Firmware and Mechanical 101 — polish, box, and what else</h1>
+      <p><strong>Goal.</strong> The boards are on order (placed Monday 28 September, back around 12 October), so <strong>everything today runs in sim mode on the dev board</strong>.
+        You give your block its driver and its app panel, wire one alarm rule, and — in a 40-minute add-on — design a printable box for the instrument from the instructor's Onshape template.
+        The instructor prints all five.</p>
+      <p><strong>Learning goals:</strong> how a block driver and an app panel fit the skeleton · work against hardware that is not there yet (sim mode) · design a printable enclosure from a template ·
+        know what to do next with all this.</p>
+      <p>Prerequisite: Homework 2 done and your zone merged; an <a href="preparation.html">Onshape account</a> (free education plan, runs in the browser). Bring your laptop and your dev board.</p>
+      <p class="callout"><strong>Mechanical is a short add-on, not a workshop.</strong> CAD is Onshape (free education plan, browser-based, nothing to install). The instructor owns a parametric box template
+        that already contains the board STEP and the front-panel cutouts; you copy it, change one thing, export an STL, and the instructor prints the queue on the Bambu.
+        The institute's laser cutter gets one slide as the alternative for flat panels; it is not used for the box.</p>
+    </section>
+
+    <section class="card">
+      <h2>Topics</h2>
+      <div class="grid">
+        <div class="tile"><h3>The block-driver interface</h3><p>Every block is a folder <code>firmware/src/blocks/b&lt;N&gt;_&lt;name&gt;/</code> implementing <code>begin() / loop() / handle(cmd) / status(out)</code>. You start from <code>blocks/template/</code>.</p></div>
+        <div class="tile"><h3>The protocol</h3><p>WebSocket messages <code>{block, cmd, args}</code> in and <code>{block, status}</code> out; one panel module per block in <code>host/pwa/panels/b&lt;N&gt;.js</code>; <code>instrument.py</code> mirrors the same commands in Python.</p></div>
+        <div class="tile"><h3>Sim mode</h3><p>The <code>SIM</code> flag fakes the hardware so the whole app runs on a bare dev board — you work two weeks ahead of the boards and swap the flag off when they arrive.</p></div>
+        <div class="tile"><h3>One alarm rule per panel</h3><p>Your block's status → the base alarm engine → relay + notification: B1 "AI1 above a threshold" · B2 "a rail out of range" · B3 "output clipped" · B4 "opto count jumped" · B5 "TRIG edge seen". Every student builds the demo's alarm step personally.</p></div>
+        <div class="tile"><h3>Boxes for electronics</h3><p>FDM tolerances (holes +0.3 mm), 2 mm walls, heat-set inserts, layer direction, why the PCB front panel makes the cutouts trivial, the STEP export from KiCad.</p></div>
+        <div class="tile"><h3>The Onshape template</h3><p>Three parameters (height, wall, foot style) and one "make it yours" change — vent pattern, embossed name, feet, a colour note — then export STL to <code>docs/students/&lt;name&gt;/box.stl</code>.</p></div>
+        <div class="tile"><h3>Tips and what else</h3><p>Bot alerts (LINE/Telegram) from the alarm engine, scripted sweeps from <code>instrument.py</code>, the 60-second video, over-the-air updates (OTA), and where to take this: your own lab's instrument.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Session plan (120 min)</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Time</th><th>Block</th><th>What happens</th></tr>
+        <tr><td>0:00</td><td>Where we are (5 min)</td><td>The merged board in 3D; order status; the demo checklist.</td></tr>
+        <tr><td>0:05</td><td>Software architecture (15 min)</td><td>The block-driver interface <code>begin/loop/handle/status</code>; the WebSocket messages <code>{block, cmd, args}</code> and <code>{block, status}</code>; one panel module per block; <code>instrument.py</code> mirrors it; the <code>SIM</code> flag; the base alarm engine; OTA. Open <code>blocks/template/</code>.</td></tr>
+        <tr><td>0:20</td><td><strong>Exercise E11: driver + panel in sim</strong> (40 min)</td><td><code>/tutor L3</code>: copy the template to <code>blocks/b&lt;N&gt;_&lt;name&gt;/</code>; fill in your block's commands (B1 <code>read_all</code>, <code>set_range</code> · B2 <code>rails</code> status · B3 <code>set_dc</code>, <code>sine</code> · B4 <code>relay</code>, <code>opto_count</code> · B5 <code>dio</code>, <code>trig_dir</code>); make the SIM branch return plausible values; add the panel and one alarm rule; flash; see the panel react on the phone; open the PR. The tutor generates the skeleton, you name the commands and write the SIM values, and you explain one message round-trip before flashing. Students whose blocks talk are paired (B3 ↔ B1, B5 ↔ B4). Done when the panel controls the block in sim and the PR is open.</td></tr>
+        <tr><td>1:00</td><td>Break (5 min)</td><td></td></tr>
+        <tr><td>1:05</td><td>Boxes for electronics (10 min)</td><td>FDM tolerances (+0.3 mm holes), wall 2 mm, heat-set inserts, layer direction, why the PCB front panel makes the cutouts trivial, the STEP from KiCad.</td></tr>
+        <tr><td>1:15</td><td><strong>Exercise E12 (start): your box</strong> (30 min)</td><td>The Onshape template on the projector: copy, import the board STEP, the three parameters (height, wall, foot style), the one "make it yours" change, export STL. You copy the template into your Onshape account, import, change one thing (vent pattern, embossed name, feet, colour note). Done when the STL is exported.</td></tr>
+        <tr><td>1:45</td><td>Tips and what else (15 min)</td><td>Bot alerts (LINE/Telegram), scripted sweeps from <code>instrument.py</code>, the 60-second video, OTA, where to take this: your own lab's instrument.</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Homework 3 (assessed, 3 h) — Exercises E11–E12 finished</h2>
+      <ul>
+        <li><strong>E11 (1.8 h) Driver + panel PR by Friday 9 October.</strong> Finish the commands, one status value plotted, <strong>one alarm rule wired to the base alarm engine</strong> (a threshold on your block's status → relay → notification), CI green; reviewed by your ring reviewer (comment only, no second fix round). <em>Teaches:</em> firmware structure, protocol, app widget, the alarm path everyone demos, working ahead of hardware.</li>
+        <li><strong>E12 (0.75 h) Box STL</strong> to <code>docs/students/&lt;name&gt;/box.stl</code>; the instructor prints all five over the following week. <em>Teaches:</em> CAD from a template, print constraints.</li>
+        <li>Watch V6 + V7 (0.3 h); workbook ch. 3 (0.15 h).</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Wrap-up (1.5 h, week of 19 October; boards back ≈ 12 October) — Exercise E13</h2>
+      <p>During the week of 12 October the instructor flashes and bench-checks every board (rails, LED, WiFi) and prints the boxes. Then:</p>
+      <ul>
+        <li><strong>E13a (0.5 h) Real hardware.</strong> Flash your own build without <code>SIM</code>, open your panel, see your block move real hardware (B1 a voltage on AI1 · B2 rail LEDs and the status panel · B3 a sine on AO1 into AI1 · B4 a relay click and an opto count · B5 a TTL line and TRIG direction). Fix one thing with the tutor.</li>
+        <li><strong>E13b (0.5 h) One measured number</strong> for your block, written into <code>SPEC.md</code> with how you measured it: B1 noise floor of one input (LSB rms) · B2 the four rail voltages and the USB current · B3 amplitude accuracy of a 1 kHz sine at ±5 V · B4 relay switching time from an opto timestamp · B5 TTL edge rate on a scope.</li>
+        <li><strong>E13c (0.5 h) 60-second phone video</strong> of that, uploaded to <code>docs/students/&lt;name&gt;/</code> and linked from your <a href="teams.html">Showcase</a> card.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Demo week (26–30 October, scheduled 5-minute slots, no extra prep) — Exercise E14</h2>
+      <p>From the class checklist: (1) waveform out, seen on the scope and on the instrument's own input · (2) change it from the phone · (3) alarm on an input → relay → notification ·
+        (4) <strong>your block</strong>: its panel and one thing it does — play your 60-second video if the live part fails.</p>
+      <p><strong>Score sheet:</strong> block works <strong>40 %</strong> · PR quality incl. your review of a peer <strong>30 %</strong> · demo clarity <strong>20 %</strong> · box <strong>10 %</strong>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Materials</h2>
+      <p class="callout">Videos: V6 <em>A block driver + app panel, end to end, in sim mode</em> (10 min, Homework 3) · V7 <em>The box: template to STL to Bambu</em> (6 min, Homework 3). Materials: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch3-day-3-week-3.md" target="_blank" rel="noopener">workbook ch. 3</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch4-wrap-up-demo.md" target="_blank" rel="noopener">ch. 4 wrap-up + demo (checklist, score sheet)</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chB-how-the-software-works.md" target="_blank" rel="noopener">ch. B How the software works</a> · slides <a href="slides/L3.html" target="_blank" rel="noopener">L3 (HTML)</a> / <a href="slides/L3.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/PROTOCOL.md" target="_blank" rel="noopener">PROTOCOL.md</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/src/blocks/template" target="_blank" rel="noopener">blocks/template</a> and <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/host/pwa/panels/template.js" target="_blank" rel="noopener">panels/template.js</a>. Onshape box template follows by Wed 30 Sep; video recordings follow here.</p>
+      <p class="callout"><code>blocks/template/</code> with the SIM branch and the alarm-engine hook, the panel template, the Onshape box template with the merged board STEP; workbook ch. 3 <em>Day 3 + week 3: make it work, make it yours</em>,
+        ch. 4 <em>Wrap-up + demo</em> (bring-up checklist, 60-second video brief, 5-minute demo script, score sheet) and ch. B <em>How the instrument's software works</em> (self-study); the L3 slides; the tutor (<code>/tutor L3</code>, <code>/tutor HW3</code>). Materials: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch3-day-3-week-3.md" target="_blank" rel="noopener">workbook ch. 3</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch4-wrap-up-demo.md" target="_blank" rel="noopener">ch. 4 wrap-up + demo (checklist, score sheet)</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chB-how-the-software-works.md" target="_blank" rel="noopener">ch. B How the software works</a> · slides <a href="slides/L3.html" target="_blank" rel="noopener">L3 (HTML)</a> / <a href="slides/L3.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/PROTOCOL.md" target="_blank" rel="noopener">PROTOCOL.md</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/src/blocks/template" target="_blank" rel="noopener">blocks/template</a> and <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/host/pwa/panels/template.js" target="_blank" rel="noopener">panels/template.js</a>. Onshape box template follows by Wed 30 Sep; video recordings follow here.</p>
+      <p>See also the <a href="resources.html#mechanical">mechanical resources</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>
