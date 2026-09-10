@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>首頁｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">實驗物理學家的基本技能：AI、印刷電路板、韌體與基礎機械設計<br>
+          <span class="brand-zh">Modern Experimental Techniques – Physics · TIGP, Academia Sinica · PHT048 / TIGP722300</span></p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a class="active" href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="index.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card hero">
+      <div style="flex: 2 1 420px;">
+        <h1>一個月打造一台真正的實驗室儀器</h1>
+        <p>這是一門為實驗物理研究生開設的實作短期課程：三場工作坊，然後是你專案的成果發表與展示。</p>
+        <ul>
+          <li><strong><a href="lecture1-zh.html">工作坊 1：實驗物理學家的 AI</a></strong>——大型語言模型如何運作、我們使用的工具（VS Code、Claude Code 擴充功能（extension）、git、免費網頁託管）、我們的「AI 方法」五步驟，以及兩個專案：<strong>專案 1</strong>，一個你自選的網頁應用程式（模擬器或遊戲），部署（deploy）到公開網路；<strong>專案 2</strong>，一個透過 WiFi 控制 ESP32（一塊小型 WiFi 微控制器（microcontroller）板，課堂提供）並從它讀取量測值的手機 App。</li>
+          <li><strong><a href="lecture2-zh.html">工作坊 2：設計印刷電路板</a></strong>——電子學速成班，然後是<strong>專案 3a</strong>：把我們的 ESP32 變成真正的實驗室設備。我們一起在 KiCad（我們用來畫電路與佈局電路板的免費軟體）中建好班級板的骨架；每個人設計一個不同的區塊（section），所以全班合力做出一台強大的儀器。板子由 JLCPCB 製造並組裝。</li>
+          <li><strong><a href="lecture3-zh.html">工作坊 3：韌體與基礎機械設計（PCB 外殼）</a></strong>——參觀原分所的製造設施、CAD 基礎，以及<strong>專案 3b</strong>：為你的儀器做一個外殼（housing；3D 列印和／或雷射切割），同時你繼續開發你的 App 與韌體（firmware）。</li>
+          <li><strong><a href="projects-zh.html#day">成果發表與展示</a></strong>（10月26–30日）——領取組裝完成的板子與外殼，組裝、測試，然後發表並展示你的專案、App、網站，以及（如果你願意）一段影片。</li>
+        </ul>
+        <p>班級板插在 ESP32-S3 開發板（dev board：一顆帶 WiFi 的單晶片小電腦，裝在有 USB-C 接頭與腳位的板子上）上，補上開發板做不到的事：2 路 ±10 V 16 位元波形輸出、8 路 ±10 V 16 位元輸入、4 個繼電器、2 路隔離快速輸入、8 路 TTL 輸出（5 V 邏輯準位訊號）與 2 路快速觸發輸出、可切換的 TRIG、
+          手機 App、Python API（從電腦驅動這塊板子的一組 Python 指令）與 OLED（小型顯示器）——全部只靠一條 USB-C 線。你能把它改造成解決你目前研究中某個問題的工具嗎？</p>
+        <p>本課程要傳達的訊息是：<em>有效運用 AI 是實驗物理學家的超能力——只要你能明確說出你要什麼，並驗證你得到了什麼。</em>沒有測試與驗證，絕不信任 AI。</p>
+        <p class="callout">第一堂課之前，請先完成<a href="preparation-zh.html">課前準備</a>的各個步驟。請自備已完整準備好的筆記型電腦；ESP32 板由課堂提供。</p>
+      </div>
+      <div class="facts">
+        <dl>
+          <dt>課程</dt><dd>現代實驗技術－物理（2 學分）<br>Modern Experimental Techniques – Physics (2 credits)</dd>
+          <dt>課程代碼</dt><dd>PHT048 · TIGP722300 · 222 D5400</dd>
+          <dt>學程</dt><dd><a href="https://tigp.iams.sinica.edu.tw/#course_schedule" target="_blank" rel="noopener">TIGP</a>，中央研究院原子與分子科學研究所</dd>
+          <dt>時間</dt><dd>每週五 14:20–16:20（第一堂課：2026年9月11日）</dd>
+          <dt>地點</dt><dd>中研院原分所 311 室<br>Room 311, IAMS, Academia Sinica</dd>
+          <dt>形式</dt><dd>工作坊／實作教學形式——你需要自備筆記型電腦，並在每堂課前完整準備好</dd>
+          <dt>語言</dt><dd>英文（Claude 可以翻譯成中文）</dd>
+          <dt>Claude 使用權</dt><dd>所有修課學生皆可使用 Claude（Team standard）——邀請郵件已於 9月6日（日）寄出</dd>
+          <dt>評量</dt><dd>以專案為準：<strong>20 %</strong> 硬體展示 · <strong>30 %</strong> 應用程式／軟體展示 · <strong>30 %</strong> 成果發表 · <strong>20 %</strong> 專案網站</dd>
+          <dt>授課教師</dt><dd>Shayne Bennetts（原分所）<br><a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a></dd>
+          <dt>攜帶物品</dt><dd>已完成<a href="preparation-zh.html">課前準備</a>的筆記型電腦（Windows / macOS / Linux），以及一條給 ESP32 用的 USB-C 線（授課教師有備用）</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>課程目標</h2>
+      <p>教授每一個現代實驗物理實驗室都需要的關鍵技能。</p>
+      <div class="grid">
+        <div class="tile"><h3>智慧</h3><p>軟體與 AI：一個能規劃、撰寫、測試並部署你所指定程式的 AI 程式代理（agent）——以及如何可靠地與它合作。</p></div>
+        <div class="tile"><h3>電子</h3><p>電子學是我們把智慧接上真實世界的方式：一塊印刷電路板（PCB），為微控制器提供精確的輸入、輸出與切換。</p></div>
+        <div class="tile"><h3>機械</h3><p>做出實體硬體——CAD、3D 列印與雷射切割——讓板子成為一台可以放在工作檯上的儀器。</p></div>
+      </div>
+      <p>我們不教 AI 的運作原理，也不教電子或機械工程（那要花好幾年）。我們的目標是給你一堂速成課，學會啟動自己專案所需的工具。</p>
+    </section>
+
+    <section class="card">
+      <h2>課程時程</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>日期</th><th>場次</th><th>內容</th><th>交付成果</th></tr>
+        <tr><td>9月11日前</td><td><a href="preparation-zh.html">課前準備</a>（在家完成）</td>
+          <td>筆電就位：VS Code、已登入的 Claude Code 擴充功能、在 VS Code 中開啟一個課程資料夾，然後由 Claude 依 <code>SETUP.md</code> 安裝其餘部分；一個已連上 GitHub 的免費 Cloudflare 帳號。</td>
+          <td>—</td></tr>
+        <tr><td>9月11日（五）</td><td><a href="lecture1-zh.html"><strong>工作坊 1：實驗物理學家的 AI</strong></a><br><small>14:20–16:20 · 311 室</small></td>
+          <td>AI 與我們使用工具的介紹；我們的「AI 方法」五步驟。專案 1：做一個網頁應用程式（模擬器或遊戲）並部署上線。專案 2：用手機透過網路控制微控制器。</td>
+          <td>專案 1：一個已部署的網頁應用程式、它的報告與專案網站。專案 2：參考韌體在你的 ESP32 上運作，然後是你自己的手機 App。下一場工作坊之前：完成課前準備、改進你的 App、動手做、玩得開心——安裝 KiCad 10，建立 JLCPCB 帳號。</td></tr>
+        <tr><td>9月18日（五）</td><td><a href="lecture2-zh.html"><strong>工作坊 2：設計印刷電路板</strong></a><br><small>14:20–16:20 · 311 室</small></td>
+          <td>電子學 101；用 KiCad 設計 PCB、自動化生產與組裝。專案 3a：把我們的 ESP32 變成真正的實驗室設備——班級板，每位學生一個區塊。</td>
+          <td>你在 KiCad 中設計的班級板區塊，納入全班訂單。</td></tr>
+        <tr><td>9月25日（五）</td><td>國定假日</td>
+          <td>不上課。</td>
+          <td>—</td></tr>
+        <tr><td><strong>9月28日（一）下午 2 點</strong></td><td><strong>全班 PCB 訂單截止</strong></td>
+          <td>最終的 Gerber 檔（製造檔）送交 JLCPCB。這是硬性截止：遲交的區塊無法放上板子。</td>
+          <td>你的區塊在截止前合併（merge）。</td></tr>
+        <tr><td>10月2日（五）</td><td><a href="lecture3-zh.html"><strong>工作坊 3：韌體與基礎機械設計（PCB 外殼）</strong></a><br><small>14:20–16:20 · 311 室</small></td>
+          <td>機械製造技術 101（參觀原分所設施）；機械設計 101（CAD 基礎）。專案 3b：為你的儀器做一個外殼。繼續開發你的 App、韌體、網站與影片。</td>
+          <td>外殼設計檔；App／韌體繼續進行。</td></tr>
+        <tr><td><strong>10月9日（五）下午 2 點</strong></td><td><strong>3D 列印／雷射切割設計檔截止</strong></td>
+          <td>外殼設計檔送交製造。硬性截止。</td>
+          <td>你的外殼設計檔已提交。</td></tr>
+        <tr><td>約 10月16日（五）</td><td>領取列印好的外殼與組裝完成的 PCB</td>
+          <td>組裝你的 ESP32、PCB 與外殼；測試並改進你的韌體與 App。</td>
+          <td>—</td></tr>
+        <tr><td>10月26–30日</td><td><a href="projects-zh.html#day"><strong>專案成果發表／展示</strong></a></td>
+          <td>發表並展示你的專案、App、網站與影片——每人約 15 分鐘。</td>
+          <td>成果發表與展示。</td></tr>
+      </table>
+      </div>
+      <p class="callout warn"><strong>兩個硬性截止：</strong>全班 PCB 訂單於 <strong>9月28日（一）下午 2 點</strong>截止（JLCPCB 製造並組裝板子；約兩週後送回），外殼設計檔於 <strong>10月9日（五）下午 2 點</strong>截止。9月25日（五）為國定假日（不上課）。</p>
+    </section>
+
+    <section class="card">
+      <h2>課程如何進行</h2>
+      <div class="grid">
+        <div class="tile"><h3>一個專案，三場工作坊</h3><p>三場工作坊並不是各自獨立的主題——它們是打造同一件裝置所需的三種技能：<a href="projects-zh.html">班級儀器</a>。你的網頁應用程式、你的手機 App、你在板子上的區塊與你的外殼，最後都匯入你的專案。</p></div>
+        <div class="tile"><h3>工作坊，而非講座</h3><p>每場工作坊是一段簡短的介紹，接著就是動手做，並有 Claude 家教（tutor；Claude Code 中的 <code>/tutor</code>）在旁協助，英文或中文皆可。理論只在能幫你做出決定時才出現——請家教解釋一個概念，也讓它反過來問你問題。</p></div>
+        <div class="tile"><h3>「AI 方法」五步驟</h3><p><strong>願景（Vision）→ 規格／計畫（Specification/Plan）→ 審查（Review）→ 寫程式（Code）→ 測試／除錯／驗證（Test/Debug/Verify）</strong>，然後反覆迭代：第一版計畫永遠不是最後一版。我們使用 <strong>VS Code + Claude Code 擴充功能</strong>，以 git 作為安全網。沒有測試與驗證，絕不信任 AI。</p></div>
+        <div class="tile"><h3>每一步都真的做一次</h3><p>部署一個真正的 App、設計一塊真正板子上真正的區塊、畫一個真正的外殼——然後你的區塊進入一塊專業組裝的板子，裝在外殼裡由你展示。發揮創意。</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>課程結束時你會做出的東西</h2>
+      <ul>
+        <li>一個<strong>已部署的網頁應用程式</strong>——模擬器或遊戲——附上說明其概念的報告。</li>
+        <li>一個<strong>透過 WiFi 控制你 ESP32 的手機 App</strong>。</li>
+        <li><strong>你在班級板上的區塊</strong>，以 KiCad 設計並製造完成。</li>
+        <li>一個儀器的<strong>外殼</strong>，3D 列印和／或雷射切割。</li>
+        <li>你專案及其網站的<strong>成果發表與展示</strong>——以及，可選的，一段介紹你的 App 與板子的影片。</li>
+      </ul>
+      <p>每個專案都放在你帳號下自己的公開 GitHub 儲存庫（repository）裡，並有自己的<strong>專案網站</strong>（GitHub Pages：它是什麼、如何運作、一張它運作中的照片或影片、驗證了什麼、連到 App 與程式碼的連結）。所有專案都會出現在<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">班級專案牆</a>上——上課時投影在螢幕上，每分鐘自動更新，所以大家都看得到彼此的專案陸續出現。見<a href="teams-zh.html">成果展</a>。</p>
+      <p>硬體是全班共同的基準線。軟體、韌體與 App 是開放的——資料記錄器、LINE 通知、PID 區塊、Python 掃描、你實驗室需要的工具。那裡才是你展現能力的地方。<strong>用 LINE 或 Telegram 和你的儀器對話</strong>——我們最鼓勵的延伸：數值飄移或警報觸發時推播通知，以及能從手機讀取數值、切換繼電器的機器人指令，隨時隨地。<strong>盡管做出很棒的東西。</strong></p>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>聯絡方式</h2>
+      <p>Shayne Bennetts 肖恩 — <a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a><br>
+        中央研究院原子與分子科學研究所。研究團隊網站：<a href="https://iamsquantum.github.io/new/index.html" target="_blank" rel="noopener">IAMS Quantum</a>。</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div>
+        <p>台灣國際研究生學程（TIGP）· 中央研究院原子與分子科學研究所</p>
+        <p>10617 台北市羅斯福路四段 1 號</p>
+      </div>
+      <p><a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener">github.com/TIGP-Experimental-Methods</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workshop 3 – Firmware and basic mechanical design | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Workshop 3 — Firmware and basic mechanical design (PCB housing) · Fri 2 Oct 2026 · 14:20–16:20 · R311, IAMS</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · PCBs</a></li>
+      <li><a class="active" href="lecture3.html">3 · Firmware &amp; Housing</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="lecture3-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Workshop 3 — Firmware and basic mechanical design (PCB housing)</h1>
+      <p><strong>Outline.</strong></p>
+      <ul>
+        <li><strong>Setup and preparation check</strong> — everyone has their laptop prepared and Onshape (a CAD program that runs in the browser, free education plan) or another CAD program ready.</li>
+        <li><strong>Introduction.</strong> How much background does everyone have?</li>
+        <li><strong>Mechanical fabrication techniques 101</strong> — a tour of the fabrication facilities at IAMS: FDM and resin 3D printing, laser cutting, water-jet cutter, lathe, mill.</li>
+        <li><strong>Mechanical design 101</strong> — using CAD, the basics: extrudes, cuts, bending, holes, threads.</li>
+        <li><strong>Tips for fabrication.</strong></li>
+        <li><strong>Project 3b: Making a housing for our instrument.</strong> Use Onshape (or your favourite CAD program) to draw a housing for your instrument, for 3D printing and/or laser cutting.</li>
+        <li><strong>Continue building your app, firmware, website and videos.</strong></li>
+      </ul>
+      <p class="callout warn"><strong>Hard cutoff: Friday 9 October, 2 pm.</strong> The final housing files for 3D printing / laser cutting must be in for manufacturing then.</p>
+      <p>Prerequisite: your section merged before the class-order cutoff; an <a href="preparation.html">Onshape account</a> or another CAD program. Bring your laptop and your dev board.</p>
+    </section>
+
+    <section class="card">
+      <h2>Detailed plan (draft — follows the workshop outline above)</h2>
+      <p>The boards are on order (placed 28 September, back around 16 October), so <strong>everything on the firmware side runs in sim mode on the dev board</strong> (a build in which the firmware — the program on the microcontroller — fakes its hardware, so the app works on the bare board). You give your section its driver and its app panel, wire one alarm rule, and design the housing.</p>
+
+      <h3>Firmware and app — your section's driver and panel</h3>
+      <div class="grid">
+        <div class="tile"><h3>The block-driver interface</h3><p>Every section is a folder <code>firmware/src/blocks/b&lt;N&gt;_&lt;name&gt;/</code> implementing <code>begin() / loop() / handle(cmd) / status(out)</code>. You start from <code>blocks/template/</code>.</p></div>
+        <div class="tile"><h3>The protocol</h3><p>WebSocket (a live two-way connection between the phone page and the board) messages <code>{block, cmd, args}</code> in and <code>{block, status}</code> out; one panel module per section in <code>host/pwa/panels/b&lt;N&gt;.js</code>; <code>instrument.py</code> (a Python program on your PC) mirrors the same commands in Python.</p></div>
+        <div class="tile"><h3>Sim mode</h3><p>The <code>SIM</code> flag fakes the hardware so the whole app runs on a bare dev board — you work ahead of the boards and swap the flag off when they arrive.</p></div>
+        <div class="tile"><h3>One alarm rule per panel</h3><p>Your section's status → the base alarm engine → relay + notification: B1 "AI1 above a threshold" · B2 "a rail out of range" · B3 "output clipped" · B4 "opto count jumped" · B5 "TRIG edge seen".</p></div>
+      </div>
+      <p><strong>E11: driver + panel in sim.</strong> <code>/tutor L3</code>: copy the template to <code>blocks/b&lt;N&gt;_&lt;name&gt;/</code>; fill in your section's commands (B1 <code>read_all</code>, <code>set_range</code> · B2 <code>rails</code> status · B3 <code>set_dc</code>, <code>sine</code> · B4 <code>relay</code>, <code>opto_count</code> · B5 <code>dio</code>, <code>trig_dir</code>); make the SIM branch return plausible values; add the panel and one alarm rule; flash (write the firmware onto the board over USB); see the panel react on the phone; open the pull request (a request to merge your changes into the shared project; someone reviews it first). The tutor generates the skeleton; you name the commands, write the SIM values, and explain one message round-trip before flashing. Sections that talk to each other are paired (B3 ↔ B1, B5 ↔ B4). Done when the panel controls the section in sim and the pull request is open.</p>
+
+      <h3>Housing — Project 3b</h3>
+      <div class="grid">
+        <div class="tile"><h3>Housings for electronics</h3><p>FDM tolerances (holes +0.3 mm), 2 mm walls, heat-set inserts, layer direction, why the PCB front panel makes the cutouts trivial, the STEP export (3D CAD exchange file) from KiCad.</p></div>
+        <div class="tile"><h3>A starting point</h3><p>The instructor's Onshape template already contains the board STEP and the front-panel cutouts, with three parameters (height, wall, foot style). Copy it and make it yours — vent pattern, embossed name, feet — or draw your own housing from scratch in the CAD program you prefer.</p></div>
+        <div class="tile"><h3>Output</h3><p>STL (the 3D-print file) and/or DXF (the laser-cutting drawing) to <code>docs/students/&lt;name&gt;/</code>, in by the cutoff. The institute prints and cuts them.</p></div>
+      </div>
+      <p><strong>E12: your housing.</strong> The template on the projector: copy, import the board STEP, the parameters, one "make it yours" change, export. You do the same in your own account — or design your own. Done when the files are exported.</p>
+
+      <h3>Between workshops — what must be finished for the cutoff (Friday 9 October, 2 pm): E11–E12</h3>
+      <p>Before the next workshop: complete the preparation, improve your apps, build and have fun. The preparation this time: the housing files are what the cutoff needs; the driver and panel are what the presentation needs.</p>
+      <ul>
+        <li><strong>E11 Driver + panel pull request.</strong> Finish the commands, one status value plotted, <strong>one alarm rule wired to the base alarm engine</strong> (a threshold on your section's status → relay → notification), CI green (continuous integration: the automatic build GitHub runs on every pull request passes); reviewed by your ring reviewer (the classmate who reviews your pull request).</li>
+        <li><strong>E12 Housing files</strong> to <code>docs/students/&lt;name&gt;/</code> — <strong>by Friday 9 October, 2 pm</strong>.</li>
+        <li>Continue your app, firmware, website and videos; read workbook ch. 3.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="presentation">
+      <h2>Presentation and demonstration</h2>
+      <ul>
+        <li><strong>~Friday 16 October:</strong> collect the manufactured PCBs and housings.</li>
+        <li><strong>Assemble</strong> your ESP32, PCB and housing. Flash your own build without <code>SIM</code>, open your panel, see your section move real hardware (B1 a voltage on AI1 · B2 rail LEDs and the status panel · B3 a sine on AO1 into AI1 · B4 a relay click and an opto count · B5 a TTL line and TRIG direction).</li>
+        <li><strong>Test and refine</strong> your firmware and app.</li>
+        <li><strong>26–30 October:</strong> present and demonstrate your project, app, website and video — about 15 minutes each. For example, make a video to describe your app and board.</li>
+        <li><strong>Project websites and the wall:</strong> each project has its own public repository and project website (GitHub Pages). <strong>Project 3 — your instrument: board section, firmware and app panel, housing — is one repository and one website</strong>, presenting the whole of it with pictures, renders or video, what it does, what was measured, and links to your pull requests in <code>class-board-2026</code> and to the class repository (the KiCad files stay in the class repository; your repository presents the work and may hold the housing CAD export, photos and the video); it is one card on the wall. All of them are on the <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">class project wall</a> — see <a href="teams.html">Showcase</a>.</li>
+      </ul>
+      <p><strong>A suggested structure</strong> for the demonstration: (1) a waveform out, seen on the oscilloscope and on the instrument's own input · (2) change it from the phone · (3) an alarm on an input → relay → notification · (4) <strong>your section</strong>: its panel and one thing it does · (5) anything you built beyond the baseline — a data logger, a LINE alert, a PID block, a Python sweep, the tool your lab needed.</p>
+    </section>
+
+    <section class="card">
+      <h2>Materials</h2>
+      <ul>
+        <li>Slides: Workshop 3 slides follow. Video recordings are not online.</li>
+        <li>Workbook on GitHub: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch3-day-3-week-3.md" target="_blank" rel="noopener">ch. 3 — Workshop 3</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch4-wrap-up-demo.md" target="_blank" rel="noopener">ch. 4 — presentation and demonstration</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chB-how-the-software-works.md" target="_blank" rel="noopener">ch. B How the software works</a> (self-study).</li>
+        <li>In the class repository: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/PROTOCOL.md" target="_blank" rel="noopener">PROTOCOL.md</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/src/blocks/template" target="_blank" rel="noopener">blocks/template</a> (with the SIM branch and the alarm-engine hook) · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/host/pwa/panels/template.js" target="_blank" rel="noopener">panels/template.js</a>. The Onshape housing template with the merged board STEP follows before the workshop.</li>
+        <li>The tutor: <code>/tutor L3</code> and <code>/tutor HW3</code> in the class repository.</li>
+        <li>See also the <a href="resources.html#mechanical">mechanical resources</a>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>工作坊 2：設計印刷電路板｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">工作坊 2 — 設計印刷電路板 · 2026年9月18日（五）· 14:20–16:20 · 中研院原分所 311 室（R311）</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a class="active" href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="lecture2.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>工作坊 2 — 設計印刷電路板</h1>
+      <p><strong>大綱。</strong></p>
+      <ul>
+        <li><strong>設備與課前準備檢查</strong>——每個人的筆電都已準備好，KiCad 已能執行（我們用來畫電路圖（schematic，即電路的圖）並佈局印刷電路板（PCB）的免費軟體）。</li>
+        <li><strong>簡介。</strong>大家的背景有多少？</li>
+        <li><strong>區塊分配</strong>——班級板上每位學生一個區塊（section）：先由自願者選，其餘抽籤。</li>
+        <li><strong>電子學 101</strong>——一堂電子學速成課，了解我們在做什麼、它如何運作。請你的 Claude 家教（tutor）解釋這些概念（例如用中文）；家教可能會問你問題，以協助教學並確認你的理解。</li>
+        <li><strong>KiCad 的 PCB 設計、自動化生產與組裝簡介</strong>——從電路圖到佈局，再到工廠拿去做成一塊組裝完成電路板的檔案。</li>
+        <li><strong>專案 3a：把我們的 ESP32 變成真正的實驗室設備。</strong>一起建立班級板的骨架；在 KiCad 裡為我們的 ESP32 加上能力與晶片。每個人設計不同的區塊，讓我們作為一個團隊做出一台強大的儀器——晶片、前面板等等。</li>
+        <li><strong>韌體與軟體——讓我們的儀器好用又友善。</strong>你能把它改成解決你目前研究中某個問題的工具嗎？</li>
+      </ul>
+      <p class="callout"><strong>發揮創意！</strong></p>
+      <p class="callout warn"><strong>硬性截止：9月28日（一）下午 2 點。</strong>最終的 Gerber 檔（電路板的製造檔）必須在那時送去製造。遲交的區塊無法上板。</p>
+      <p>先修條件：課間你已改進了專案 1 與專案 2 的 App；今天需要<a href="preparation-zh.html">已安裝 KiCad 10</a> 並開啟過一次，以及 JLCPCB 帳號（電路板工廠；零件來自它自己的零件庫）。</p>
+    </section>
+
+    <section class="card">
+      <h2>詳細計畫（草稿——依上方工作坊大綱）</h2>
+
+      <h3>硬體模式：開發板＋載板，由 JLCPCB 組裝</h3>
+      <p>MCU（微控制器（microcontroller），單晶片上的小電腦）留在經過驗證的 ESP32-S3 開發板（dev board，載著它、附 USB-C 接頭與腳位的板子）上；<strong>班級板是一塊供它插上的載板</strong>——正規做法的類比前端、隔離、緩衝器、
+        堅固的連接器。一個設計、一次下單、每位學生一塊組裝完成的板子。<strong>JLCPCB 負責全部組裝，表面黏著與插件元件都包括</strong>；前面板是第二塊小 PCB。
+        你不需要焊接任何東西，而單獨的開發板會一直能執行應用程式，是永遠的備案。組裝完成的板子每位學生約 100 美元。</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>區塊</th><th>負責人</th><th>裡面有什麼</th></tr>
+        <tr><td>基底（Base）</td><td>授課教師</td><td>開發板插座、匯流排分配、RGB LED、2 個 Qwiic、2×10 排針、OLED，以及<strong>前面板：3 × 4 個 SMA，間距 20 mm</strong>——AO1 AO2 TRIG AUX / AI1 AI2 AI3 AI4 / AI5 AI6 AI7 AI8</td></tr>
+        <tr><td><strong>B1 精密輸入</strong></td><td>學生</td><td>ADS8688＋8 組相同的保護網路（R + BAV99 + C）→ AI1–AI8；±10 V、16 位元、總計 500 kSPS</td></tr>
+        <tr><td><strong>B2 電源與電軌</strong></td><td>學生</td><td>USB-C、5 V 插座、Schottky ORing、2 個 polyfuse、2 個 TVS、2 × 2 W 隔離模組 → ±12 V、78L05（5 VA）、AMS1117（3V3）、電軌 LED、測試點</td></tr>
+        <tr><td><strong>B3 訊號產生</strong></td><td>學生</td><td>DAC8563＋OPA2192 ±10 V＋2 ×（49.9 Ω＋箝位）→ AO1、AO2</td></tr>
+        <tr><td><strong>B4 隔離切換</strong></td><td>學生</td><td>4 個 SPDT 繼電器，經 ULN2003 由 GPIO 直接驅動、2 × 6N137 快速隔離輸入、端子、LED</td></tr>
+        <tr><td><strong>B5 數位 I/O 與時序</strong></td><td>學生</td><td>74AHCT541（8 路 5 V TTL 輸出）、2 路快速觸發輸出、74LVC1T45（可切換的 5 V TRIG SMA，方向由 GPIO 控制）、TCXO 封裝（footprint：零件焊上去的銅箔圖形；不裝件）、端子</td></tr>
+      </table>
+      </div>
+      <p>板上每一顆 IC 都會在課堂上認識。訊號調理（儀表放大器、PGA、濾波器）不是學生區塊：它仍是授課教師負責、預設不裝件的選項。</p>
+
+      <h3>電子學 101——六個概念，每一個都指向我們的電路圖</h3>
+      <div class="grid">
+        <div class="tile"><h3>(a) 電軌、去耦合、接地</h3><p>電從哪裡來、如何在每顆晶片旁邊把它弄乾淨；類比地與數位地相會的唯一一點。區塊 B2。</p></div>
+        <div class="tile"><h3>(b) ±10 V 與 16 位元買到了什麼</h3><p>輸入端與輸出端的範圍與解析度，以及為什麼開發板自己的 ADC 與 DAC（類比數位與數位類比轉換器）不夠用。區塊 B1 與 B3。</p></div>
+        <div class="tile"><h3>(c) 把運算放大器級當黑盒子</h3><p>不看內部，只看增益與偏移：DAC 的輸出如何變成 ±10 V 的擺幅。區塊 B3。</p></div>
+        <div class="tile"><h3>(d) 隔離</h3><p>繼電器、光耦合器、爬電距離：切換與感測那些不能和你共地的東西。區塊 B4。</p></div>
+        <div class="tile"><h3>(e) 3.3 V vs 5 V 邏輯</h3><p>為什麼 GPIO（微控制器上的通用腳位）不能直接驅動 5 V TTL，以及緩衝器做了什麼。區塊 B5。</p></div>
+        <div class="tile"><h3>(f) 匯流排</h3><p>SPI 與 I²C（晶片與微控制器對話的兩種常見接線標準）把各區塊接到 MCU；你的區塊裡哪些腳位走的是最快的訊號。</p></div>
+      </div>
+
+      <h3>用 KiCad 設計 PCB——僅需的六個操作</h3>
+      <div class="grid">
+        <div class="tile"><h3>六個操作</h3><p>放零件並接線 · 標號（annotate）· <em>Update PCB from schematic</em> · 把封裝拖到位 · 佈線（routing：畫出銅箔走線）· 設計規則檢查（DRC，KiCad 的設計規則檢查），然後看 3D 檢視。在投影機上、於基底頁面中現場示範一次。</p></div>
+        <div class="tile"><h3>零件從哪裡來</h3><p>每個符號（symbol：零件在電路圖中的圖形）都標有 LCSC 料號；<code>easyeda2kicad</code> 抓下符號、封裝與 3D 模型；LCSC 有現貨的零件 JLCPCB 就能貼裝。這就是自動化生產與組裝。</p></div>
+        <div class="tile"><h3>拉取請求＋同儕審查</h3><p>為你的區塊開一個拉取請求（pull request：請求把你的修改併入共用專案；會先有人審查）、照著檢查清單審查一位同學的、一輪修正——與授課教師合併（merge）時使用的是同一份清單。</p></div>
+      </div>
+
+      <h3>課堂上的專案 3a</h3>
+      <div class="table-wrap">
+      <table>
+        <tr><th>步驟</th><th>發生什麼</th></tr>
+        <tr><td>讀你的區塊</td><td>家教就你的區塊問兩個問題（「你的區塊裡哪些腳位走最快的訊號？」「你的區塊的地在哪裡接到其餘部分？」）；然後和將來要審查你拉取請求的鄰座聊一下。</td></tr>
+        <tr><td><strong>KiCad 現場示範</strong></td><td>在投影機上、在基底頁面中：放一組 100 nF＋10 µF 並接線、標號、<em>Update PCB from schematic</em>、拖動這兩個封裝、佈三條走線、跑 DRC、看 3D 檢視。</td></tr>
+        <tr><td><strong>E6：電路圖缺口</strong></td><td>開啟你的缺口頁面；對照電路圖 PDF，放回 3–4 個缺少的零件（數值與封裝取自專案零件庫），接線，跑電氣規則檢查（ERC，KiCad 的電氣規則檢查）。家教會說出零件名稱並檢查每一個放置。ERC 顯示 0 個錯誤即完成。</td></tr>
+        <tr><td><strong>E7（開始）：為你的規則區域佈線</strong></td><td><em>Update PCB from schematic</em>；新的封裝落在你的規則區域（zone：板上框出來、屬於你的那塊範圍）裡；佈線；DRC。家教提醒規則（第 2 層不放任何東西、留在 <code>ZONE_B&lt;N&gt;</code> 裡、去耦合貼著腳位），並和你一起讀 DRC 輸出。授課教師現場修正兩個經典問題（層別錯誤、未連接的網路——net，即必須相連的一組腳位）。</td></tr>
+        <tr><td>拉取請求＋審查，現場示範</td><td>授課教師從一個學生分支（branch）開拉取請求、指定環狀審查者（A 審 B、B 審 C……E 審 A）、依檢查清單寫一則意見、示範「request changes」與「approve」的差別。</td></tr>
+        <tr><td>韌體與軟體</td><td>儀器的韌體（firmware）與手機應用程式（來自專案 2）如何隨電路板成長：每個區塊一個驅動程式、一個應用程式面板。你能把它改成解決你目前研究中某個問題的工具嗎？</td></tr>
+      </table>
+      </div>
+
+      <h3>課間——截止前（9月28日（一）下午 2 點）必須完成的事：E7–E10</h3>
+      <p>下一場工作坊之前：完成課前準備、改進你的 App、動手做、玩得開心。這次的課前準備：你的區塊在 Gerber 檔送去工廠之前必須走完的步驟。截止時尚未合併的區塊不會在板子上。</p>
+      <ul>
+        <li><strong>E7 完成佈線。</strong>DRC 0 個錯誤、3D 截圖。</li>
+        <li><strong>E8 從 LCSC 取得一個零件。</strong><code>easyeda2kicad --full --lcsc_id C474881</code>（2 腳螺絲端子；或你的 LED）；加入專案零件庫；替換進去。</li>
+        <li><strong>E9 開你的拉取請求。</strong>分支（獨立的一條工作線）<code>b&lt;N&gt;-&lt;name&gt;</code>、提交（commit：附一行說明存下一個快照）、附 3D 截圖開拉取請求；指定你的環狀審查者。</li>
+        <li><strong>E10 審查同學，然後修正自己的。</strong>照著檢查清單走過對方的拉取請求；至少留兩則意見；approve 或 request changes。然後回應你自己拉取請求上的意見。</li>
+      </ul>
+      <p><strong>同儕審查檢查清單</strong>（workbook 第 C 章——與授課教師合併時使用的同一份清單）：ERC 0 / DRC 0 · 每個零件都有 <code>LCSC</code> 欄位 · 數值與 PDF 一致 · 去耦合貼著腳位 ·
+        第 2 層不放任何東西 · 不超出你的規則區域 · 標出第 1 腳 · 接地銅箔已連通 · B4 爬電距離 ≥ 2.5 mm · 每個連接器都有絲印標示 · CI 綠燈（持續整合（CI）：GitHub 對每個拉取請求自動執行的建置通過）。</p>
+      <p class="callout warn"><strong>班級下單：</strong>你的區塊必須在截止前合併，即 <strong>9月28日（一）下午 2 點</strong>。然後授課教師把各區塊合併到 <code>main</code>、跑完整 DRC、匯出 Gerber、BOM（物料清單，即零件清單）與 CPL（貼裝座標清單），並向 JLCPCB <strong>下單</strong>組裝完成的板子、空板與前面板。9月25日（五）為國定假日（不上課）。</p>
+    </section>
+
+    <section class="card">
+      <h2>教材</h2>
+      <ul>
+        <li>投影片：工作坊 2 的投影片稍後提供。影片錄影不會上線。</li>
+        <li>GitHub 上的 workbook：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch2-day-2-week-2.md" target="_blank" rel="noopener">第 2 章 — 工作坊 2</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chA-electronics-from-zero.md" target="_blank" rel="noopener">第 A 章 從零開始的電子學</a>（自學）· <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chC-cheat-sheets.md" target="_blank" rel="noopener">第 C 章 速查表</a>（KiCad 快速鍵、審查清單）· <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/blocks" target="_blank" rel="noopener">區塊頁面</a>（每個區塊一頁：它的 PDF 節錄、問題、它的規則區域）。</li>
+        <li>班級儲存庫（repository）中：完整電路圖 PDF、缺口頁面、<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/hardware/lib/README.md" target="_blank" rel="noopener">KiCad 零件庫套件</a>（不需解壓）、已預先放好封裝與規則區域的 PCB、審查檢查清單與審查者環——這些在工作坊前提供。</li>
+        <li>家教：班級儲存庫中的 <code>/tutor L2</code> 與 <code>/tutor HW2</code>。</li>
+        <li>另請參閱<a href="resources-zh.html#electronics">電子資源</a>。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

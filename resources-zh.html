@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>資源｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">資源——投影片、工具、文件、供應商、閱讀材料</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a class="active" href="resources-zh.html">資源</a></li><li><a class="lang" href="resources.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card" id="slides">
+      <h2>投影片與班級儲存庫</h2>
+      <ul>
+        <li><strong>投影片：</strong><a href="slides/W1-AI-for-experimentalists.pdf" target="_blank" rel="noopener">工作坊 1——實驗物理學家的 AI（PDF）</a>。工作坊 2 與工作坊 3 的投影片隨後補上。錄影不放上網。</li>
+        <li><strong>班級儲存庫：</strong><a href="https://github.com/TIGP-Experimental-Methods/class-board-2026" target="_blank" rel="noopener">class-board-2026</a>（儲存庫（repository）是一個由 git 保存完整歷史的專案資料夾；放在 GitHub 上就同時有一份線上版）——參考韌體（firmware）與手機 App、KiCad 零件庫、<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/README.md" target="_blank" rel="noopener">workbook</a>，以及 Claude 家教（tutor）技能（在 Claude Code 中輸入 <code>/tutor</code>）。</li>
+        <li><strong>專案牆：</strong><a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">tigp-experimental-methods.github.io/showcase-2026</a>——每位學生的專案以卡片呈現，每分鐘自動更新；<a href="https://github.com/TIGP-Experimental-Methods/showcase-2026" target="_blank" rel="noopener">showcase-2026 儲存庫</a>（每位學生都能推送；README 說明條目格式）。見<a href="teams-zh.html">成果展</a>。</li>
+        <li><strong>專案 1 類型的範例：</strong><a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">pendulum-example</a>（<a href="https://tigp-experimental-methods.github.io/pendulum-example/" target="_blank" rel="noopener">線上版</a>）· <a href="https://github.com/TIGP-Experimental-Methods/csv-scope-example" target="_blank" rel="noopener">csv-scope-example</a>（<a href="https://tigp-experimental-methods.github.io/csv-scope-example/" target="_blank" rel="noopener">線上版</a>）。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="install">
+      <h2>安裝程式（逐步說明見<a href="preparation-zh.html">課前準備</a>）</h2>
+      <ul>
+        <li><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Visual Studio Code</a></li>
+        <li><a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code" target="_blank" rel="noopener">VS Code 的 Claude Code 擴充功能（extension）</a> · <a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">文件</a></li>
+        <li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git</a> · <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a> · <a href="https://desktop.github.com/" target="_blank" rel="noopener">GitHub Desktop</a>——git 記錄一個資料夾中檔案的歷史；GitHub CLI（<code>gh</code>）是 GitHub 的命令列工具</li>
+        <li><a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener">uv</a>（Python 安裝器／套件管理器）</li>
+        <li><a href="https://www.kicad.org/download/" target="_blank" rel="noopener">KiCad</a>（我們用來畫電路圖（schematic）與佈局印刷電路板（PCB）的免費軟體——工作坊 2 前要能執行）</li>
+        <li><a href="https://www.onshape.com/en/education/" target="_blank" rel="noopener">Onshape（教育版）</a> · <a href="https://www.autodesk.com/products/fusion-360/personal" target="_blank" rel="noopener">Fusion 360（個人版）</a> · <a href="https://www.freecad.org/" target="_blank" rel="noopener">FreeCAD</a>——CAD 軟體，工作坊 3 前準備好</li>
+        <li><a href="https://platformio.org/install/ide?install=vscode" target="_blank" rel="noopener">VS Code 的 PlatformIO</a>（建置並燒錄（flash）韌體）· <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">Arduino IDE 2</a></li>
+        <li><a href="https://bambulab.com/en/download/studio" target="_blank" rel="noopener">Bambu Studio</a>（課程的 3D 印表機是 Bambu 機種）</li>
+      </ul>
+    </section>
+
+    <section class="card" id="glossary">
+      <h2>我們用的詞</h2>
+      <p>課程網頁反覆出現的工具名詞，每個一行。每一頁在名詞第一次出現時也會就地解釋。</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>名詞</th><th>意思</th></tr>
+        <tr><td><strong>git</strong></td><td>記錄一個資料夾中檔案歷史的工具</td></tr>
+        <tr><td><strong>GitHub</strong></td><td>存放並分享儲存庫的網站</td></tr>
+        <tr><td><strong>repository 儲存庫</strong></td><td>由 git 保存完整歷史的專案資料夾；放在 GitHub 上就同時有一份線上版</td></tr>
+        <tr><td><strong>clone 複製</strong></td><td>把儲存庫的完整副本下載到你的筆電</td></tr>
+        <tr><td><strong>commit 提交</strong></td><td>把你的修改存成一個快照，附一行說明</td></tr>
+        <tr><td><strong>diff 差異</strong></td><td>兩個快照之間究竟改了什麼的清單——你審查的是它，而不是整個檔案</td></tr>
+        <tr><td><strong>push 推送</strong></td><td>把你的提交上傳到 GitHub</td></tr>
+        <tr><td><strong>branch 分支</strong></td><td>儲存庫內各自獨立的一條工作線，讓多人修改時不互相踩到</td></tr>
+        <tr><td><strong>main</strong></td><td>主分支，大家共同依據的版本——main 永遠要能跑</td></tr>
+        <tr><td><strong>merge 合併</strong></td><td>把一個分支的修改併入主線</td></tr>
+        <tr><td><strong>pull request（PR）拉取請求</strong></td><td>請求把你的分支併入共用專案；先由某人審查、留意見並核准</td></tr>
+        <tr><td><strong>ring reviewer 環狀審查者</strong></td><td>審查你拉取請求的同學（A 審 B、B 審 C、……、E 審 A）</td></tr>
+        <tr><td><strong>CI 持續整合</strong></td><td>continuous integration：GitHub 對每個拉取請求自動執行的建置，並回報綠燈或紅燈</td></tr>
+        <tr><td><strong>GitHub CLI（<code>gh</code>）</strong></td><td>GitHub 的命令列工具：在終端機（輸入指令的文字視窗）登入、建立儲存庫、開拉取請求</td></tr>
+        <tr><td><strong>Markdown</strong></td><td>帶輕量格式的純文字（<code>#</code> 標題、<code>-</code> 清單）；README、計畫與交接檔案都用它寫</td></tr>
+        <tr><td><strong>CLAUDE.md · PLAN.md · HANDOVER.md</strong></td><td>儲存庫裡的純文字檔：專案如何設定（代理每個工作階段都會讀）· 要做什麼、依什麼順序 · 已完成、已驗證、下一步、注意事項——讓新的工作階段能接著做</td></tr>
+        <tr><td><strong>coding agent 程式代理</strong></td><td>在你的檔案上工作的 Claude Code：讀檔、寫程式、執行指令並回報</td></tr>
+        <tr><td><strong>context window 情境視窗</strong></td><td>模型在一個工作階段（session）中看到的一切——對話、檔案與指示；每則訊息都會把它全部重送一次，所以要保持精簡：一個工作階段只談一個主題</td></tr>
+        <tr><td><strong>token 權杖 · API key 金鑰</strong></td><td>模型讀寫（也是計費）的文字單位 · 讓你的程式能呼叫模型或服務的密碼；金鑰就是錢，絕不放進儲存庫</td></tr>
+        <tr><td><strong>Cloudflare Pages · GitHub Pages</strong></td><td>把儲存庫變成公開網頁的免費服務（Cloudflare Workers 再加上後端）</td></tr>
+        <tr><td><strong>deploy 部署</strong></td><td>把網頁發布上線</td></tr>
+        <tr><td><strong>project website 專案網站 · project wall 專案牆</strong></td><td>一個專案儲存庫的公開 GitHub Pages 網站（它是什麼、如何運作、一張它運作中的照片或影片、驗證了什麼、連到 App 與程式碼的連結）· 把全班每個專案以卡片呈現、每分鐘自動更新的班級頁面</td></tr>
+        <tr><td><strong>webhook 網頁掛鉤</strong></td><td>一個網址，某項服務（Telegram、LINE）在事情發生時會來呼叫——機器人就是這樣收到訊息的</td></tr>
+        <tr><td><strong>microcontroller 微控制器 · dev board 開發板</strong></td><td>單晶片上的小電腦；開發板載著它，附 USB-C 接頭與腳位。我們用的是帶 WiFi 的 ESP32-S3</td></tr>
+        <tr><td><strong>firmware 韌體</strong></td><td>在微控制器上執行的程式</td></tr>
+        <tr><td><strong>flash 燒錄</strong></td><td>經 USB 把韌體寫進板子</td></tr>
+        <tr><td><strong>PlatformIO · toolchain 工具鏈</strong></td><td>為我們建置並燒錄韌體的工具 · 它使用的編譯器與輔助程式</td></tr>
+        <tr><td><strong>SIM mode 模擬模式</strong></td><td>讓韌體假造自己硬體的一種建置，班級板還沒到手前 App 就能在光板開發板上跑</td></tr>
+        <tr><td><strong>access point 存取點</strong></td><td>板子自己發出的 WiFi 網路，用手機加入</td></tr>
+        <tr><td><strong>PWA · WebSocket</strong></td><td>手機 App：由板子提供、像 App 一樣運作的網頁 · 該網頁與板子之間的即時雙向連線</td></tr>
+        <tr><td><strong>KiCad</strong></td><td>我們用來畫電路圖與佈局印刷電路板的免費軟體</td></tr>
+        <tr><td><strong>schematic 電路圖 · PCB 印刷電路板</strong></td><td>電路的圖 · 帶銅箔走線的實體電路板設計</td></tr>
+        <tr><td><strong>symbol 符號 · footprint 封裝</strong></td><td>零件在電路圖中的圖形 · 零件焊上去的銅箔圖形</td></tr>
+        <tr><td><strong>ERC · DRC</strong></td><td>KiCad 的電氣規則檢查與設計規則檢查；零錯誤即通過</td></tr>
+        <tr><td><strong>rule area（zone）規則區域 · routing 佈線</strong></td><td>板上劃給你的框出區域 · 畫出零件之間的銅箔走線</td></tr>
+        <tr><td><strong>JLCPCB</strong></td><td>製造並組裝班級板的工廠；零件來自它的零件庫（料號形如 C12345——不需要 LCSC 帳號）</td></tr>
+        <tr><td><strong>BOM 物料清單 · Gerber</strong></td><td>零件清單 · 送去工廠的製造檔</td></tr>
+        <tr><td><strong>STL · STEP · DXF</strong></td><td>3D 檔案格式：列印用 · CAD 交換用 · 以及雷射切割用的 2D 圖檔格式</td></tr>
+        <tr><td><strong>Onshape</strong></td><td>我們建議用來做外殼（housing）的瀏覽器 CAD 軟體（任何 CAD 軟體都可以）</td></tr>
+        <tr><td><strong>GPIO · SPI · I²C</strong></td><td>微控制器上的通用腳位 · 晶片與微控制器對話的兩種常見接線標準</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <section class="card" id="ai">
+      <h2>實驗物理學家的 AI——工作坊 1 提到的工具</h2>
+      <h3>代理與文件</h3>
+      <ul>
+        <li><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">Claude Code 文件</a>——入門、CLAUDE.md、技能（skill）、鉤子（hook）、子代理（subagent）、MCP；<a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">VS Code 擴充功能</a>（我們的選擇：綁定程度低，你的程式碼與歷史都還是你的）。</li>
+        <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener">Claude Code 最佳實務</a>（Anthropic 工程部落格）。</li>
+        <li>執行代理（agent）的其他方式：<a href="https://claude.com/product/cowork" target="_blank" rel="noopener">Claude Cowork</a> · <a href="https://claude.com/product/design" target="_blank" rel="noopener">Claude Design</a>。計畫或程式碼的<em>獨立審查者</em>，是一個沒看過這份工作的全新 Claude 工作階段。</li>
+        <li><a href="https://console.anthropic.com/" target="_blank" rel="noopener">Anthropic Console</a>——把 LLM 放進自己 App 所需的 API 金鑰；<a href="https://docs.anthropic.com/" target="_blank" rel="noopener">API 文件</a>。金鑰就是錢：別放進儲存庫。</li>
+        <li><a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener">Markdown 指南</a>（帶輕量格式的純文字）· <a href="https://docs.github.com/en/get-started/writing-on-github" target="_blank" rel="noopener">在 GitHub 上寫作</a></li>
+      </ul>
+      <h3>Git 與 GitHub</h3>
+      <ul>
+        <li><a href="https://code.visualstudio.com/docs/sourcecontrol/overview" target="_blank" rel="noopener">VS Code 的原始碼控制</a>——不用終端機也能編輯 → 暫存 → 提交 · <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world" target="_blank" rel="noopener">GitHub Hello World</a> · <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git（免費書籍）</a></li>
+      </ul>
+      <h3>免費部署</h3>
+      <ul>
+        <li><a href="https://docs.github.com/en/pages/quickstart" target="_blank" rel="noopener">GitHub Pages</a>（從公開儲存庫產生靜態網頁——每個專案網站，以及任何完全在瀏覽器裡執行的 App，網址 <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code>）</li>
+        <li><a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages</a>＋<a href="https://developers.cloudflare.com/workers/" target="_blank" rel="noopener">Cloudflare Workers</a>（直接從 GitHub 儲存庫部署；有免費方案——任何有後端、機器人網頁掛鉤（webhook）或機密的東西都放這裡）。你可能兩個主機都需要，所以兩個帳號都要準備好。</li>
+        <li><a href="https://support.google.com/youtube/answer/157177" target="_blank" rel="noopener">YouTube（不公開）</a>——只有拿到連結的人才看得到的影片</li>
+        <li><a href="https://huggingface.co/spaces" target="_blank" rel="noopener">Hugging Face Spaces</a>（App 與模型的展示）· <a href="https://zenodo.org/" target="_blank" rel="noopener">Zenodo</a>（附可引用 DOI 的資料與程式碼）</li>
+      </ul>
+      <h3>會跟你說話的 App</h3>
+      <ul>
+        <li><a href="https://core.telegram.org/bots/tutorial" target="_blank" rel="noopener">Telegram Bot API</a>——用 <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a> 建立機器人；最容易的起點</li>
+        <li><a href="https://developers.line.biz/en/docs/messaging-api/" target="_blank" rel="noopener">LINE Messaging API</a>——台灣人人都有的 App；先從 Telegram 開始，再移植到 LINE</li>
+        <li><a href="https://ntfy.sh/" target="_blank" rel="noopener">ntfy.sh</a>——只做推播通知，不需要機器人</li>
+      </ul>
+      <h3>語音、影片與圖像</h3>
+      <ul>
+        <li><a href="https://github.com/openai/whisper" target="_blank" rel="noopener">OpenAI Whisper</a>（語音轉文字）· <a href="https://github.com/resemble-ai/chatterbox" target="_blank" rel="noopener">Chatterbox</a>（文字轉語音，開放原始碼）</li>
+        <li><a href="https://github.com/iams-yb-lab/show-your-work" target="_blank" rel="noopener">show-your-work</a>——實驗室公開的影片、投影片與報告製作流程：五個 Claude Code 技能（<code>education-video</code>、<code>slide-deck</code>、<code>technical-report</code>、<code>natural-voice</code>、<code>showoff-render</code>）；先寫腳本，最後才做圖。選用，適合專案 1 的簡報延伸，以及介紹你的儀器的影片。</li>
+        <li><a href="https://www.blender.org/" target="_blank" rel="noopener">Blender</a>（從 CAD 模型以程式產生硬體的渲染圖）· <a href="https://www.unrealengine.com/" target="_blank" rel="noopener">Unreal Engine</a>（場景）。生成的圖像要標示清楚。</li>
+        <li>用 Markdown 做投影片：<a href="https://marp.app/" target="_blank" rel="noopener">Marp</a> · <a href="https://revealjs.com/" target="_blank" rel="noopener">reveal.js</a>。繪製圖表：<a href="https://mermaid.js.org/" target="_blank" rel="noopener">Mermaid</a>、<a href="https://www.drawio.com/" target="_blank" rel="noopener">draw.io</a>。螢幕錄影：<a href="https://obsproject.com/" target="_blank" rel="noopener">OBS Studio</a>。</li>
+      </ul>
+      <h3>Python 與儀器</h3>
+      <ul>
+        <li><a href="https://docs.astral.sh/uv/guides/" target="_blank" rel="noopener">uv 指南</a> · <a href="https://docs.python.org/3/tutorial/" target="_blank" rel="noopener">Python 教學</a> · <a href="https://matplotlib.org/stable/gallery/index.html" target="_blank" rel="noopener">matplotlib 圖庫</a> · <a href="https://pyserial.readthedocs.io/" target="_blank" rel="noopener">pySerial</a> · <a href="https://pyvisa.readthedocs.io/" target="_blank" rel="noopener">PyVISA</a>（儀器控制）</li>
+        <li>在瀏覽器裡做專案 1：<a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial" target="_blank" rel="noopener">MDN canvas 教學</a>（模擬器或遊戲網頁通常就是用它畫的）。</li>
+        <li>原分所：<a href="https://iamsquantum.github.io/sail-club/index.html" target="_blank" rel="noopener">SAIL Club</a>（Sharing AI Lunch Club）與其<a href="https://iamsquantum.github.io/sail-club/resources.html" target="_blank" rel="noopener">資源頁面</a>。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="electronics">
+      <h2>電子</h2>
+      <ul>
+        <li><a href="https://docs.kicad.org/" target="_blank" rel="noopener">KiCad 文件</a> · <a href="https://www.kicad.org/help/learning-resources/" target="_blank" rel="noopener">KiCad 學習資源</a> · <a href="https://github.com/Bouni/kicad-jlcpcb-tools" target="_blank" rel="noopener">kicad-jlcpcb-tools</a> 外掛（LCSC 零件搜尋、BOM——零件清單——與 CPL 匯出）</li>
+        <li><a href="https://jlcpcb.com/" target="_blank" rel="noopener">JLCPCB</a>——PCB 製造與 SMT 組裝 · <a href="https://jlcpcb.com/parts" target="_blank" rel="noopener">JLCPCB 零件庫</a> · <a href="https://www.lcsc.com/" target="_blank" rel="noopener">LCSC</a> · <a href="https://jlcpcb.com/capabilities/pcb-capabilities" target="_blank" rel="noopener">PCB 製程能力／設計規則</a></li>
+        <li>開發板：<a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/index.html" target="_blank" rel="noopener">ESP32-S3</a>（我們用的：<a href="https://jin-hua.com.tw/page/product/show.aspx?num=40729&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">金華 #40729</a>，NT$400）· <a href="https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html" target="_blank" rel="noopener">Raspberry Pi Pico</a> · <a href="https://www.pjrc.com/teensy/" target="_blank" rel="noopener">Teensy 4.x</a> · <a href="https://docs.arduino.cc/" target="_blank" rel="noopener">Arduino 文件</a></li>
+        <li>類比電路：<a href="https://www.ti.com/lit/an/sboa092b/sboa092b.pdf" target="_blank" rel="noopener">TI Op Amps for Everyone</a> · <a href="https://www.analog.com/en/resources/technical-books/opamp_applications_handbook.html" target="_blank" rel="noopener">ADI Op Amp Applications Handbook</a> · <a href="https://www.ti.com/lit/an/sboa060/sboa060.pdf" target="_blank" rel="noopener">光電二極體放大器（TI）</a> · Horowitz 與 Hill 合著《The Art of Electronics》（圖書館可借）</li>
+        <li>資料轉換器：<a href="https://www.analog.com/en/resources/technical-books/data-conversion-handbook.html" target="_blank" rel="noopener">ADI Data Conversion Handbook</a>；時基：<a href="https://www.nist.gov/publications/handbook-frequency-stability-analysis" target="_blank" rel="noopener">NIST 頻率穩定度</a></li>
+        <li>PCB 佈局實務：<a href="https://www.ti.com/lit/an/szza009/szza009.pdf" target="_blank" rel="noopener">降低 EMI 的 PCB 設計準則（TI）</a></li>
+        <li>儀器：<a href="https://www.ivifoundation.org/downloads/SCPI/scpi-99.pdf" target="_blank" rel="noopener">SCPI 標準</a>（用 Python 和你的示波器對話）</li>
+      </ul>
+    </section>
+
+    <section class="card" id="mechanical">
+      <h2>機械</h2>
+      <ul>
+        <li><a href="https://learn.onshape.com/" target="_blank" rel="noopener">Onshape 學習中心</a> · <a href="https://cad.onshape.com/help/Content/sheet-metal.htm" target="_blank" rel="noopener">Onshape 鈑金</a></li>
+        <li>3D 列印設計規則：<a href="https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/" target="_blank" rel="noopener">Hubs FDM 設計指南</a> · <a href="https://www.hubs.com/knowledge-base/key-design-considerations-3d-printing/" target="_blank" rel="noopener">關鍵設計考量</a> · <a href="https://help.prusa3d.com/" target="_blank" rel="noopener">Prusa 知識庫</a></li>
+        <li>熱熔螺紋銅套（heat-set inserts）：CNC Kitchen 測試 · <a href="https://markforged.com/resources/blog/heat-set-inserts" target="_blank" rel="noopener">Markforged 指南</a></li>
+        <li>雷射切割：<a href="https://www.makercase.com/" target="_blank" rel="noopener">MakerCase</a>（盒體產生器）· <a href="https://boxes.hackerspace-bamberg.de/" target="_blank" rel="noopener">Boxes.py</a> · 所內壓克力雷射切割機（DXF 或 STEP——請洽授課教師）</li>
+        <li>線上鈑金與 CNC：<a href="https://jlccnc.com/sheet-metal-fabrication" target="_blank" rel="noopener">JLCPCB 鈑金</a> · <a href="https://jlccnc.com/" target="_blank" rel="noopener">JLCPCB CNC</a> · <a href="https://jlc3dp.com/" target="_blank" rel="noopener">JLCPCB 3D 列印</a> · <a href="https://sendcutsend.com/guidelines/" target="_blank" rel="noopener">SendCutSend 設計準則</a></li>
+        <li>用 AI 寫程式碼做 CAD：<a href="https://openscad.org/" target="_blank" rel="noopener">OpenSCAD</a> · <a href="https://cadquery.readthedocs.io/" target="_blank" rel="noopener">CadQuery</a> · <a href="https://build123d.readthedocs.io/" target="_blank" rel="noopener">build123d</a></li>
+        <li>五金零件：<a href="https://www.mcmaster.com/" target="_blank" rel="noopener">McMaster-Carr</a>（每顆螺絲都有 CAD 模型）· <a href="https://www.misumi.com.tw/" target="_blank" rel="noopener">MISUMI 台灣</a></li>
+      </ul>
+    </section>
+
+    <section class="card" id="taiwan">
+      <h2>在台灣採購與製作</h2>
+      <ul>
+        <li>電子零件：<a href="https://www.lcsc.com/" target="_blank" rel="noopener">LCSC</a>（可與 JLCPCB 併運）、<a href="https://www.digikey.tw/" target="_blank" rel="noopener">DigiKey 台灣</a>、<a href="https://www.mouser.tw/" target="_blank" rel="noopener">Mouser 台灣</a>；本地通路：<a href="https://www.taiwaniot.com.tw/" target="_blank" rel="noopener">台灣物聯科技（Taiwan IoT）</a>、<a href="https://www.icshop.com.tw/" target="_blank" rel="noopener">ICShop</a>、光華商場。</li>
+        <li>開發板與模組：<a href="https://shopee.tw/" target="_blank" rel="noopener">蝦皮（Shopee）</a>／<a href="https://www.ruten.com.tw/" target="_blank" rel="noopener">露天（Ruten）</a> 本地出貨快速；<a href="https://www.adafruit.com/" target="_blank" rel="noopener">Adafruit</a> 與 <a href="https://www.sparkfun.com/" target="_blank" rel="noopener">SparkFun</a> 的模組文件完善。</li>
+        <li>加工製作：JLCPCB（PCB、組裝、3D 列印、CNC、鈑金——寄到台灣約 2 週；<strong>全班 PCB 訂單截止：9月28日（一）下午 2 點</strong>）；所內 Bambu 3D 印表機與壓克力雷射切割機（DXF/STEP；<strong>外殼設計檔截止：10月9日（五）下午 2 點</strong>）。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workshop 1 – AI for experimentalists | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Workshop 1 — AI for experimentalists · Fri 11 Sep 2026 · 14:20–16:20 · R311, IAMS</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a class="active" href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · PCBs</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Housing</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="lecture1-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Workshop 1 — AI for experimentalists</h1>
+      <p><strong>Aim.</strong> By the end of today you know how to use AI to help you build the things our lab builds with it: websites, videos and tutorials, PCB design, data acquisition and fitting, laser locking, hardware control, software. You do it with an AI coding agent — <strong>Claude Code in VS Code</strong>, working on your files: it reads them, writes code, runs commands and reports back — and you learn the method that makes its output trustworthy.</p>
+      <p><strong>Outline.</strong> Setup and preparation check → introduction to AI and the tools we use → our "AI method" in 5 steps → <strong>Project 1: build a web app (a simulator or a game)</strong> → <strong>Project 2: control a microcontroller over the net with your phone</strong>.</p>
+      <p class="callout"><strong>Think about what you want to make!</strong> Suggestions for Project 1: loading a freight train game · an inverted pendulum simulator · phase-locking coupled pendula · unfair golf · billiards · a calculator or simulator for something from your research.</p>
+      <p>Prerequisite: the <a href="preparation.html">preparation</a> is done — VS Code with the Claude Code extension signed in, a course folder, the class repository downloaded, a free Cloudflare account connected to GitHub. Bring your laptop and a USB-C cable (the instructor has spares); the ESP32 board is provided.</p>
+    </section>
+
+    <section class="card">
+      <h2>1 · Setup and preparation check</h2>
+      <p>Everyone has their laptop prepared, Claude access working, and the tutor repository downloaded: the class repository <code>class-board-2026</code> (a repository is a project folder whose complete history is kept by git, the version-history tool; on GitHub it also lives online) is on your laptop and opens in VS Code. Open Claude Code in it and type <code>/tutor L1</code>: the tutor greets you in English or Mandarin and checks your setup with you. If anything is missing, fix it now with the tutor — the rest of the day builds on it. The check covers both deployment accounts: signed in to GitHub, and a Cloudflare account connected to GitHub — you may need both today.</p>
+      <p><strong>The tutor does the mechanical work and you approve it</strong> — creating the project folder and repository, enabling GitHub Pages, the project-wall entry, the secrets check. You do the part that is the learning: write the vision, review the plan, name the test, report what you see, and press <em>Commit</em> / <em>Sync Changes</em> in Source Control. <strong>The instructor is not the help desk during class; the tutor is</strong> — only when the tutor cannot fix it do you go to the instructor.</p>
+    </section>
+
+    <section class="card">
+      <h2>2 · Introduction to AI and the tools we use</h2>
+      <p>A short primer, in the <a href="slides/W1-AI-for-experimentalists.pdf" target="_blank" rel="noopener">slides (PDF)</a>. The topics, each with its rule of thumb:</p>
+      <ul>
+        <li><strong>How large language models work.</strong> Text becomes tokens, tokens become numbers; one operation repeated — predict the next token. Sampling is deliberately random: <em>fluency is not the same thing as correctness.</em> Training fits the weights once; inference just runs them — <em>the model does not learn from your conversation</em> (unless your data is used for training, so keep secrets and unpublished results out of it).</li>
+        <li><strong>Attention and context.</strong> To predict the next word the model looks back over every earlier word. Every message resends the whole conversation, so a long chat gets slower and more expensive per message; the unchanged beginning is cached — <em>stable instructions and documents first, volatile text last.</em> <em>Keep context small: one topic per session.</em></li>
+        <li><strong>Context rot.</strong> A dropped-in PDF or image is a very expensive prefix, resent on every turn and mostly noise. <em>Use Markdown</em> (plain text with light formatting): <em>let a separate session read each file and write a detailed text summary; work from that.</em></li>
+        <li><strong>Models.</strong> Haiku, Sonnet, Opus and Fable are the same idea at different scale, at roughly 1 : 3 : 5 : 10 the cost per token. <em>The strong model plans and checks; cheap models do the work</em> — in subagents with their own fresh context, in parallel. Chinese open-source models are cheaper but weaker and a security risk; they are not allowed.</li>
+        <li><strong>Reviewing.</strong> <em>Never let the author grade its own work.</em> An independent reviewer with a different view — a fresh Claude session that has not seen the work; tests written from the plan before the work starts; loop, do not hope.</li>
+        <li><strong>Long projects.</strong> Documentation, handovers and fresh sessions: a new session reads <code>CLAUDE.md</code>, the plan and the last handover; at about half the context window it writes the handover and commits; then a fresh session. <em>The disk is the memory.</em></li>
+        <li><strong><code>CLAUDE.md</code>, memory, skills, MCP, hooks, extensions</strong> — the six places you put what the agent should know, and what each costs in the window. <em>Prefer hooks for anything that must always happen.</em></li>
+        <li><strong>Workflow must-dos.</strong> Put all needed data in the prompt · one topic per session · summarise files first · cheap workers, strong planner · verify independently.</li>
+        <li><strong>Failure modes.</strong> Hallucinations follow from the process: plausible, not verified; a confident tone is not confidence; rare facts, exact numbers and citations are where guessing shows. Beyond hallucination: it invents specifics, agrees with you, makes small errors in correct-looking structure, drops requirements, and errors multiply (95 % per step is 36 % over 20 steps). <em>Rule: use AI where checking is easier than doing.</em> Agent failures — gaming the test, claiming without running, scope creep, loops, destructive actions — are caught by mechanism (hooks, git, tests), not by reading harder. In some sense hallucination is creativity: testing and validation put it in the right places.</li>
+        <li><strong>Tools.</strong> Four ways to run an agent — Claude Cowork, Claude Design, other vendors' agent apps, VS Code + agents; <em>our choice: VS Code + the Claude Code extension</em> (low lock-in; your code, configuration and history stay yours). Made a mistake? <em>Stop the execution, then rewind</em> — do not poison your context. Context full? Start a new session: <em>"Please finish what you are working on and document anything from this session that may be useful to future Claude sessions in .md files in this directory and a handover.md file to allow Claude to continue our work in a new session."</em> Compaction is lossy — documentation is better. Check your usage often.</li>
+        <li><strong>Git.</strong> Version control is the safety net, the record and the way you collaborate — with people and with an agent. Four words: repository, commit (a named snapshot with a message), diff, history. The loop edit → stage → commit, <em>entirely from VS Code's Source Control panel — no terminal required.</em> Branches: <em>main always runs.</em> GitHub keeps a shared copy: push, pull, clone, pull request (a request to merge your changes, reviewed first). <code>.gitignore</code> keeps raw data, generated output and <em>secrets</em> out. With an agent: <em>commit before, ask it to commit as it goes, review the diff not the file, give it a branch, never let it rewrite history.</em></li>
+        <li><strong>Deployment, for free.</strong> GitHub for code, GitHub Pages for static pages, Cloudflare Pages + Workers for apps with a backend, YouTube (unlisted) for video, Hugging Face Spaces and Zenodo for demos and data. Say <em>"Deploy this"</em> — Claude does the wiring. The loop: commit → push → the host builds → live. <em>Secrets never go in the repository</em>; they live in the host's environment settings.</li>
+        <li><strong>Apps that talk to you.</strong> Telegram (a token from @BotFather — the easiest start), the LINE Messaging API (what everyone in Taiwan has), ntfy.sh for notifications only; a webhook on a Cloudflare Worker. <em>Start with Telegram, then port to LINE.</em> Tokens are passwords. Gmail, Sheets and Drive from code; an LLM inside your app through an API key (keys are money); voice in, voice out. <em>Two ways AI makes software smarter:</em> A — AI-written code (the default) · B — an LLM in the loop (reach for it at the hard step).</li>
+        <li><strong>Video.</strong> Script first, pictures last: document → script → narration → visuals timed to the audio. The lab's pipeline is public (<a href="https://github.com/iams-yb-lab/show-your-work" target="_blank" rel="noopener">show-your-work</a>). Pictures of hardware: Blender (scriptable, from CAD) and Unreal (scenery). Label generated imagery.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>3 · Our "AI method" in 5 steps</h2>
+      <p>The most important slide in the talk.</p>
+      <ol>
+        <li><strong>Vision.</strong> Describe what you want, with as much detail as possible.</li>
+        <li><strong>Specification / Plan.</strong> Get AI to produce a detailed specification — plan the project! Break the project into many small tasks with testable deliverables. Ask AI to ask you questions!</li>
+        <li><strong>Review.</strong> Review the plan, and have AI review the plan to identify improvements and flaws — in a fresh Claude session that has not seen the work, so the author does not grade its own plan.</li>
+        <li><strong>Code</strong> (using agent swarms). Tell AI to run swarms of agents in parallel to complete the build.</li>
+        <li><strong>Test / Debug / Verify.</strong> Ensure your plan and specification include methods to test the code. Fix problems one at a time.</li>
+      </ol>
+      <p class="callout"><strong>Iterate: the first plan is never the last plan.</strong> <strong>Never trust AI without testing and verifying.</strong></p>
+    </section>
+
+    <section class="card">
+      <h2>4 · Project 1 — Build a web app (a simulator or a game)</h2>
+      <p><strong>What do you want to make?</strong> Suggestions: loading a freight train game · an inverted pendulum simulator · phase-locking coupled pendula · unfair golf · billiards · a calculator or simulator for something from your research.</p>
+      <ol>
+        <li>Decide what to make. Give it its own folder and its own <strong>public GitHub repository</strong> under your personal account (a repository is a project folder whose complete history is kept by git; on GitHub it also lives online). The tutor checks it and prompts you to push at every milestone.</li>
+        <li>Follow the "AI method" to produce a working local demo.</li>
+        <li>Deploy it on the web (publish it so it is live at a public address). Which host depends on what you built, and you may need both: a static page → GitHub Pages, straight from the repository; anything with a backend, a bot webhook or a secret → Cloudflare Pages + Workers.</li>
+        <li>Create a report that explains the concept or game in detail.</li>
+        <li>Make the <strong>project website</strong> — the GitHub Pages site of the repository, at <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code>: a title, what it is and why it is interesting, how it works, a picture, GIF or short video of it working, what was verified, and links to the live app (<code>…/app/</code>) and to the repository.</li>
+        <li>Improve the presentation: Markdown → slides → website → YouTube video (optional extension).</li>
+        <li><strong>Add it to the <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">project wall</a></strong> — the tutor prepares your entry (one JSON file and one picture) and you push it. See <a href="teams.html">Showcase</a>.</li>
+      </ol>
+      <p><strong>Each project = its own folder and its own public repository</strong>, with a public project website — not just a README. <a href="https://docs.github.com/en/pages/quickstart" target="_blank" rel="noopener">GitHub Pages</a> hosts the project website and any static app; anything with a backend, a bot webhook or a secret goes on <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages + Workers</a> — you may need both, so have both accounts ready. Either redeploys on every push. The instructor's <a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">pendulum-example</a> and <a href="https://github.com/TIGP-Experimental-Methods/csv-scope-example" target="_blank" rel="noopener">csv-scope-example</a> are examples of Project-1-style builds.</p>
+    </section>
+
+    <section class="card">
+      <h2>5 · Project 2 — Control a microcontroller over the net with your phone</h2>
+      <p><strong>Aim:</strong> create a phone app that lets you control and measure from hardware — the ESP32 (a small WiFi microcontroller board; ours is the <a href="https://jin-hua.com.tw/page/product/show.aspx?num=40729&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">Jinhua ESP32-S3, NT$400</a>, provided) — over WiFi. Follow the "AI method".</p>
+      <ol>
+        <li><strong>Step 1 — the hardware-validation baseline.</strong> Flash the class repository's reference firmware (the program that runs on the microcontroller) and phone app onto your own ESP32-S3 (flash = write it onto the board over USB; the first flash of a new board needs BOOT + RST once). The board becomes its own WiFi access point <code>instrument-XXXX</code>. Join it from your phone or laptop (password <code>instrument</code>), type <code>http://192.168.4.1</code> into the browser, control the LED and read the live values. Three tips: stay connected when the phone warns there is no internet · on Android, switch mobile data off · type the <code>http://</code> yourself. <em>Starting from a known working hardware baseline is an essential part of any experimental physics workflow — it separates hardware problems from software problems.</em></li>
+        <li><strong>Step 2 — your own app, by the "AI method".</strong> Its own folder and its own public GitHub repository, like Project 1. For example: a phone app that controls the brightness and colour of the ESP32's LED; then measure something and show it live on the phone. The class firmware stays the fallback if your own build stalls — and it is the base for Projects 3a and 3b.</li>
+        <li>Make the <strong>project website</strong> (GitHub Pages of the repository): title, what it is and why it is interesting, how it works, a picture, GIF or short video of it working, what was verified, a link to the repository — and, since an app that runs on the board has no public address, a short video of it working instead of a live link.</li>
+        <li><strong>Add it to the <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">project wall</a></strong> — the tutor prepares the entry, you push it.</li>
+      </ol>
+      <p><strong>Camera.</strong> For anyone who wants to try a camera app, one unit of the <a href="https://jin-hua.com.tw/page/product/show.aspx?num=41395&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">ESP32-S3-N16R8-CAM 開發板 + OV3660 鏡頭</a> (Jinhua #41395) is available.</p>
+    </section>
+
+    <section class="card">
+      <h2>6 · Between workshops</h2>
+      <p><strong>Before the next workshop: complete the preparation, improve your apps, build and have fun.</strong> The apps are your Project 1 and Project 2 — push at every milestone, keep the project websites and the <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">project wall</a> current.</p>
+      <p><strong>Preparation for Workshop 2:</strong></p>
+      <ul>
+        <li><strong>Install KiCad 10</strong> (the free program we draw the schematic and lay out the printed circuit board in) and open it once, so it finishes configuring its libraries — see <a href="preparation.html">Preparation</a>.</li>
+        <li><strong>Create a JLCPCB account</strong> (the board factory; parts come from its own parts library).</li>
+      </ul>
+      <p>Your part of the class board is assigned at the start of Workshop 2. If you are stuck, ask the tutor first, then e-mail the instructor.</p>
+    </section>
+
+    <section class="card">
+      <h2>7 · Beyond the baseline</h2>
+      <p>The hardware is the shared baseline — fixed by budget and timeline. Everything else is open: the software, the firmware, the app, and everything around the instrument. Whenever you are ahead, ask: <em>what problem in my lab could this solve?</em> <strong>Talk to your instrument from LINE or Telegram</strong> — the extension we most encourage: push notifications when a value drifts or an alarm fires, and bot commands that read a value or switch a relay from your phone, from anywhere. <strong>Just build something great.</strong></p>
+    </section>
+
+    <section class="card">
+      <h2>8 · Materials</h2>
+      <ul>
+        <li>Slides: <a href="slides/W1-AI-for-experimentalists.pdf" target="_blank" rel="noopener">Workshop 1 — AI for experimentalists (PDF)</a>. Video recordings are not online.</li>
+        <li>Workbook on GitHub: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">ch. 0 — preparation</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch1-day-1-week-1.md" target="_blank" rel="noopener">ch. 1 — Workshop 1</a>.</li>
+        <li>Reference repositories, as examples of Project-1-style builds: <a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">pendulum-example</a> (<a href="https://tigp-experimental-methods.github.io/pendulum-example/" target="_blank" rel="noopener">live</a>) · <a href="https://github.com/TIGP-Experimental-Methods/csv-scope-example" target="_blank" rel="noopener">csv-scope-example</a> (<a href="https://tigp-experimental-methods.github.io/csv-scope-example/" target="_blank" rel="noopener">live</a>).</li>
+        <li>The <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">project wall</a> — everyone's projects, live (<a href="https://github.com/TIGP-Experimental-Methods/showcase-2026" target="_blank" rel="noopener">repository</a>; the README has the entry format). See <a href="teams.html">Showcase</a>.</li>
+        <li>The tutor: <code>/tutor L1</code> in the class repository.</li>
+        <li>See also the <a href="resources.html#ai">AI resources</a>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

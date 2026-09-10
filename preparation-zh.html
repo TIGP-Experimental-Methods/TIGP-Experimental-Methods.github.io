@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>課前準備｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">課前準備——請在工作坊 1 之前完成（workbook 第 0 章）<br>
+          <span class="brand-zh">Modern Experimental Techniques – Physics</span></p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a class="active" href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="preparation.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>工作坊 1（實驗物理學家的 AI）之前——workbook 第 0 章</h1>
+      <p>工作坊 1 從一開始就動手實作。在簡短介紹 AI 與我們使用的工具之後，你會在 VS Code 中用 Claude Code 做出兩樣東西：<strong>專案 1</strong>，一個你自選的網頁應用程式——模擬器或遊戲——部署（deploy：發布上線）到公開網路；以及<strong>專案 2</strong>，一個透過 WiFi 控制你的 ESP32（課堂提供的小型 WiFi 微控制器（microcontroller）板）並從它讀取量測值的手機 App。所以這些工具與帳號必須事先在你的筆電上正常運作。
+        這份清單很短，而且大部分由 Claude 代勞。以下每個步驟都附有一個
+        <span class="check">✔ 檢查</span>，讓你確認該步驟是否成功。任何安裝設定問題卡住了，就求助：從步驟 5 起，先請 Claude Code 診斷錯誤；
+        還是解決不了，就記下錯誤訊息，寄給授課教師（<a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a>）。</p>
+      <p class="callout">小提示：只有步驟 1–4 需要自己動手。從步驟 5 起，由 Claude Code 負責安裝，你負責看與批准；Cloudflare 帳號（步驟 7）
+        是另外唯一一件它無法代勞的事。這不是作弊——這正是本課程的重點。</p>
+
+      <ol class="steps">
+        <li>
+          <h3>一台可以自行安裝軟體的筆電，以及一條 USB-C 線</h3>
+          <p>Windows 10/11、macOS 或 Linux。你需要管理員權限與至少 <strong>10 GB 的可用磁碟空間</strong>。ESP32 開發板（dev board：載著微控制器的小板子）由課堂提供，其接頭為 <strong>USB-C</strong>。
+            <strong>請自備一條適合你筆電的 USB-C 資料線</strong>——USB-C 對 USB-C，或 USB-A 對 USB-C；只能充電的線沒有資料功能。授課教師有備用。</p>
+          <p><span class="check">✔ 檢查：</span>你不必請示任何人就能在這台筆電上安裝程式、有 10 GB 可用空間，而且資料線已放進包包。</p>
+        </li>
+
+        <li>
+          <h3>安裝 Visual Studio Code</h3>
+          <p>從 <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a> 下載，並以預設選項安裝
+            （在 Windows 上，出現選項時請勾選「Add to PATH」與「Open with Code」）。</p>
+          <p><span class="check">✔ 檢查：</span>VS Code 能開啟。選單 <em>Help → About</em> 顯示版本編號。</p>
+        </li>
+
+        <li>
+          <h3>安裝 Claude Code 擴充功能並登入</h3>
+          <p>在 VS Code 中按 <code>Ctrl+Shift+X</code>（macOS 為 <code>Cmd+Shift+X</code>），搜尋 <strong>Claude Code</strong>（發行者：Anthropic）並點選 Install——
+            或從 <a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code" target="_blank" rel="noopener">marketplace 頁面</a>安裝這個擴充功能（extension）。
+            文件：<a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">Claude Code in VS Code</a>。</p>
+          <p>所有修課學生皆可使用 Claude（Team standard）：本課程 <strong>Claude 組織</strong>的邀請已於 9月6日（日）以電子郵件寄出。請接受邀請，並在擴充功能要求登入時使用該帳號登入。
+            （若邀請尚未寄達，請先安裝擴充功能，之後再登入，並告知授課教師。）上課時 Claude Code 也是你的 Claude 家教（tutor）：
+            在班級儲存庫（repository）中輸入 <code>/tutor L1</code>，它會用英文或中文帶你走過 workbook 的章節。</p>
+          <p><span class="check">✔ 檢查：</span>VS Code 側邊欄出現 Claude 圖示；登入後輸入「hello」可以得到回應。</p>
+        </li>
+
+        <li>
+          <h3>建立一個本機課程資料夾，並在 VS Code 中開啟</h3>
+          <p>建立一個空資料夾，例如家目錄下的 <code>tigp-2026</code>。不要放在 OneDrive、Google Drive 或 Dropbox 的同步資料夾內（同步程式會和 git——記錄資料夾檔案歷史的工具——互相干擾），
+            路徑中也不要有任何空格（部分工具鏈——建置韌體的編譯器與輔助程式——無法處理）。在 VS Code 中選 <em>File → Open Folder…</em> 並選取它。</p>
+          <p><span class="check">✔ 檢查：</span>資料夾名稱出現在 VS Code 檔案總管的最上方，且 <em>Terminal → New Terminal</em> 會在該資料夾開啟終端機（terminal：輸入指令的文字視窗）。</p>
+        </li>
+
+        <li>
+          <h3>其餘交給 Claude</h3>
+          <p>在該資料夾中開啟 Claude Code（側邊欄的 Claude 圖示），貼上以下文字（指令保持英文原文即可）：</p>
+          <pre><code>Read https://raw.githubusercontent.com/TIGP-Experimental-Methods/class-board-2026/main/SETUP.md and follow it step by step. Ask me before installing anything, and tell me what each step is for in one sentence.</code></pre>
+          <p>接著 Claude 會安裝 git 並設定你的姓名與電子郵件、透過 <code>uv</code>（一個快速的 Python 安裝與套件管理工具）安裝 Python、安裝 GitHub CLI（GitHub 的命令列工具 <code>gh</code>；若你沒有 GitHub 帳號，它會請你建立一個，並在瀏覽器中登入）；
+            檢查你是否已是班級組織 <a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener"><strong>TIGP-Experimental-Methods</strong></a> 的成員；把班級儲存庫（由 git 保存完整歷史的共用專案資料夾，在 GitHub 上也有線上版）<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026" target="_blank" rel="noopener"><strong>class-board-2026</strong></a> 複製（clone：下載完整副本）到該資料夾；
+            安裝 PlatformIO（建置並燒錄（flash）韌體（firmware：在微控制器上執行的程式）的工具）並建置一次韌體，讓工具鏈下載完成；最後印出一份 <strong>「toolchain OK」</strong>報告。每次安裝前它都會先問你。
+            它遵循的說明就在 <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/SETUP.md" target="_blank" rel="noopener">SETUP.md</a>——純文字，好奇的話可以自己讀。</p>
+          <p><span class="check">✔ 檢查：</span>Claude 的報告顯示 <strong>toolchain OK</strong>。若失敗：先請 Claude 診斷；還是解決不了，就把報告寄給授課教師（<a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a>）。</p>
+        </li>
+
+        <li>
+          <h3>Claude 幫你設定了什麼（想的話可自行檢查）</h3>
+          <p>步驟 5 做的就是你原本要親手完成的清單；完整指令都在 <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/SETUP.md" target="_blank" rel="noopener">SETUP.md</a>。儲存庫 <strong>class-board-2026</strong> 收納全班共用的課程工作：
+            <code>firmware/</code>、<code>host/</code>（參考手機 App＋<code>instrument.py</code>）、<code>hardware/</code>（KiCad）、<code>workbook/</code>、<code>tutor/</code>，以及你自己的資料夾 <code>docs/students/&lt;name&gt;/</code>。
+            你在分支（branch：各自獨立的工作線，讓多人修改時不互相干擾）上工作並開拉取請求（pull request：請求把你的分支合併進共用專案；會先有人審查）；<code>main</code>（主分支，大家共同依據的版本）受保護，由授課教師合併（merge）。你的專案 1 與專案 2 各自放在自己的資料夾，以及你個人帳號下各自的<strong>公開</strong> GitHub 儲存庫中，並各有一個放在 GitHub Pages 上的專案網站；家教會檢查，並在每個里程碑提醒你推送（push）。在終端機中（VS Code <em>Terminal → New Terminal</em>）：</p>
+          <ul>
+            <li><span class="check">✔</span> <code>git --version</code> 會印出版本編號，且 <code>git config --global user.email</code> 印出的是你 GitHub 帳號的電子郵件——兩者必須相同，否則 GitHub 不會把你的提交（commit：你所做修改的存檔快照）記在你名下。</li>
+            <li><span class="check">✔</span> <code>uv --version</code> 會印出版本編號。</li>
+            <li><span class="check">✔</span> <code>gh auth status</code> 顯示你已登入。</li>
+            <li><span class="check">✔</span> 你的課程資料夾內有 <code>class-board-2026</code> 資料夾，且在其中執行 <code>git status</code> 顯示 <code>On branch main</code>。</li>
+            <li><span class="check">✔</span> 在該資料夾中執行 <code>pio run -e esp32s3-sim</code>，結尾顯示 <code>SUCCESS</code>。</li>
+          </ul>
+          <p>兩個容易忽略的地方：組織成員資格需要授課教師的邀請——若 Claude 回報你尚未是成員，請把你的 GitHub 使用者名稱寄給授課教師，
+            稍後再重新檢查。另外，第一次 <code>pio run</code> 會下載 ESP32 工具鏈（數百 MB）；它必須在工作坊 1 <em>之前</em>完成，因為當天教室網路由全班共用。</p>
+        </li>
+
+        <li>
+          <h3>建立免費的 Cloudflare 帳號並連上 GitHub</h3>
+          <p>這一步要自己動手——Claude 可以告訴你該點哪裡，但無法替你註冊。工作坊 1 中，你會把你的專案部署到公開網路，而且<strong>你可能兩個主機都需要——兩個帳號都要準備好</strong>：靜態網頁（專案網站；完全在瀏覽器裡執行的 App）放在 GitHub Pages（把公開儲存庫變成公開網頁的免費服務——有 GitHub 帳號就夠）；任何有後端、機器人網頁掛鉤（webhook）或機密的東西（LINE 或 Telegram 機器人、API 金鑰、排程工作）放在 <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages＋Workers</a>（免費方案；能執行伺服器端程式碼）。
+            到 <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener">dash.cloudflare.com/sign-up</a> 註冊（免費方案；驗證電子郵件）。然後連上 GitHub 一次：在儀表板進入
+            <em>Workers &amp; Pages → Create → Pages → Connect to Git</em>，授權 Cloudflare 存取你的 GitHub 帳號，到這裡就停——專案本身在課堂上建立。</p>
+          <p><span class="check">✔ 檢查：</span>已登入 Cloudflare 儀表板；「Connect to Git」畫面列出你的 GitHub 帳號。（若 Cloudflare 註冊失敗，工作坊 1 可以先只用 GitHub Pages——不需要再裝任何東西——但在你做任何有後端的東西之前，要先把帳號弄好。）</p>
+        </li>
+
+        <li>
+          <h3>想一想你要做什麼！</h3>
+          <p><strong>專案 1</strong> 是一個你自選的網頁應用程式——模擬器或遊戲。建議：貨運列車裝載遊戲 · 倒立擺模擬器 · 耦合擺的相位鎖定 · 不公平的高爾夫 · 撞球 · 為你研究中的某個題目做的計算器或模擬器。<strong>專案 2</strong> 是一個透過 WiFi 控制你的 ESP32 並從它讀取量測值的手機 App——例如先控制它 LED 的亮度與顏色，然後在手機上即時顯示一個量測值。想試做相機 App 的人，有一台 <a href="https://jin-hua.com.tw/page/product/show.aspx?num=41395&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">ESP32-S3-N16R8-CAM 開發板 + OV3660 鏡頭</a>（金華 #41395）可用。</p>
+          <p>班級板——大家在<a href="projects-zh.html">專案 3a 與 3b</a> 中一起打造的儀器——是一塊板、五個區塊（section），每位學生一個區塊；你的區塊會在工作坊 2 開始時分配，所以事前沒有什麼需要選擇。不過，請帶著來自你自己實驗室的問題：有了這樣一台儀器，你會想監測、觸發、切換或自動化什麼？</p>
+          <p><span class="check">✔ 檢查：</span>你能用一句話說出你的專案 1 會是什麼，並說出一件自己實驗室裡想用手機控制或量測的事。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>工作坊 2（設計印刷電路板）需要——課間</h1>
+      <p>下一場工作坊之前：完成課前準備、改進你的 App、動手做、玩得開心。課前準備——工作坊 2 之前有兩件事必須就緒：</p>
+      <ol class="steps">
+        <li>
+          <h3>安裝 KiCad 10 並開啟一次</h3>
+          <p>KiCad 是我們用來畫電路圖（schematic：電路繪圖）與佈局印刷電路板（PCB）的免費軟體；工作坊 2 時它必須能在你的筆電上執行。從 <a href="https://www.kicad.org/download/" target="_blank" rel="noopener">kicad.org/download</a> 下載目前的穩定版（第 10 版），連同預設程式庫一併安裝。
+            安裝後先啟動一次，讓它完成符號庫與封裝庫的設定（符號（symbol）是零件在電路圖中的圖形；封裝（footprint）是零件焊上去的銅箔圖形）。然後開啟班級專案：班級儲存庫 <code>hardware/</code> 內的 <code>class-board.kicad_pro</code>——專案零件庫已在裡面，不需要解壓縮任何東西。</p>
+          <p><span class="check">✔ 檢查：</span>KiCad 能開啟；<em>File → New Project</em> 可用，且能開啟 Schematic Editor（電路圖編輯器）；班級專案開啟時沒有缺少程式庫的警告。</p>
+        </li>
+        <li>
+          <h3>建立 JLCPCB 帳號</h3>
+          <p><a href="https://jlcpcb.com/" target="_blank" rel="noopener">JLCPCB</a> 負責製造與組裝班級板，零件來自它自己的<a href="https://jlcpcb.com/parts" target="_blank" rel="noopener">零件庫</a>（料號形如 C12345）。只需要一個免費帳號；不需要 LCSC 帳號。現在不需要付款。</p>
+          <p><span class="check">✔ 檢查：</span>兩個網站你都能登入。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>工作坊 3（韌體與基礎機械設計）之前</h1>
+      <ol class="steps">
+        <li>
+          <h3>建立 Onshape 帳號——或準備好另一套 CAD 軟體</h3>
+          <p>專案 3b 是為你的儀器做一個外殼（housing），以 <a href="https://www.onshape.com/en/education/" target="_blank" rel="noopener">Onshape</a>（免費教育方案，在瀏覽器中執行，無需安裝，任何筆電都能用）或你慣用的 CAD 軟體繪製。
+            若用 Onshape，請以你的大學電子郵件註冊 <em>Education</em> 方案。工作坊 3 時，你可以把授課教師的外殼範本——裡面已有電路板的 STEP 檔（3D CAD 交換格式）與前面板開孔——複製到自己的帳號並改成你自己的，或從頭自己畫；你會匯出 STL（3D 列印檔）和／或 DXF（雷射切割圖檔）。</p>
+          <p><span class="check">✔ 檢查：</span>你能建立新文件並畫出一個矩形草圖。</p>
+        </li>
+        <li>
+          <h3>可選：安裝切片軟體</h3>
+          <p>外殼由研究所負責列印與切割，所以切片軟體不是必需的。若你想預覽自己的 STL 會怎麼列印，可安裝 <a href="https://bambulab.com/en/download/studio" target="_blank" rel="noopener">Bambu Studio</a>（本課程的 3D 印表機是 Bambu）。</p>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div>
+        <p>台灣國際研究生學程（TIGP）· 中央研究院原子與分子科學研究所</p>
+      </div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

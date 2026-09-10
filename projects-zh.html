@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>專題｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">課程專題：一台人人動手打造的實驗室儀器，再用軟體做出自己的特色</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a class="active" href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="projects.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>班級儀器：函數波形產生器／任意波形產生器（AWG）兼實驗室控制器</h1>
+      <p>每個人都打造<strong>同一套儀器平台</strong>——一台每個實驗室都用得上的桌上型「瑞士刀」。2026 年度的做法是<strong>一塊班級板，分成五個區塊（section），每位學生負責一個</strong>——<strong>專案 3a</strong>（電路板，用 KiCad 設計）與<strong>專案 3b</strong>（它的外殼）。
+        硬體刻意標準化，讓工作坊、設計審查與全班統一的印刷電路板（PCB）訂單方向一致；
+        <strong>你發揮的空間在軟體</strong>：介面、自動化與細節打磨，讓一塊電路板變成人人愛用的儀器。</p>
+
+      <h2>這台儀器能做什麼</h2>
+      <ul>
+        <li><strong>產生訊號：</strong>16 位元雙通道任意波形產生器——直流電位、斜波、正弦波與任意波形表，頻率到約 50 kHz、振幅 ±10 V（AO1、AO2）——再加上兩路硬體定時的觸發／時鐘輸出（5 V TTL），可達數十 MHz。</li>
+        <li><strong>監測訊號：</strong>八路 16 位元 ±10 V 類比輸入，全部走 SMA 接頭（AI1–AI8），量程可由軟體切換、最小到 ±0.64 V 以配合感測器量測，並記錄、繪圖。板上另預留一組儀表放大器／可程式增益的訊號調理鏈，作為授課教師的選配，接到第 7、8 路輸入。</li>
+        <li><strong>切換開關：</strong>四路低電壓繼電器、八路 5 V TTL 輸出、兩路高速光耦隔離輸入，以及一個可由韌體（firmware）切換輸入／輸出方向的 TRIG 接頭——警報、連鎖保護（interlock）、序列動作。</li>
+        <li><strong>什麼都能連：</strong>以原生 USB 連 Python；以 WiFi 連網頁、手機與訊息機器人。你的手機就是前面板（板上一顆小 OLED 顯示狀態）；選配的相機節點可把影像串流進同一個 App——想試做相機 App 的人，有一台 <a href="https://jin-hua.com.tw/page/product/show.aspx?num=41395&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">ESP32-S3-N16R8-CAM 開發板 + OV3660 鏡頭</a>（金華 #41395）可用。</li>
+      </ul>
+
+      <h2>系統架構</h2>
+      <pre><code>   ┌──────  the CLASS BOARD: base (instructor) + 5 blocks (one per student) · one design, JLCPCB-assembled ×5, nothing to solder  ──────┐
+ AO1 AO2 ◄── ±10 V stages ◄── DAC8563 16-bit AWG ───────┐          ┌─── ADS8688 8 × 16-bit ±10 V ◄── AI1–AI8 (SMA)
+              [block 3: signal generation]              │          │         [block 1: precision inputs]
+                                                 ESP32-S3 dev board (socketed, u.FL antenna → SMA)
+ USB-C 5 V + data (or 5 V jack) ──► ±12 V · 5 VA · 3V3 ─┤          ├─── 4 relays · 2 fast opto inputs           [block 4: isolated switching]
+              [block 2: power &amp; rails]                  │          └─── 8 TTL out · 2 fast trigger/clock out · TRIG in/out (5 V TTL)  [block 5: digital I/O &amp; timing]
+                                                        │
+   (instructor option, unpopulated: in-amp · PGA · filter · TIA footprints → inputs 7–8, AUX SMA)
+                                                        └──────────── WiFi (phone/web app · WebSocket · OTA) · native USB (Python API)
+                    │                                                              │
+       [Python host: API, logging, plots]                    [PWA on your phone · bot alerts · optional camera node]
+                    └──────────────── GitHub class repository + your project website + video ───────────────┘
+        + base: dev-board socket, buses, 2 × Qwiic, 2×10 header   + front-panel PCB: 12 SMAs (3 × 4), OLED, 3 LEDs   + 3D-printed box</code></pre>
+      <p><strong>MCU——微控制器（microcontroller，單晶片上的小電腦）的選擇（2026 年度已定案）：</strong>採用標準 DevKitC-1 腳位、附外接天線接頭的 ESP32-S3 N16R8 開發板（dev board）（金華，NT$400），插在班級板的插座上，執行 Arduino 框架。有 WiFi 就能發展網頁／手機／機器人方向；u.FL 天線接到 SMA 穿板座，讓 WiFi 在密閉的金屬或壓克力外殼內也能用；開發板留下 31 個可用 GPIO（通用腳位）與一條 80 MHz 的 SPI 匯流排（晶片與微控制器對話的常見接線標準）給轉換器使用。核心電路採統一規格，讓全班訂單與設計審查得以順利進行——但你依然要在這塊板子上動手做真正的硬體工作（見下段），你的創意也同時展現在韌體（在微控制器上執行的程式）、主機端軟體、介面與外殼上。</p>
+      <p><strong>一塊班級板、五個區塊——你負責其中一個。</strong>整塊板子是同一個 KiCad（電路設計軟體）專案，放在一個班級儲存庫（repository：由 git 保存完整歷史的共用專案資料夾，放在 GitHub 上）裡。授課教師先把<strong>整塊板子</strong>做完——基礎部分（開發板插座、匯流排、擴充排針、帶 12 個 SMA 接頭的前面板 PCB）加上全部五個區塊——再交給你完整電路圖（schematic）的 PDF，以及你那個區塊電路圖的<em>「留白」</em>版本（刻意刪掉幾個零件）。五個區塊：<em>精密輸入</em>（ADS8688，AI1–AI8）、<em>電源與電源軌</em>（USB-C／5 V 插座、±12 V 隔離模組、穩壓器）、<em>訊號產生</em>（DAC8563＋±10 V 輸出級）、<em>隔離切換</em>（繼電器＋高速光耦輸入）與<em>數位 I/O 與定時</em>（TTL 輸出、高速觸發輸出、TRIG 接頭）。你的工作——每一步都只做一次，由 Claude 家教（tutor）陪你走：對照 PDF <strong>補回被刪掉的零件</strong>、<strong>從 LCSC 抓一個零件</strong>（LCSC 是 JLCPCB——組裝我們電路板的工廠——的零件目錄）進零件庫、<strong>在板上屬於你的區域內佈線</strong>（routing：在屬於你的範圍內畫出銅箔走線；IC 與接頭已預先放好）、發出<strong>拉取請求</strong>（pull request，簡稱 PR：請求把你的修改併入共用專案，會先有人審查）並<strong>審查一位同學的</strong>，然後依模板寫出你區塊的<strong>韌體驅動與 App 面板</strong>——先在模擬模式（SIM mode）下完成，板子到貨後再上真實硬體。合併（merge）後的設計在 9月28日（一）下午 2 點（硬性截止）送進全班訂單，製作五份——每人一台組裝完成的儀器。你的區域、你的拉取請求，以及你對同學的審查，就是你在專案 3a 的部分；外殼則是專案 3b。</p>
+      <p><strong>規則：</strong>僅限低電壓——儀器由 USB-C 或 5 V 電源供電，繼電器只切換訊號級與 ≤ 30 V DC 的負載，絕不碰市電。零件須為 JLCPCB 現貨；開發板由課程提供。<strong>成本：</strong>班級板是同一份設計製作五份，零件依「每一塊錢能學到多少」挑選——每位學生約 <strong>NT$3.2k</strong>（≈ US$100）全包：開發板、零件、四層 PCB、前面板 PCB 與 <strong>JLCPCB 全部組裝</strong>，沒有任何需要自己焊接的東西。每個零件都必須物有所值，JLC 報價在下單前檢查。</p>
+    </section>
+
+
+    <section class="card">
+      <h2>其他想法：可加在 ESP32 這類開發板上的擴充硬體</h2>
+      <p><strong>本課程的硬體是固定的</strong>——同一份電路板設計，全班一次訂購；下面這份清單裡沒有任何一項屬於課程內容，也不是給學生的延伸題。放在這裡純粹作為靈感：把哪些擴充硬體加到 ESP32 這類開發板上，可以做出其他對實驗室有用的工具——課程結束之後，或在你自己的工作裡。班級板保留了一組 2×10 擴充排針、兩個 Qwiic 接頭與幾個預留的封裝（footprint：尚未裝件零件的銅箔圖形），日後仍有可能加上這些東西。以下皆採 JLCPCB 現貨零件。</p>
+      <div class="grid">
+        <div class="tile"><h3>🏎 高速擷取</h3><p>ADS9224R 雙通道 16 位元 3 MSPS，或 AD9235 40 MSPS 接在閒置的 LCD_CAM 平行埠上：擷取快速的暫態訊號——2026 年度核心電路為了成本與時程而移除的等級。</p></div>
+        <div class="tile"><h3>〰 DDS 正弦波源</h3><p>AD9833 直接數位合成，正弦波到 1 MHz，掛在擴充排針的 SPI 上：與 16 位元 AWG 互補，把訊號源的頻率上限往上推。</p></div>
+        <div class="tile"><h3>🧮 精密 ADC</h3><p>ADS1115／ADS1256：16–24 位<em>真實</em>解析度，適合 µV 級與感測器量測。看見 MCU 內建 ADC 看不見的東西——再用雜訊底限圖證明它。</p></div>
+        <div class="tile"><h3>🔢 更多通道</h3><p>MCP23017（+16 GPIO）與 CD74HC4067（16 路類比輸入共用一腳）：兩顆便宜晶片掛在同一條匯流排上，通道數就超越 Arduino Mega。</p></div>
+        <div class="tile"><h3>🎚 可程式增益／自動量程</h3><p>PGA113 或數位電位器設定增益：輸入級會自己切換量程，弱訊號與強訊號都落在刻度內。班級板在第 7、8 路輸入上預留了未上件的 PGA113 封裝——把它裝上、寫好驅動。</p></div>
+        <div class="tile"><h3>⚖️ 儀表放大器輸入級</h3><p>INA826／INA333 級差動前端：電橋、熱電偶與疊在雜訊接地上的微小訊號，都能乾淨量測。班級板的訊號調理區預留了 INA826 的封裝。</p></div>
+        <div class="tile"><h3>🌡 精密溫度通道</h3><p>MAX31865 + PT100/PT1000 或熱敏電阻電橋：mK 級測溫——實驗室 PID 的感測端。</p></div>
+        <div class="tile"><h3>🔥 加熱器／TEC 驅動</h3><p>MOSFET PWM 級加上 INA 電流偵測：致動端——對雷射座或樣品台做閉迴路溫控。</p></div>
+        <div class="tile"><h3>🚶 運動驅動</h3><p>A4988／DRV8825 步進馬達驅動或伺服機接頭：快門、濾光片輪、斬波器——全都聽你的觸發引擎指揮。</p></div>
+        <div class="tile"><h3>⏰ 真正的時基</h3><p>TCXO（±1–2 ppm）加上外部 10 MHz 參考輸入：把訊號產生器升級成計量級訊號源——再用兩塊板互拍（beat）量出改善幅度。班級板上有一個未上件的 TCXO 封裝。</p></div>
+        <div class="tile"><h3>🔗 隔離式 RS-485／CAN</h3><p>橫跨實驗室、電氣隔離的多點儀器匯流排——真實設施就是這樣把設備串起來的。</p></div>
+        <div class="tile"><h3>🖥 觸控螢幕前面板</h3><p>手機／網頁 App 才是這台儀器的臉，班級板上的小 OLED 顯示狀態；若想要能獨立操作的面板，可在前面板 PCB 上加一片 3.5″ 480×320 TFT（ILI9488，SPI）與電容式觸控（FT6236／GT911，I²C——另一種晶片間匯流排），以 LVGL 驅動。輕量版：OLED＋旋轉編碼器。</p></div>
+        <div class="tile"><h3>💾 記錄 + 時鐘</h3><p>microSD 插槽 + DS3231 RTC：不需主機也能記錄數週的含時間戳資料——想拿資料時再用 WiFi 取回。</p></div>
+        <div class="tile"><h3>🔋 電池供電</h3><p>TP4056 充電器 + 升壓轉換器：可攜式現場量測，停電也不中斷記錄。</p></div>
+        <div class="tile"><h3>💡 光電二極體／TIA 輸入</h3><p>互阻抗（TIA）光量測通道：雷射功率監測、螢光偵測——佈局品質真正見真章的類比設計。班級板的訊號調理區預留了 OPA2156 TIA 的封裝。</p></div>
+        <div class="tile"><h3>⚡ 電源監測</h3><p>INA226 監看自己的電源軌：儀器自己量測電流、電壓與能耗——內建自我診斷。</p></div>
+        <div class="tile"><h3>🔊 音頻級編解碼器</h3><p>I²S ADC/DAC：高傳真類比路徑，把數位濾波器與軟體鎖相放大器方向升級到 24 位品質。</p></div>
+        <div class="tile"><h3>🛡 更多開關</h3><p>加裝繼電器或高側開關，含正確的飛輪二極體與隔離：把警報／連鎖保護的輸出規模擴大到一整個機架。</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>超越基準線：做出很棒的東西</h2>
+      <p>成果發表與展示（10月26–30日，每人約 15 分鐘）對每個人都有同一套建議的流程（見下）。軟體、韌體、App，以及圍繞這台儀器的一切，都由你決定要推到多遠——挑一個對你自己的實驗室真正有幫助的方向，或單純挑一個你會很自豪拿出來展示的東西：</p>
+      <div class="grid">
+        <div class="tile"><h3>📱 手機 App／網頁介面</h3><p>由 ESP32 提供一個精緻的網頁應用程式（可安裝的 PWA：像 App 一樣運作的網頁）：波形控制、即時讀值、深色模式、多使用者。在研討室裡也能操控你的儀器。</p></div>
+        <div class="tile"><h3>🔔 監測、警報與繼電器</h3><p>對類比輸入設定門檻規則：觸發繼電器、鎖住連鎖保護、推送 Telegram／LINE 警報。故障安全（fail-safe）的預設值、手動重置、含時間戳記的事件記錄。</p></div>
+        <div class="tile"><h3>⏱ 觸發與序列控制</h3><p>觸發輸入 → 波形爆發（burst）或繼電器動作；可程式化的序列與排程；讓兩台裝置同步。把波形產生器變成實驗的總指揮。</p></div>
+        <div class="tile"><h3>🐍 Python API 與腳本</h3><p>乾淨俐落的 <code>instrument.sine(1e3, 0.5)</code> API；自動掃描；用你自己的產生器＋ADC 量測濾波器的轉移函數並繪圖。</p></div>
+        <div class="tile"><h3>📈 校正與特性量測</h3><p>校正振幅與頻率；在示波器上量測頻寬、失真、輸出阻抗；發布一頁規格書風格的規格頁。物理內涵就在這裡。</p></div>
+        <div class="tile"><h3>🌐 多儀器系統</h3><p>用 MQTT 或 REST 串連多台裝置；用一個儀表板看遍整個實驗室；把同學的儀器當作用戶端。迷你版的系統工程。</p></div>
+        <div class="tile"><h3>🛠 韌體工藝</h3><p>穩健的狀態機、看門狗（watchdog）、重開機後仍保留的設定、OTA（over-the-air，即經由 WiFi）更新（ESP32）、開機自我測試。這就是展示品與產品的差別。</p></div>
+        <div class="tile"><h3>🎛 前面板與外殼細節</h3><p>以 PCB 製作前面板，附絲印標示、導光柱、OLED 狀態顯示，以及（選配）與手機 App 共用同一套 API 的觸控介面（LVGL）；一個看起來像買來的、而不是自己拼出來的外殼。</p></div>
+        <div class="tile"><h3>🎬 把成果展現出來</h3><p>一支介紹這塊板子的影片 · 一頁使用 AI 或 KiCad 的訣竅 · 一個精緻的網頁 · 一個能教會別人某件事的遊戲。把東西好好呈現本身就是一項技能。<strong>盡管做出很棒的東西。</strong></p></div>
+      </div>
+      <p class="callout">你自己實驗室的需求指向不同的想法？很好——寫進你的規格書。電路板本身不會改變。</p>
+    </section>
+
+    <section class="card">
+      <h2>展示——建議的流程</h2>
+      <p>成果發表與展示在 10月26–30日進行，每人約 15 分鐘。展示部分的建議流程：</p>
+      <ol>
+        <li>產生指定的波形（頻率＋振幅），並在示波器上展示。</li>
+        <li>用你選擇的介面（手機／網頁／Python／機器人）改變輸出。</li>
+        <li>對某路類比輸入設定警報門檻；展示繼電器動作與通知。</li>
+        <li>展示<strong>你負責的區塊</strong>：它的 App 面板與它能做的一件事——以及你的專題網站。</li>
+        <li>你在基準線之外做的任何東西——資料記錄器、LINE 警報、PID 區塊、Python 掃描、你實驗室需要的工具。</li>
+      </ol>
+      <p><strong>備援方案：</strong>韌體的模擬模式能在單獨的開發板上跑出 App 與每個面板——如果板子遲到或故障，就展示這個，完全不丟臉。</p>
+      <p><strong>影片：</strong>歡迎在成果發表中加入一支介紹你的 App 與電路板的影片（例如透過專案 1 的流程：Markdown → 投影片 → 網站 → YouTube）；這是選配，現場展示出狀況時就播放它。</p>
+    </section>
+
+    <section class="card">
+      <h2>製作計畫（與工作坊同步進行）</h2>
+      <p>專題在工作坊的幾週內同步進行，與你的研究並行——而不是課程結束後的第二份工作。每次工作階段（session）結束都要提交（commit：附一行說明、存下你修改的快照）並留下交接筆記；每一章都由 Claude 家教陪你走完。</p>
+      <div class="table-wrap">
+      <table>
+        <tr><th>時間（2026）</th><th>里程碑</th></tr>
+        <tr><td>9月11日（五）· 工作坊 1</td><td><strong>專案 1：</strong>一個你自選的網頁應用程式（模擬器或遊戲），用「AI 方法」打造並部署（deploy），附專案網站。<strong>專案 2：</strong>先讓參考韌體在你的 ESP32 上運作（硬體驗證基準線），再做你自己的手機 App，透過 WiFi 控制它並讀取量測值。每個專案各有自己的公開儲存庫，並放上<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">專案牆</a>。</td></tr>
+        <tr><td>9月14日當週 · 課間</td><td>改進你的專案 1 與專案 2 的 App，玩得開心。工作坊 2 之前：安裝 KiCad 10 並開啟一次；建立 JLCPCB 帳號。</td></tr>
+        <tr><td>9月18日（五）· 工作坊 2</td><td><strong>區塊分配完成。</strong>用我們的電路圖上電子學 101；KiCad 現場示範；<strong>專案 3a：</strong>補回你區塊被刪掉的零件；開始在你的區域佈線。</td></tr>
+        <tr><td>9月21日當週 · 課間，為了截止日<br><small>（9月25日（五）：國定假日）</small></td><td>完成佈線、設計規則檢查（DRC，KiCad 內建）全數通過、從 LCSC 抓一個零件。<strong>發出你的拉取請求</strong> · <strong>審查一位同學的</strong> · 修正自己的——在全班下單前合併。</td></tr>
+        <tr><td><strong>9月28日（一）下午 2 點</strong></td><td><strong>全班 PCB 訂單截止：</strong>授課教師合併五個區域，把 Gerber 檔送交 JLCPCB。硬性截止。</td></tr>
+        <tr><td>10月2日（五）· 工作坊 3</td><td>機械製造技術 101（參觀原分所的設施）；機械設計 101；在模擬模式下完成你區塊的驅動與 App 面板；<strong>專案 3b：</strong>用 Onshape（瀏覽器 CAD）或其他 CAD 軟體設計你的外殼。</td></tr>
+        <tr><td>10月5日當週 · 課間，為了截止日</td><td>驅動＋面板的拉取請求；輸出外殼檔案（3D 列印用的 STL 及／或雷射切割用的 DXF）。</td></tr>
+        <tr><td><strong>10月9日（五）下午 2 點</strong></td><td><strong>3D 列印／雷射切割設計檔截止。</strong>硬性截止。</td></tr>
+        <tr><td>約 10月16日（五）</td><td>領取列印好的外殼與組裝完成的 PCB；組裝你的 ESP32、PCB 與外殼；測試並精修你的韌體與 App。</td></tr>
+        <tr><td>10月26–30日</td><td><strong>成果發表與展示</strong>你的專題、App、網站與影片——每人約 15 分鐘。</td></tr>
+      </table>
+      </div>
+      <p>製造交期是硬性限制：PCB 製作、組裝與運送到台灣約需 <strong>2 週</strong>（板子約 10月16日回來），因此 <strong>9月28日（一）下午 2 點的全班訂單截止</strong>沒有商量餘地。外殼在所內列印與切割——設計檔須在 <strong>10月9日（五）下午 2 點</strong>前交出。</p>
+    </section>
+
+    <section class="card" id="day">
+      <h2>成果發表與展示（2026 年 10月26–30日）</h2>
+      <p>約在 10月16日（五）領取製作完成的 PCB 與外殼；組裝你的 ESP32、PCB 與外殼；測試並精修你的韌體與 App。然後在 10月26–30日那一週<strong>發表並展示你的專題</strong>——每人約 15 分鐘，<strong>以英文進行</strong>；鼓勵使用 AI 協助準備。</p>
+      <ul>
+        <li><strong>展示</strong>——依上方建議的流程：輸出一個波形，在示波器與儀器自己的輸入上看到它 · 用手機改變它 · 某路輸入的警報 → 繼電器 → 通知 · <strong>你負責的區塊</strong>：它的面板與它能做的一件事 · 你在基準線之外做的東西。</li>
+        <li><strong>發表</strong>——你做了什麼、為什麼做，哪些成功、你學到什麼；建立在共用硬體之上的軟體，正是你展現實力的地方。</li>
+        <li><strong>你的專案網站</strong>——每個專案一個，即各公開儲存庫的 GitHub Pages 網站：專案 1 與它的報告、你的手機 App，以及專案 3——你的儀器（板上區塊、韌體、外殼）放在<strong>同一個</strong>儲存庫的<strong>同一個</strong>網站上——還有（如果你願意）一支介紹你的 App 與電路板的<strong>影片</strong>。</li>
+      </ul>
+      <p>每個專案都在<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">班級專案牆</a>上——如何加入你的專案，見<a href="teams-zh.html">成果展頁面</a>。</p>
+    </section>
+
+    <section class="card">
+      <h2>專題構想庫</h2>
+      <p>本課程較早的版本曾提供十六個儀器專題的選單——流量連鎖保護、雷射光束快門、PID 控制器、鎖相放大器等等。
+        基於實務考量我們統一為單一平台，但這個構想庫仍值得一逛：它是<em>軟體方向</em>的寶庫
+        （許多可直接對應到這台儀器的輸入、繼電器與觸發），也是課程結束<em>之後</em>你可以打造什麼的靈感來源。
+        → <a href="project-archive-zh.html">瀏覽專題構想庫</a>。</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

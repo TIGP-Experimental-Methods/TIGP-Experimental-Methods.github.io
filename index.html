@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern Experimental Techniques – Physics | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Basic skills for experimentalists: AI, printed circuit boards, firmware and basic mechanical design<br>
+          <span class="brand-zh">現代實驗技術－物理 · TIGP, Academia Sinica · PHT048 / TIGP722300</span></p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a class="active" href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · PCBs</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Housing</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="index-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card hero">
+      <div style="flex: 2 1 420px;">
+        <h1>Build a real lab instrument in one month</h1>
+        <p>A hands-on short course for graduate students in experimental physics: three workshops, then a presentation and demonstration of your project.</p>
+        <ul>
+          <li><strong><a href="lecture1.html">Workshop 1: AI for experimentalists</a></strong> — how large language models work, the tools we use (VS Code, the Claude Code extension, git, free hosting), our "AI method" in 5 steps, and two projects: <strong>Project 1</strong>, a web app of your choice (a simulator or a game) deployed on the public web, and <strong>Project 2</strong>, a phone app that controls and measures from the ESP32 (a small WiFi microcontroller board, provided) over WiFi.</li>
+          <li><strong><a href="lecture2.html">Workshop 2: Designing printed circuit boards</a></strong> — a crash course in electronics, then <strong>Project 3a</strong>: turning our ESP32 into a real piece of lab equipment. Together we build the skeleton of the class board in KiCad (the free program we draw circuits and lay out boards in); everyone designs a different section, so as a team we produce a powerful instrument. The board is manufactured and assembled by JLCPCB.</li>
+          <li><strong><a href="lecture3.html">Workshop 3: Firmware and basic mechanical design (PCB housing)</a></strong> — a tour of the IAMS fabrication facilities, CAD basics, and <strong>Project 3b</strong>: a housing for your instrument (3D printing and/or laser cutting), while you continue building your app and firmware.</li>
+          <li><strong><a href="projects.html#day">Presentation and demonstration</a></strong> (26–30 October) — collect the assembled boards and housings, assemble, test, then present and demonstrate your project, app, website and, if you like, a video.</li>
+        </ul>
+        <p>The class board plugs onto the ESP32-S3 dev board (a small computer-on-a-chip with WiFi, on a board with a USB-C connector and pins) and gives it what the dev board cannot do: 2 × ±10 V 16-bit waveform outputs, 8 × ±10 V 16-bit inputs, 4 relays, 2 isolated fast inputs, 8 TTL outputs (5 V logic-level signals) and 2 fast trigger outputs, a switchable TRIG,
+          a phone app, a Python API (a set of Python commands for driving the board from a PC) and an OLED (a small display) — all from one USB-C cable. Can you adapt it to solve a problem in your current research?</p>
+        <p>The message of the course: <em>effective use of AI is a superpower for an experimentalist — if you can specify what you want and verify what you get.</em> Never trust AI without testing and verifying.</p>
+        <p class="callout">Before the first class, complete the <a href="preparation.html">Preparation</a> steps. Bring your laptop, fully prepared; the ESP32 board is provided.</p>
+      </div>
+      <div class="facts">
+        <dl>
+          <dt>Course</dt><dd>Modern Experimental Techniques – Physics (2 credits)<br>現代實驗技術－物理（2 學分）</dd>
+          <dt>Codes</dt><dd>PHT048 · TIGP722300 · 222 D5400</dd>
+          <dt>Program</dt><dd><a href="https://tigp.iams.sinica.edu.tw/#course_schedule" target="_blank" rel="noopener">TIGP</a>, Institute of Atomic and Molecular Sciences, Academia Sinica</dd>
+          <dt>When</dt><dd>Fridays 14:20–16:20 (first class 11 Sep 2026)</dd>
+          <dt>Where</dt><dd>Room 311, IAMS, Academia Sinica<br>中研院原分所311室</dd>
+          <dt>Format</dt><dd>Workshop/tutorial style — you will need your laptop, fully prepared before each class</dd>
+          <dt>Language</dt><dd>English (Claude can translate to Mandarin)</dd>
+          <dt>Claude access</dt><dd>Access to Claude (Team standard) is provided to all enrolled students — invitation e-mail sent Sunday 6 September</dd>
+          <dt>Assessment</dt><dd>Based on the project: <strong>20 %</strong> hardware demonstration · <strong>30 %</strong> app/software demonstration · <strong>30 %</strong> presentation · <strong>20 %</strong> project website</dd>
+          <dt>Instructor</dt><dd>Shayne Bennetts (IAMS)<br><a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a></dd>
+          <dt>Bring</dt><dd>Laptop (Windows / macOS / Linux) with the <a href="preparation.html">preparation</a> done, and a USB-C cable for the ESP32 (the instructor has spares)</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Course objective</h2>
+      <p>Teach the key skills needed in every modern experimental physics lab.</p>
+      <div class="grid">
+        <div class="tile"><h3>Intelligence</h3><p>Software and AI: an AI coding agent that plans, writes, tests and deploys the programs you specify — and how to work with it reliably.</p></div>
+        <div class="tile"><h3>Electronics</h3><p>Electronics is how we interface intelligence with the real world: a printed circuit board that gives a microcontroller precise inputs, outputs and switching.</p></div>
+        <div class="tile"><h3>Mechanics</h3><p>Creating physical hardware — CAD, 3D printing and laser cutting — so the board becomes an instrument you can put on a bench.</p></div>
+      </div>
+      <p>We are not teaching how AI works or electronic/mechanical engineering (that takes years). We aim to give you a crash course in using the tools you need to get started with your own projects.</p>
+    </section>
+
+    <section class="card">
+      <h2>Schedule</h2>
+      <div class="table-wrap">
+      <table>
+        <tr><th>Date</th><th>Session</th><th>What happens</th><th>Deliverable</th></tr>
+        <tr><td>before 11 Sep</td><td><a href="preparation.html">Preparation</a> (at home)</td>
+          <td>Laptop ready: VS Code, the Claude Code extension signed in, a course folder opened in VS Code, then Claude installs the rest from <code>SETUP.md</code>; a free Cloudflare account connected to GitHub.</td>
+          <td>—</td></tr>
+        <tr><td>Fri 11 Sep</td><td><a href="lecture1.html"><strong>Workshop 1: AI for experimentalists</strong></a><br><small>14:20–16:20 · Room 311</small></td>
+          <td>Introduction to AI and the tools we use; our "AI method" in 5 steps. Project 1: build a web app (a simulator or a game) and deploy it. Project 2: control a microcontroller over the net with your phone.</td>
+          <td>Project 1: a deployed web app, its report and its project website. Project 2: the reference firmware running on your ESP32, then your own phone app. Before the next workshop: complete the preparation, improve your apps, build and have fun — KiCad 10 installed, a JLCPCB account created.</td></tr>
+        <tr><td>Fri 18 Sep</td><td><a href="lecture2.html"><strong>Workshop 2: Designing printed circuit boards</strong></a><br><small>14:20–16:20 · Room 311</small></td>
+          <td>Electronics 101; PCB design with KiCad, automated production and assembly. Project 3a: turning our ESP32 into a real piece of lab equipment — the class board, one section per student.</td>
+          <td>Your section of the class board in KiCad, in the class order.</td></tr>
+        <tr><td>Fri 25 Sep</td><td>Public holiday</td>
+          <td>No class.</td>
+          <td>—</td></tr>
+        <tr><td><strong>Mon 28 Sep, 2 pm</strong></td><td><strong>Cutoff for the class PCB order</strong></td>
+          <td>The final Gerber files (manufacturing files) go to JLCPCB. A hard cutoff: a late section cannot be on the board.</td>
+          <td>Your section merged before the cutoff.</td></tr>
+        <tr><td>Fri 2 Oct</td><td><a href="lecture3.html"><strong>Workshop 3: Firmware and basic mechanical design (PCB housing)</strong></a><br><small>14:20–16:20 · Room 311</small></td>
+          <td>Mechanical fabrication techniques 101 (tour of the IAMS facilities); mechanical design 101 (CAD basics). Project 3b: a housing for your instrument. Continue building your app, firmware, website and videos.</td>
+          <td>Housing files; app/firmware continued.</td></tr>
+        <tr><td><strong>Fri 9 Oct, 2 pm</strong></td><td><strong>Cutoff for design files for 3D printing / laser cutting</strong></td>
+          <td>Housing files in for manufacturing. A hard cutoff.</td>
+          <td>Your housing files submitted.</td></tr>
+        <tr><td>~Fri 16 Oct</td><td>Collect printed enclosures and assembled PCBs</td>
+          <td>Assemble your ESP32, PCB and housing; test and refine your firmware and app.</td>
+          <td>—</td></tr>
+        <tr><td>26–30 Oct</td><td><a href="projects.html#day"><strong>Project presentations / demonstrations</strong></a></td>
+          <td>Present and demonstrate your project, app, website and video — about 15 minutes each.</td>
+          <td>The presentation and demonstration.</td></tr>
+      </table>
+      </div>
+      <p class="callout warn"><strong>Two hard cutoffs:</strong> the class PCB order on <strong>Monday 28 September, 2 pm</strong> (JLCPCB manufactures and assembles the boards; they come back about two weeks later) and the housing files on <strong>Friday 9 October, 2 pm</strong>. Friday 25 September is a public holiday (no class).</p>
+    </section>
+
+    <section class="card">
+      <h2>How the course works</h2>
+      <div class="grid">
+        <div class="tile"><h3>One project, three workshops</h3><p>The workshops are not separate topics — they are the three skills needed to build one device: the <a href="projects.html">class instrument</a>. Your web app, your phone app, your section of the board and your housing all end up in your project.</p></div>
+        <div class="tile"><h3>Workshop, not seminar</h3><p>Each workshop is a short introduction followed by building, with a Claude tutor (<code>/tutor</code> in Claude Code) at your side, in English or Mandarin. Theory appears when it unblocks a decision — ask the tutor to explain an idea, and let it ask you questions back.</p></div>
+        <div class="tile"><h3>The "AI method" in 5 steps</h3><p><strong>Vision → Specification/Plan → Review → Code → Test/Debug/Verify</strong>, then iterate: the first plan is never the last plan. We use <strong>VS Code + the Claude Code extension</strong>, with git as the safety net. Never trust AI without testing and verifying.</p></div>
+        <div class="tile"><h3>Do each step once, for real</h3><p>Deploy a real app, design a real section of a real board, draw a real housing — and your section goes into a professionally assembled board you demonstrate in its housing. Be creative.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>What you will have built by the end</h2>
+      <ul>
+        <li>A <strong>deployed web app</strong> — a simulator or a game — with its report explaining the concept.</li>
+        <li>A <strong>phone app controlling your ESP32</strong> over WiFi.</li>
+        <li><strong>Your section of the class board</strong>, designed in KiCad and manufactured.</li>
+        <li>A <strong>housing</strong> for the instrument, 3D-printed and/or laser-cut.</li>
+        <li>The <strong>presentation and demonstration</strong> of your project, its website — and, optionally, a video describing your app and board.</li>
+      </ul>
+      <p>Each project lives in its own public GitHub repository under your account and has its own <strong>project website</strong> (GitHub Pages: what it is, how it works, a picture or video of it working, what was verified, links to the app and the code). All of them appear on the <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">class project wall</a> — on the projector in class, refreshing itself every minute, so everyone sees each other's projects appear. See <a href="teams.html">Showcase</a>.</p>
+      <p>The hardware is the shared baseline. The software, firmware and app are open — a data logger, a LINE alert, a PID block, a Python sweep, the tool your lab needs. That is where you show what you can do. <strong>Talk to your instrument from LINE or Telegram</strong> — the extension we most encourage: push notifications when a value drifts or an alarm fires, and bot commands that read a value or switch a relay from your phone, from anywhere. <strong>Just build something great.</strong></p>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>Contact</h2>
+      <p>Shayne Bennetts 肖恩 — <a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a><br>
+        Institute of Atomic and Molecular Sciences, Academia Sinica. Group website: <a href="https://iamsquantum.github.io/new/index.html" target="_blank" rel="noopener">IAMS Quantum</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div>
+        <p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p>
+        <p>No. 1, Roosevelt Rd. Sec. 4, Taipei 10617, Taiwan</p>
+      </div>
+      <p><a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener">github.com/TIGP-Experimental-Methods</a></p>
+    </div>
+  </footer>
+</body>
+</html>

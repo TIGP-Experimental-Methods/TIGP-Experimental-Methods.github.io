@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preparation | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Preparation — do this before Workshop 1 (workbook ch. 0)</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a class="active" href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · PCBs</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Housing</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="preparation-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Before Workshop 1 (AI for experimentalists) — workbook chapter 0</h1>
+      <p>Workshop 1 is hands-on from the start. After a short introduction to AI and the tools we use, you build two things with Claude Code in VS Code: <strong>Project 1</strong>, a web app you choose — a simulator or a game — deployed (published so it is live) on the public web; and <strong>Project 2</strong>, a phone app that controls and measures from your ESP32 (the small WiFi microcontroller board, provided) over WiFi. So the tools and accounts must already work on your laptop.
+        This list is short, and Claude does most of it for you. Every step below has a
+        <span class="check">✔ check</span> that tells you it worked. If you are stuck on any setup problem, ask for help: from step 5 on, ask Claude Code to diagnose the error first;
+        if that does not fix it, note the error message and email it to the instructor (<a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a>).</p>
+      <p class="callout">Tip: only steps 1–4 are done by hand. From step 5 on, Claude Code does the installing while you watch and approve; the Cloudflare account (step 7)
+        is the only other thing it cannot do for you. That is not cheating — it is the point of the course.</p>
+
+      <ol class="steps">
+        <li>
+          <h3>A laptop you can install software on, and a USB-C cable</h3>
+          <p>Windows 10/11, macOS or Linux. You need administrator rights and at least <strong>10 GB of free disk space</strong>. The ESP32 dev board (the small board carrying the microcontroller) is provided; its connector is <strong>USB-C</strong>.
+            <strong>Bring a USB-C data cable that fits your laptop</strong> — USB-C to USB-C, or USB-A to USB-C; charging-only cables do not carry data. The instructor has spares.</p>
+          <p><span class="check">✔ check:</span> You can install a program on this laptop without asking anyone, 10 GB are free, and the cable is in your bag.</p>
+        </li>
+
+        <li>
+          <h3>Install Visual Studio Code</h3>
+          <p>Download from <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a> and install with default options
+            (on Windows, tick "Add to PATH" and "Open with Code" when offered).</p>
+          <p><span class="check">✔ check:</span> VS Code opens. In the menu <em>Help → About</em> shows a version number.</p>
+        </li>
+
+        <li>
+          <h3>Install the Claude Code extension and sign in</h3>
+          <p>In VS Code press <code>Ctrl+Shift+X</code> (macOS <code>Cmd+Shift+X</code>), search for <strong>Claude Code</strong> (publisher: Anthropic) and click Install —
+            or install from the <a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code" target="_blank" rel="noopener">marketplace page</a>.
+            Documentation: <a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">Claude Code in VS Code</a>.</p>
+          <p>Access to Claude (Team standard) is provided to all enrolled students: the invitation to the course's <strong>Claude organization</strong> was e-mailed on Sunday 6 September. Accept it and sign in with that account
+            when the extension asks. (If the invitation has not arrived, install the extension now, sign in later, and tell the instructor.) In class, Claude Code is also your tutor:
+            <code>/tutor L1</code> in the class repository walks you through the workbook chapter, in English or Mandarin.</p>
+          <p><span class="check">✔ check:</span> A Claude icon appears in the VS Code side bar; after signing in you can type "hello" and get an answer.</p>
+        </li>
+
+        <li>
+          <h3>Create a local course folder and open it in VS Code</h3>
+          <p>Make an empty folder, for example <code>tigp-2026</code> in your home directory. Not inside a OneDrive, Google Drive or Dropbox sync folder (sync clients fight with git, the tool that records the history of a folder of files),
+            and with no spaces anywhere in the path (some toolchains — the compiler and helper programs that build the firmware — choke on them). In VS Code choose <em>File → Open Folder…</em> and pick it.</p>
+          <p><span class="check">✔ check:</span> The folder name shows at the top of the VS Code Explorer, and <em>Terminal → New Terminal</em> opens a terminal (the text window where you type commands) in that folder.</p>
+        </li>
+
+        <li>
+          <h3>Let Claude prepare the rest</h3>
+          <p>Open Claude Code in that folder (the Claude icon in the side bar) and paste:</p>
+          <pre><code>Read https://raw.githubusercontent.com/TIGP-Experimental-Methods/class-board-2026/main/SETUP.md and follow it step by step. Ask me before installing anything, and tell me what each step is for in one sentence.</code></pre>
+          <p>Claude then installs git and sets your name and e-mail, Python via <code>uv</code> (a fast installer and package manager for Python), and the GitHub CLI (GitHub's command-line tool, <code>gh</code>; it will ask you to create a GitHub account if you have none, and to log in in the browser);
+            checks that you are a member of the class organization <a href="https://github.com/TIGP-Experimental-Methods" target="_blank" rel="noopener"><strong>TIGP-Experimental-Methods</strong></a>; clones (downloads a full copy of) the class repository (the shared project folder whose complete history git keeps; it also lives online on GitHub) <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026" target="_blank" rel="noopener"><strong>class-board-2026</strong></a> into the folder;
+            installs PlatformIO (the tool that builds and flashes the firmware — the program that runs on the microcontroller) and builds the firmware once so the toolchain is downloaded; and prints a <strong>"toolchain OK"</strong> report. It asks before every install.
+            The instructions it follows are in <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/SETUP.md" target="_blank" rel="noopener">SETUP.md</a> — plain text, read them yourself if you are curious.</p>
+          <p><span class="check">✔ check:</span> Claude's report says <strong>toolchain OK</strong>. If it fails: ask Claude to diagnose it first; if that does not fix it, e-mail the report to the instructor (<a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a>).</p>
+        </li>
+
+        <li>
+          <h3>What Claude set up (check it yourself if you like)</h3>
+          <p>Step 5 is the same list you would otherwise work through by hand; the exact commands are in <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/SETUP.md" target="_blank" rel="noopener">SETUP.md</a>. The repository <strong>class-board-2026</strong> holds the shared course work:
+            <code>firmware/</code>, <code>host/</code> (the reference phone app + <code>instrument.py</code>), <code>hardware/</code> (KiCad), <code>workbook/</code>, <code>tutor/</code>, and your own folder <code>docs/students/&lt;name&gt;/</code>.
+            You work on branches (separate lines of work, so several people can change things without treading on each other) and open pull requests (a request to merge your branch into the shared project; someone reviews it first); <code>main</code> (the main branch, the version everyone builds on) is protected and the instructor merges. Your Project 1 and Project 2 each live in their own folder and their own <strong>public</strong> GitHub repository under your personal account, each with a project website on GitHub Pages; the tutor checks this and prompts you to push at every milestone. In a terminal (VS Code <em>Terminal → New Terminal</em>):</p>
+          <ul>
+            <li><span class="check">✔</span> <code>git --version</code> prints a version, and <code>git config --global user.email</code> prints the e-mail of your GitHub account — they must match, or GitHub will not credit your commits (saved snapshots of your changes).</li>
+            <li><span class="check">✔</span> <code>uv --version</code> prints a version.</li>
+            <li><span class="check">✔</span> <code>gh auth status</code> says you are logged in.</li>
+            <li><span class="check">✔</span> The folder <code>class-board-2026</code> exists inside your course folder, and <code>git status</code> in it says <code>On branch main</code>.</li>
+            <li><span class="check">✔</span> <code>pio run -e esp32s3-sim</code> in that folder ends with <code>SUCCESS</code>.</li>
+          </ul>
+          <p>Two things that are easy to miss: organization membership needs an invitation from the instructor — if Claude reports that you are not a member yet, send your GitHub username to the instructor
+            and rerun the check later. And the first <code>pio run</code> downloads the ESP32 toolchain (several hundred MB); it must finish <em>before</em> Workshop 1, when the classroom network is shared by everyone.</p>
+        </li>
+
+        <li>
+          <h3>Create a free Cloudflare account and connect it to GitHub</h3>
+          <p>This one you do by hand — Claude can tell you where to click but cannot sign up for you. In Workshop 1 you deploy your projects to the public web, and <strong>you may need both hosts — have both accounts ready</strong>: a static page (the project website; an app that runs entirely in the browser) goes on GitHub Pages (a free service that turns a public repository into a public web page — your GitHub account is enough); anything with a backend, a bot webhook or a secret (a LINE or Telegram bot, an API key, a scheduled task) goes on <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages + Workers</a> (free tier; runs server-side code).
+            Sign up at <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener">dash.cloudflare.com/sign-up</a> (free plan; verify the email). Then, once, connect GitHub: in the dashboard go to
+            <em>Workers &amp; Pages → Create → Pages → Connect to Git</em>, authorise Cloudflare for your GitHub account, and stop there — you create the project itself in class.</p>
+          <p><span class="check">✔ check:</span> Signed in to the Cloudflare dashboard; the "Connect to Git" screen lists your GitHub account. (If Cloudflare sign-up fails, Workshop 1 can start on GitHub Pages alone — nothing else to install — but sort the account out before you build anything with a backend.)</p>
+        </li>
+
+        <li>
+          <h3>Think about what you want to make!</h3>
+          <p><strong>Project 1</strong> is a web app of your choice — a simulator or a game. Suggestions: loading a freight train game · an inverted pendulum simulator · phase-locking coupled pendula · unfair golf · billiards · a calculator or simulator for something from your research. <strong>Project 2</strong> is a phone app that controls and measures from your ESP32 over WiFi — for example the brightness and colour of its LED first, then a measurement shown live on the phone. For anyone who wants to try a camera app, one <a href="https://jin-hua.com.tw/page/product/show.aspx?num=41395&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">ESP32-S3-N16R8-CAM 開發板 + OV3660 鏡頭</a> (Jinhua #41395) is available.</p>
+          <p>The class board — the instrument everyone builds in <a href="projects.html">Projects 3a and 3b</a> — is one board in five sections, one section per student; your section is assigned at the start of Workshop 2, so there is nothing to choose beforehand. Do come with a problem from your own lab, though: what would you monitor, trigger, switch or automate with such an instrument?</p>
+          <p><span class="check">✔ check:</span> You can say in one sentence what your Project 1 will be, and name one thing in your own lab you would control or measure with your phone.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>Needed at Workshop 2 (Designing printed circuit boards) — between the workshops</h1>
+      <p>Before the next workshop: complete the preparation, improve your apps, build and have fun. The preparation — two things that must be ready before Workshop 2:</p>
+      <ol class="steps">
+        <li>
+          <h3>Install KiCad 10 and open it once</h3>
+          <p>KiCad is the free program we draw the schematic (circuit drawing) and lay out the printed circuit board in; it must be running on your laptop at Workshop 2. Download the current stable release (version 10) from <a href="https://www.kicad.org/download/" target="_blank" rel="noopener">kicad.org/download</a>. Install with the default libraries.
+            Start it once so it finishes configuring the symbol and footprint libraries (a symbol is a part's drawing in the schematic; a footprint is the copper pattern it is soldered onto). Then open the class project, <code>class-board.kicad_pro</code> in <code>hardware/</code> of the class repository — the project library is already there, nothing to unzip.</p>
+          <p><span class="check">✔ check:</span> KiCad opens; <em>File → New Project</em> works and you can open the Schematic Editor; the class project opens without missing-library warnings.</p>
+        </li>
+        <li>
+          <h3>Create a JLCPCB account</h3>
+          <p><a href="https://jlcpcb.com/" target="_blank" rel="noopener">JLCPCB</a> manufactures and assembles the class board, and its own <a href="https://jlcpcb.com/parts" target="_blank" rel="noopener">parts library</a> is where our parts come from (the part numbers look like C12345). One free account is all you need; no LCSC account. No payment needed now.</p>
+          <p><span class="check">✔ check:</span> You can log in to both sites.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h1>Before Workshop 3 (Firmware and basic mechanical design)</h1>
+      <ol class="steps">
+        <li>
+          <h3>Create an Onshape account — or have another CAD program ready</h3>
+          <p>Project 3b is a housing for your instrument, drawn in <a href="https://www.onshape.com/en/education/" target="_blank" rel="noopener">Onshape</a> (free education plan, runs in the browser, no installation, works on any laptop) or in your favourite CAD program.
+            For Onshape, sign up with your university email under the <em>Education</em> plan. In Workshop 3 you can copy the instructor's housing template — it already contains the board STEP (3D CAD exchange file) and the front-panel cutouts — into your account and make it yours, or draw your own from scratch; you export an STL (the 3D-print file) and/or a DXF (the laser-cutting drawing).</p>
+          <p><span class="check">✔ check:</span> You can create a new document and sketch a rectangle.</p>
+        </li>
+        <li>
+          <h3>Optional: install a slicer</h3>
+          <p>The institute prints and cuts the housings, so a slicer is not required. If you want to preview how your STL will print, install <a href="https://bambulab.com/en/download/studio" target="_blank" rel="noopener">Bambu Studio</a> (the course 3D printers are Bambu).</p>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div>
+        <p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p>
+      </div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>
