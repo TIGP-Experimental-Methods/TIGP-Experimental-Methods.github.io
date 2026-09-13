@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>成果展｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>
+    .wall-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 16px 0 4px; }
+    .wall-btn {
+      display: inline-block; font-weight: 700; font-size: 1.05em; text-decoration: none;
+      padding: 12px 22px; border-radius: 999px;
+      background: var(--accent); color: #fff; border: 2px solid var(--accent);
+    }
+    .wall-btn:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+    .wall-btn.secondary { background: #f2f7fa; color: var(--accent-ink); border-color: var(--line); }
+    .wall-btn.secondary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .wall-frame { width: 100%; height: 900px; border: 1px solid var(--line); border-radius: 12px; background: #fff; display: block; }
+    .wall-note { color: var(--muted); font-size: 0.9em; margin-top: 8px; }
+  </style>
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">成果展——班級專案牆：每一個專案、它的網站與它的程式碼</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a class="active" href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="teams.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>班級專案牆</h1>
+      <p>一個頁面，放著全班每一個專案，以卡片呈現：一張圖片、標題、學生、一行簡介，以及連到專案網站與儲存庫（repository：保存完整歷史的專案資料夾，放在 GitHub 上）的連結。專案牆<strong>每分鐘自動更新</strong>，上課時投影在螢幕上——所以大家都看得到彼此的專案陸續出現，互相借用點子、開始交談。</p>
+      <p>專案牆就是儲存庫 <a href="https://github.com/TIGP-Experimental-Methods/showcase-2026" target="_blank" rel="noopener">TIGP-Experimental-Methods/showcase-2026</a>，以 GitHub Pages 發布；<strong>每位學生都能推送（push）到它</strong>。</p>
+      <h3>如何加入你的專案</h3>
+      <ol>
+        <li>完成一個專案：你帳號下自己的公開 GitHub 儲存庫，它的<strong>專案網站</strong>已上線（該儲存庫的 GitHub Pages，網址 <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code>——標題、它是什麼、為什麼有趣、如何運作、一張它運作中的照片、GIF 或短片、驗證了什麼、連到線上 App 與儲存庫的連結）。</li>
+        <li>專案結束時，家教替你加上條目——<strong>一個 JSON 檔加一張圖片</strong>——格式依專案牆儲存庫的 <a href="https://github.com/TIGP-Experimental-Methods/showcase-2026#readme" target="_blank" rel="noopener">README</a> 說明。</li>
+        <li>由你推送。一分鐘內你的卡片就會出現在專案牆上——也出現在投影機上。</li>
+      </ol>
+      <p>每個專案一張卡片：專案 1（網頁應用程式）、專案 2（ESP32 的手機 App），以及<strong>專案 3——你的儀器：板上區塊、韌體、外殼</strong>——整個專案 3 只有一張卡片、一個儲存庫、一個專案網站（KiCad 設計檔留在班級儲存庫；你的儲存庫呈現這件作品——照片、渲染圖或影片、它做什麼、量到了什麼——並連到你的拉取請求）。</p>
+      <div class="wall-actions">
+        <a class="wall-btn" href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">開啟即時專案牆 ↗</a>
+        <a class="wall-btn secondary" href="https://github.com/TIGP-Experimental-Methods/showcase-2026" target="_blank" rel="noopener">專案牆儲存庫與 README</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>即時畫面</h2>
+      <iframe class="wall-frame" src="https://tigp-experimental-methods.github.io/showcase-2026/" title="班級專案牆（即時）" loading="lazy"></iframe>
+      <p class="wall-note">上方是即時顯示的專案牆。若無法在此載入，請<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">在新分頁開啟</a>。</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

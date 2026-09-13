@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>專題構想庫｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">專題構想庫——用本課程的方法就能打造的儀器</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · 電子</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與機械</a></li>
+      <li><a class="active" href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="project-archive.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>專題構想庫</h1>
+      <p>本課程的總整專題現在是<a href="projects-zh.html">一台標準化的儀器</a>，但這十六個經過審核的專題構想，
+        仍然是「開發板＋客製載板（carrier）＋AI 軟體」這套方法幾週內能做出什麼的絕佳目錄。瀏覽它們，可以為你的儀器找到<strong>軟體方向</strong>
+        （警報、儀表板、控制迴路、特性量測方法），也可以為課程結束後在自己實驗室要打造的<em>下一個</em>東西找靈感——
+        如果你有充分的理由想改做其中一個，也可以找講師談。</p>
+      <p>分級代表的是風險，不是優劣：A＝低風險，C＝有企圖心。所有專題共用同一套架構：感測器／致動器 ↔ 客製載板 ↔ 開發板 ↔ Python 主機 ↔ 網頁／機器人，裝在自製的機殼裡。</p>
+    </section>
+
+    <section class="card">
+      <h2>A 級——低風險、高完成度潛力</h2>
+      <div class="grid">
+        <div class="tile"><span class="tag a">A 級</span><h3>冷卻水流量監測與連鎖保護</h3><p>霍爾效應流量感測器＋ESP32；具故障安全設計的繼電器／光耦連鎖輸出；即時繪圖；在磁鐵燒壞之前發出機器人警報。用水桶和碼表校正。</p></div>
+        <div class="tile"><span class="tag a">A 級</span><h3>雷射光束快門</h3><p>伺服馬達或步進馬達驅動的葉片，裝在光學桌固定座上；TTL（BNC）＋序列埠控制；用光電二極體量測開關時間與抖動（jitter）。市售品要價 $500 以上。</p></div>
+        <div class="tile"><span class="tag a">A 級</span><h3>實驗室環境記錄器</h3><p>透過 WiFi 連線的溫度／濕度／氣壓節點；資料庫＋網頁儀表板；漂移警報；把你的雷射漂移和室溫做關聯分析。</p></div>
+        <div class="tile"><span class="tag a">A 級</span><h3>IP 控制的繼電器與警報節點</h3><p>ESP32 搭配隔離輸入與低電壓繼電器輸出，可由網頁／機器人／MQTT 控制；故障安全的預設值、看門狗、身分驗證、事件記錄。</p></div>
+        <div class="tile"><span class="tag a">A 級</span><h3>通用實驗室放大器</h3><p>BNC 輸入／輸出的電壓放大器或儀表放大器，具可切換增益、輸入保護、50 Ω 驅動能力、偏移微調。最理想的第一塊 PCB；量測它的頻寬與雜訊。</p></div>
+      </div>
+
+      <h2>B 級——真材實料的類比、運動或混合訊號內容</h2>
+      <div class="grid">
+        <div class="tile"><span class="tag b">B 級</span><h3>可變增益 TIA 光偵測器</h3><p>光電二極體＋轉阻放大器（TIA），2–3 段增益、頻寬限制、板載 ADC 串流、有屏蔽的機殼。佈局品質在這裡真的有差。</p></div>
+        <div class="tile"><span class="tag b">B 級</span><h3>PID 溫度控制器</h3><p>熱敏電阻電橋＋MOSFET 加熱器或 H 橋 TEC 驅動器；含抗積分飽和（anti-windup）的數位 PID；以 AI 協助、從記錄下來的步階響應調整參數；過夜 mK 等級穩定度圖。</p></div>
+        <div class="tile"><span class="tag b">B 級</span><h3>電動濾光片輪／旋轉座</h3><p>步進馬達＋光學定位索引；歸零（homing）與定位點；為 Ø25 mm 光學元件 3D 列印的輪盤——真正的公差設計；用雷射量測重現性。</p></div>
+        <div class="tile"><span class="tag b">B 級</span><h3>任意波形產生器＋BNC 子板</h3><p>Teensy 或 ESP32-S3＋外接 DAC → 緩衝後的 BNC 輸出；由 Python 上傳波形表；透過 ESP32 提供的網頁用手機控制。<em>已併入全班統一儀器（AWG／DAC 那一半）。</em></p></div>
+        <div class="tile"><span class="tag b">B 級</span><h3>精密 ADC/DAC 前端</h3><p>16–24 位元轉換器、精密參考電壓、抗混疊濾波器、BNC 輸入輸出——量測得出來比任何微控制器內建的都好；實測 ENOB。多個其他專題共用的硬體。</p></div>
+        <div class="tile"><span class="tag b">B 級</span><h3>數位控制的放大器／濾波器</h3><p>由 ESP32 設定增益與截止頻率（數位電位器、PGA 或切換電容濾波器）——用手機就能調整；掃描各種設定並繪出實測的轉移函數。</p></div>
+        <div class="tile"><span class="tag b">B 級</span><h3>有真正時基的 DDS 函數波形產生器</h3><p>由 MCU 驅動 AD9833 等級的 DDS，可達 12 MHz；用 TCXO 或 OCXO 升級時脈，並加上外部 10 MHz 參考輸入；量測改善幅度（拍頻、艾倫方差 (Allan deviation)）。<em>已併入全班統一儀器（DDS 那一半）。</em></p></div>
+        <div class="tile"><span class="tag b">B 級</span><h3>數位濾波器盒</h3><p>ADC → Teensy 上的 FIR/IIR／陷波濾波器 → DAC；係數用 Python（scipy.signal）設計；量測延遲與響應，並與設計值比較。</p></div>
+      </div>
+
+      <h2>C 級——有企圖心</h2>
+      <div class="grid">
+        <div class="tile"><span class="tag c">C 級</span><h3>數位 PID「迷你鎖箱」</h3><p>類比誤差訊號輸入 → Teensy 上的高速 PID → 壓電／電流輸出；10–50 kHz 迴路；含示波器畫面的 GUI；最低展示是鎖定一個模擬的受控體，鎖定真實雷射則是進階目標。</p></div>
+        <div class="tile"><span class="tag c">C 級</span><h3>鎖相放大器（數位式）</h3><p>產生參考訊號、取樣訊號、解調為 X/Y（R/θ），串流到主機 GUI 並提供時間常數控制。最低展示：在室內光線下還原 1 kHz 調變的 LED 訊號。整份清單中每顆元件能換到最多物理的專題。</p></div>
+        <div class="tile"><span class="tag c">C 級</span><h3>多通道實驗室連鎖保護與狀態中樞</h3><p>把門禁／流量／溫度／市電正常等訊號整合到一個壁掛盒，含繼電器、狀態面板、事件記錄、網頁與機器人；看門狗設計；逐級通報機制為進階目標。</p></div>
+      </div>
+
+      <p>基於正當理由被剔除的項目（好奇可以問）：任何切換市電的裝置、機械手臂／龍門架、波長計／光譜儀、高壓壓電驅動器。</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>

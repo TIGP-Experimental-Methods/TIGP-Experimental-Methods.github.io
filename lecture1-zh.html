@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>工作坊 1：實驗物理學家的 AI｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">工作坊 1 — 實驗物理學家的 AI · 2026年9月11日（五）· 14:20–16:20 · 中研院原分所 311 室（R311）</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a class="active" href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="teams-zh.html">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="lecture1.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>工作坊 1 — 實驗物理學家的 AI</h1>
+      <p><strong>目標。</strong>今天結束時，你會知道如何用 AI 幫你做出我們實驗室用它做的那些東西：網站、影片與教學、PCB 設計、資料擷取與擬合、雷射鎖頻、硬體控制、軟體。你用一個 AI 程式代理（coding agent）來做——<strong>VS Code 裡的 Claude Code</strong>，直接在你的檔案上工作：它讀檔、寫程式、執行指令並回報——而你學會的是讓它的產出值得信賴的方法。</p>
+      <p><strong>大綱。</strong>設備與課前準備檢查 → AI 與我們使用的工具簡介 → 我們的「AI 方法」五步驟 → <strong>專案 1：做一個網頁應用程式（模擬器或遊戲）</strong> → <strong>專案 2：用手機透過網路控制微控制器</strong>。</p>
+      <p class="callout"><strong>先想好你要做什麼！</strong>專案 1 的建議：貨運列車裝載遊戲 · 倒立擺模擬器 · 耦合擺的相位鎖定 · 不公平的高爾夫 · 撞球 · 一個跟你自己研究有關的計算器或模擬器。</p>
+      <p>先修條件：<a href="preparation-zh.html">課前準備</a>已完成——VS Code 裝好 Claude Code 擴充功能（extension）並登入、一個課程資料夾、已下載班級儲存庫（repository）、一個已連上 GitHub 的免費 Cloudflare 帳號。請帶筆電與一條 USB-C 線（授課教師有備用）；ESP32 開發板（dev board）由課堂提供。</p>
+    </section>
+
+    <section class="card">
+      <h2>1 · 設備與課前準備檢查</h2>
+      <p>每個人的筆電都準備好了、Claude 可以正常使用、家教儲存庫也已下載：班級儲存庫 <code>class-board-2026</code>（儲存庫是一個專案資料夾，其完整歷史由 git——版本紀錄工具——保存；在 GitHub 上它也有線上版）已在你的筆電上，並能在 VS Code 中開啟。在其中開啟 Claude Code，輸入 <code>/tutor L1</code>：Claude 家教（tutor）會用英文或中文向你打招呼，並和你一起檢查設定。若有任何缺漏，現在就和家教一起修好——今天接下來的一切都建立在這上面。檢查涵蓋兩個部署帳號：已登入 GitHub，以及一個已連上 GitHub 的 Cloudflare 帳號——今天你可能兩個都需要。</p>
+      <p><strong>機械性的工作由家教來做，由你批准</strong>——建立專案資料夾與儲存庫、開啟 GitHub Pages、專案牆條目、機密檢查。屬於學習的部分由你來做：寫願景、審閱計畫、指定測試、回報你看到什麼，並在 Source Control 按下 <em>Commit</em>／<em>Sync Changes</em>。<strong>課堂上授課教師不是服務台；家教才是</strong>——只有家教也解決不了時，才去找授課教師。</p>
+    </section>
+
+    <section class="card">
+      <h2>2 · AI 與我們使用的工具簡介</h2>
+      <p>一段簡短的入門，見<a href="slides/W1-AI-for-experimentalists.pdf" target="_blank" rel="noopener">投影片（PDF）</a>。各主題與各自的經驗法則：</p>
+      <ul>
+        <li><strong>大型語言模型如何運作。</strong>文字變成權杖（token），權杖變成數字；一個操作不斷重複——預測下一個權杖。取樣是刻意隨機的：<em>流暢不等於正確。</em>訓練把權重擬合一次；推論只是執行它們——<em>模型不會從你的對話中學習</em>（除非你的資料被拿去訓練，所以機密與未發表的結果不要放進去）。</li>
+        <li><strong>注意力與情境。</strong>為了預測下一個詞，模型會回頭看每一個先前的詞。每則訊息都會把整段對話重新送出，所以聊得越長，每則訊息就越慢也越貴；不變的開頭會被快取（cache）——<em>穩定的指示與文件放前面，多變的文字放最後。</em><em>把情境保持精簡：一個工作階段（session）一個主題。</em></li>
+        <li><strong>情境腐化（context rot）。</strong>直接丟進去的一份 PDF 或一張圖片，是非常昂貴的前綴：每一輪都重送，而且大多是雜訊。<em>改用 Markdown</em>（帶有輕量格式的純文字）：<em>讓另一個工作階段讀每個檔案並寫出詳細的文字摘要；之後從那份摘要出發工作。</em></li>
+        <li><strong>模型。</strong>Haiku、Sonnet、Opus 與 Fable 是同一個概念的不同規模，每個權杖的成本大約是 1 : 3 : 5 : 10。<em>強的模型負責規劃與檢查；便宜的模型負責做事</em>——在各自擁有全新情境的子代理（subagent）中平行進行。中國的開源模型比較便宜但比較弱，而且有資安風險；不允許使用。</li>
+        <li><strong>審查。</strong><em>絕不讓作者為自己的作品打分數。</em>由一個觀點不同的獨立審查者來看——一個沒看過這份工作的全新 Claude 工作階段；測試在動工前就依計畫寫好；反覆循環，而不是寄望運氣。</li>
+        <li><strong>長期專案。</strong>文件、交接與全新的工作階段：新的工作階段讀 <code>CLAUDE.md</code>、計畫與上一次的交接紀錄；情境視窗（context window）用到大約一半時，寫交接紀錄並提交（commit）；然後開一個全新的工作階段。<em>硬碟就是記憶。</em></li>
+        <li><strong><code>CLAUDE.md</code>、記憶、技能（skill）、MCP、鉤子（hook）、擴充功能</strong>——六個放置「代理應該知道的事」的地方，以及各自在情境視窗裡的成本。<em>凡是必須每次都發生的事，優先用鉤子。</em></li>
+        <li><strong>工作流程的必做事項。</strong>把所有需要的資料放進提示（prompt）裡 · 一個工作階段一個主題 · 先摘要檔案 · 便宜的工人、強的規劃者 · 獨立驗證。</li>
+        <li><strong>失敗模式。</strong>幻覺（hallucination）是這個過程的必然結果：看似合理，未經驗證；自信的語氣不等於有把握；罕見的事實、精確的數字與引用文獻，正是猜測露餡的地方。幻覺之外：它會編造細節、附和你、在看起來正確的結構裡犯小錯、漏掉需求，而錯誤會相乘（每步 95 %，20 步後只剩 36 %）。<em>原則：把 AI 用在「檢查比動手做容易」的地方。</em>代理的失敗——鑽測試的漏洞、沒執行就宣稱做完、範圍蔓延、無窮循環、破壞性操作——要靠機制（鉤子、git、測試）抓出來，而不是靠讀得更仔細。某種意義上，幻覺就是創造力：測試與驗證把它放到該去的地方。</li>
+        <li><strong>工具。</strong>執行代理的四種方式——Claude Cowork、Claude Design、其他廠商的代理應用程式、VS Code＋代理；<em>我們的選擇：VS Code＋Claude Code 擴充功能</em>（綁定程度低；你的程式碼、設定與歷史都是你自己的）。犯錯了？<em>先停止執行，再倒回</em>——不要污染你的情境。情境滿了？開一個新的工作階段：<em>"Please finish what you are working on and document anything from this session that may be useful to future Claude sessions in .md files in this directory and a handover.md file to allow Claude to continue our work in a new session."</em>（指令保持英文原文即可。）壓縮（compaction）會流失資訊——寫文件更好。常常查看你的用量。</li>
+        <li><strong>Git。</strong>版本控制是安全網、是紀錄，也是你協作的方式——與人協作，也與代理協作。四個詞：儲存庫、提交（一個附有說明訊息、有名字的快照）、差異（diff）、歷史。編輯 → 暫存（stage）→ 提交這個循環，<em>全部在 VS Code 的原始檔控制（Source Control）面板完成——不需要終端機。</em>分支（branch）：<em>main 永遠可以執行。</em>GitHub 保存一份共用副本：推送（push）、拉取（pull）、複製（clone）、拉取請求（pull request：請求合併（merge）你的修改，先經審查）。<code>.gitignore</code> 把原始資料、產生的輸出與<em>機密</em>擋在外面。和代理一起用時：<em>動工前先提交、要它邊做邊提交、審查差異而不是整個檔案、給它一個分支、絕不讓它改寫歷史。</em></li>
+        <li><strong>部署（deploy）——免費。</strong>程式碼放 GitHub，靜態網頁放 GitHub Pages，有後端的應用程式放 Cloudflare Pages＋Workers，影片放 YouTube（不公開列出），展示與資料放 Hugging Face Spaces 與 Zenodo。說一句 <em>"Deploy this"</em>——接線的事 Claude 來做。循環是：提交 → 推送 → 主機建置 → 上線。<em>機密絕不進儲存庫</em>；它們放在主機的環境設定裡。</li>
+        <li><strong>會和你對話的應用程式。</strong>Telegram（向 @BotFather 取得一個權杖——最容易上手）、LINE Messaging API（台灣人人都有的）、只做通知的 ntfy.sh；架在 Cloudflare Worker 上的網頁掛鉤（webhook）。<em>先從 Telegram 開始，再移植到 LINE。</em>權杖就是密碼。用程式操作 Gmail、Sheets 與 Drive；透過 API 金鑰把一個 LLM 放進你的應用程式裡（金鑰就是錢）；語音輸入、語音輸出。<em>AI 讓軟體更聰明的兩種方式：</em>A——AI 寫的程式碼（預設）· B——迴圈裡有一個 LLM（在最難的那一步才動用）。</li>
+        <li><strong>影片。</strong>先寫腳本，最後才配畫面：文件 → 腳本 → 旁白 → 依音訊時間軸配上視覺。本實驗室的流程是公開的（<a href="https://github.com/iams-yb-lab/show-your-work" target="_blank" rel="noopener">show-your-work</a>）。硬體的畫面：Blender（可用腳本驅動，從 CAD 出發）與 Unreal（場景）。生成的影像要標示出來。</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>3 · 我們的「AI 方法」五步驟</h2>
+      <p>整場演講最重要的一張投影片。</p>
+      <ol>
+        <li><strong>願景（Vision）。</strong>描述你想要什麼，越詳細越好。</li>
+        <li><strong>規格／計畫（Specification/Plan）。</strong>讓 AI 產出一份詳細的規格——規劃這個專案！把專案拆成許多小任務，每個都有可測試的交付物。要求 AI 向你提問！</li>
+        <li><strong>審查（Review）。</strong>審查計畫，並讓 AI 審查計畫以找出改進之處與缺陷——在一個沒看過這份工作的全新 Claude 工作階段裡進行，讓作者不必為自己的計畫打分數。</li>
+        <li><strong>寫程式（Code）</strong>（使用代理群）。要 AI 平行執行一群代理來完成建置。</li>
+        <li><strong>測試／除錯／驗證（Test/Debug/Verify）。</strong>確保你的計畫與規格包含測試程式碼的方法。問題一次修一個。</li>
+      </ol>
+      <p class="callout"><strong>反覆迭代：第一版計畫永遠不是最後一版。</strong> <strong>沒有測試與驗證，絕不信任 AI。</strong></p>
+    </section>
+
+    <section class="card">
+      <h2>4 · 專案 1 — 做一個網頁應用程式（模擬器或遊戲）</h2>
+      <p><strong>你想做什麼？</strong>建議：貨運列車裝載遊戲 · 倒立擺模擬器 · 耦合擺的相位鎖定 · 不公平的高爾夫 · 撞球 · 一個跟你自己研究有關的計算器或模擬器。</p>
+      <ol>
+        <li>決定要做什麼。給它一個自己的資料夾，以及你個人帳號下一個自己的<strong>公開 GitHub 儲存庫</strong>（儲存庫是一個專案資料夾，其完整歷史由 git 保存；在 GitHub 上它也有線上版）。家教會檢查它，並在每個里程碑提醒你推送（push）。</li>
+        <li>依照「AI 方法」做出一個能在本機執行的展示版。</li>
+        <li>部署到網路上（發布它，讓它在一個公開網址上線）。用哪個主機取決於你做了什麼，而且你可能兩個都需要：靜態網頁 → 直接從儲存庫用 GitHub Pages；任何有後端、機器人網頁掛鉤（webhook）或機密的東西 → Cloudflare Pages＋Workers。</li>
+        <li>寫一份報告，詳細說明這個概念或遊戲。</li>
+        <li>做<strong>專案網站</strong>——這個儲存庫的 GitHub Pages 網站，網址 <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code>：標題、它是什麼、為什麼有趣、如何運作、一張它運作中的照片、GIF 或短片、驗證了什麼，以及連到線上 App（<code>…/app/</code>）與儲存庫的連結。</li>
+        <li>改進呈現方式：Markdown → 投影片 → 網站 → YouTube 影片（可選的延伸）。</li>
+        <li><strong>把它加到<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">專案牆</a>上</strong>——家教替你準備條目（一個 JSON 檔加一張圖片），由你推送。見<a href="teams-zh.html">成果展</a>。</li>
+      </ol>
+      <p><strong>每個專案＝自己的資料夾＋自己的公開儲存庫</strong>，並附一個公開的專案網站——不只是一份 README。<a href="https://docs.github.com/en/pages/quickstart" target="_blank" rel="noopener">GitHub Pages</a> 託管專案網站與任何靜態 App；任何有後端、機器人網頁掛鉤或機密的東西放在 <a href="https://developers.cloudflare.com/pages/get-started/git-integration/" target="_blank" rel="noopener">Cloudflare Pages＋Workers</a>——你可能兩個都需要，所以兩個帳號都要準備好。兩者都會在每次推送後自動重新部署。授課教師的 <a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">pendulum-example</a> 與 <a href="https://github.com/TIGP-Experimental-Methods/csv-scope-example" target="_blank" rel="noopener">csv-scope-example</a> 是專案 1 類型作品的範例。</p>
+    </section>
+
+    <section class="card">
+      <h2>5 · 專案 2 — 用手機透過網路控制微控制器</h2>
+      <p><strong>目標：</strong>做一個手機應用程式，讓你能透過 WiFi 控制硬體並從硬體讀取量測值——這裡的硬體是 ESP32（一塊小型的 WiFi 微控制器（microcontroller）開發板；我們用的是 <a href="https://jin-hua.com.tw/page/product/show.aspx?num=40729&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">Jinhua ESP32-S3，NT$400</a>，由課堂提供）。依照「AI 方法」進行。</p>
+      <ol>
+        <li><strong>步驟 1——硬體驗證基準線。</strong>把班級儲存庫的參考韌體（firmware：在微控制器上執行的程式）與手機應用程式燒錄到你自己的 ESP32-S3 上（燒錄（flash）＝經 USB 把它寫進板子；新板子第一次燒錄要按一次 BOOT＋RST）。板子會變成自己的 WiFi 存取點（access point）<code>instrument-XXXX</code>。用手機或筆電加入它（密碼 <code>instrument</code>），在瀏覽器輸入 <code>http://192.168.4.1</code>，控制 LED 並讀取即時數值。三個提示：手機警告「沒有網際網路」時保持連線 · Android 請關閉行動數據 · <code>http://</code> 要自己打。<em>從一個已知可用的硬體基準線出發，是任何實驗物理工作流程不可或缺的一部分——它把硬體問題和軟體問題分開。</em></li>
+        <li><strong>步驟 2——用「AI 方法」做你自己的 App。</strong>和專案 1 一樣，自己的資料夾、自己的公開 GitHub 儲存庫。例如：一個控制 ESP32 上 LED 亮度與顏色的手機應用程式；然後量測某個東西，並在手機上即時顯示。班級韌體仍是你自己的版本卡住時的備案——也是專案 3a 與 3b 的基礎。</li>
+        <li>做<strong>專案網站</strong>（這個儲存庫的 GitHub Pages）：標題、它是什麼、為什麼有趣、如何運作、一張它運作中的照片、GIF 或短片、驗證了什麼、連到儲存庫的連結——而且，因為在板子上執行的 App 沒有公開網址，就用一段它運作中的短片代替線上連結。</li>
+        <li><strong>把它加到<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">專案牆</a>上</strong>——家教準備條目，由你推送。</li>
+      </ol>
+      <p><strong>相機。</strong>想試做相機 App 的人，有一台 <a href="https://jin-hua.com.tw/page/product/show.aspx?num=41395&amp;kw=ESP32&amp;lang=TW" target="_blank" rel="noopener">ESP32-S3-N16R8-CAM 開發板 + OV3660 鏡頭</a>（金華 #41395）可用。</p>
+    </section>
+
+    <section class="card">
+      <h2>6 · 課間</h2>
+      <p><strong>下一場工作坊之前：完成課前準備、改進你的 App、動手做、玩得開心。</strong>App 指的是你的專案 1 與專案 2——每個里程碑都推送，讓專案網站與<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">專案牆</a>保持最新。</p>
+      <p><strong>工作坊 2 的準備：</strong></p>
+      <ul>
+        <li><strong>安裝 KiCad 10</strong>（我們用來畫電路圖（schematic）與佈局印刷電路板（PCB）的免費程式），並開啟一次，讓它完成零件庫的設定——見<a href="preparation-zh.html">課前準備</a>。</li>
+        <li><strong>建立 JLCPCB 帳號</strong>（電路板工廠；零件來自它自己的零件庫）。</li>
+      </ul>
+      <p>你在班級板上負責的部分，會在工作坊 2 開始時分配。卡住了先問家教，再寫信給授課教師。</p>
+    </section>
+
+    <section class="card">
+      <h2>7 · 超越基準線</h2>
+      <p>硬體是共同的基準線——由預算與時程決定。其餘一切都是開放的：軟體、韌體、應用程式，以及圍繞這台儀器的所有東西。每當你走在進度前面，就問：<em>我實驗室裡有什麼問題，這能解決？</em><strong>用 LINE 或 Telegram 和你的儀器對話</strong>——我們最鼓勵的延伸：數值飄移或警報觸發時推播通知，以及能從手機讀取數值或切換繼電器的機器人指令，隨時隨地。<strong>盡管做出很棒的東西。</strong></p>
+    </section>
+
+    <section class="card">
+      <h2>8 · 教材</h2>
+      <ul>
+        <li>投影片：<a href="slides/W1-AI-for-experimentalists.pdf" target="_blank" rel="noopener">工作坊 1 — 實驗物理學家的 AI（PDF）</a>。課堂錄影不會放上網。</li>
+        <li>GitHub 上的 Workbook：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch0-before-day-1.md" target="_blank" rel="noopener">第 0 章——課前準備</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch1-day-1-week-1.md" target="_blank" rel="noopener">第 1 章——工作坊 1</a>。</li>
+        <li>參考儲存庫，作為專案 1 類型作品的範例：<a href="https://github.com/TIGP-Experimental-Methods/pendulum-example" target="_blank" rel="noopener">pendulum-example</a>（<a href="https://tigp-experimental-methods.github.io/pendulum-example/" target="_blank" rel="noopener">線上版</a>）· <a href="https://github.com/TIGP-Experimental-Methods/csv-scope-example" target="_blank" rel="noopener">csv-scope-example</a>（<a href="https://tigp-experimental-methods.github.io/csv-scope-example/" target="_blank" rel="noopener">線上版</a>）。</li>
+        <li><a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">專案牆</a>——全班的專案，即時更新（<a href="https://github.com/TIGP-Experimental-Methods/showcase-2026" target="_blank" rel="noopener">儲存庫</a>；README 說明條目格式）。見<a href="teams-zh.html">成果展</a>。</li>
+        <li>Claude 家教：在班級儲存庫中輸入 <code>/tutor L1</code>。</li>
+        <li>另請參閱 <a href="resources-zh.html#ai">AI 資源</a>。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>
