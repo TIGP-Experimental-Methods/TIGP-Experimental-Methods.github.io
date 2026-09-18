@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Showcase | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>
+    .wall-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 16px 0 4px; }
+    .wall-btn {
+      display: inline-block; font-weight: 700; font-size: 1.05em; text-decoration: none;
+      padding: 12px 22px; border-radius: 999px;
+      background: var(--accent); color: #fff; border: 2px solid var(--accent);
+    }
+    .wall-btn:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+    .wall-btn.secondary { background: #f2f7fa; color: var(--accent-ink); border-color: var(--line); }
+    .wall-btn.secondary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .wall-frame { width: 100%; height: 900px; border: 1px solid var(--line); border-radius: 12px; background: #fff; display: block; }
+    .wall-note { color: var(--muted); font-size: 0.9em; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Showcase — the class project wall: every project, its website and its code</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · PCBs</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Housing</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a class="active" href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="teams-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>The class project wall</h1>
+      <p>One page with every project in the class, as cards: a picture, a title, the student, a one-line blurb and links to the project website and the repository (the project folder with its full history, kept online on GitHub). The wall <strong>refreshes itself every minute</strong>, and it is on the projector in class — so everyone sees each other's projects appear, borrows ideas and starts talking.</p>
+      <p>The wall is the repository <a href="https://github.com/TIGP-Experimental-Methods/showcase-2026" target="_blank" rel="noopener">TIGP-Experimental-Methods/showcase-2026</a>, published with GitHub Pages; <strong>every student can push to it</strong>.</p>
+      <h3>How to add yourself</h3>
+      <ol>
+        <li>Finish a project: its own public GitHub repository under your account, its <strong>project website</strong> live (GitHub Pages of that repository, <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code> — title, what it is and why it is interesting, how it works, a picture, GIF or short video of it working, what was verified, links to the live app and to the repository).</li>
+        <li>At the end of the project the tutor adds your entry — <strong>one JSON file and one picture</strong> — in the format the <a href="https://github.com/TIGP-Experimental-Methods/showcase-2026#readme" target="_blank" rel="noopener">README</a> of the wall's repository describes.</li>
+        <li>You push it. Within a minute your card is on the wall — and on the projector.</li>
+      </ol>
+      <p>One card per project: Project 1 (the web app), Project 2 (the phone app for the ESP32) and <strong>Project 3 — your instrument: board section, firmware, housing</strong> — one card, one repository and one project website for the whole of Project 3 (the KiCad design files stay in the class repository; your repository presents the work — pictures, renders or video, what it does, what was measured — and links to your pull requests).</p>
+      <div class="wall-actions">
+        <a class="wall-btn" href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">Open the live project wall ↗</a>
+        <a class="wall-btn secondary" href="https://github.com/TIGP-Experimental-Methods/showcase-2026" target="_blank" rel="noopener">Wall repository and README</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Live</h2>
+      <iframe class="wall-frame" src="https://tigp-experimental-methods.github.io/showcase-2026/" title="The class project wall (live)" loading="lazy"></iframe>
+      <p class="wall-note">The wall shown live above. If it does not load here, <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">open it in its own tab</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Idea Archive | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Project idea archive — instruments you could build with this course's methods</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · Electronics</a></li>
+      <li><a href="lecture3.html">3 · Firmware &amp; Mechanical</a></li>
+      <li><a class="active" href="projects.html">Project</a></li>
+      <li><a href="teams.html">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="project-archive-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>The idea archive</h1>
+      <p>The course's capstone is now <a href="projects.html">one standardised instrument</a>, but these sixteen vetted project ideas remain a great catalogue of
+        what the dev-board + custom-carrier + AI-software method can build in a few weeks. Browse them for <strong>software directions</strong> for your instrument
+        (alarms, dashboards, control loops, characterisation methods), for inspiration for what to build <em>next</em> in your own lab — or ask the instructor if you have
+        a strong case for building one of these instead.</p>
+      <p>Tiers signal risk, not virtue: A = low risk, C = ambitious. All share the same architecture: sensor/actuator ↔ custom carrier ↔ dev board ↔ Python host ↔ web/bot, in a fabricated enclosure.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tier A — low risk, high polish potential</h2>
+      <div class="grid">
+        <div class="tile"><span class="tag a">Tier A</span><h3>Cooling-water flow monitor &amp; interlock</h3><p>Hall-effect flow sensor + ESP32; relay/opto interlock output that fails safe; live plot; bot alert before the magnet cooks. Calibrate with bucket and stopwatch.</p></div>
+        <div class="tile"><span class="tag a">Tier A</span><h3>Laser beam shutter</h3><p>Servo or stepper blade on an optical-table mount; TTL (BNC) + serial control; measure open/close time and jitter with a photodiode. Commercial ones cost $500+.</p></div>
+        <div class="tile"><span class="tag a">Tier A</span><h3>Lab environment logger</h3><p>Temperature / humidity / pressure nodes on WiFi; database + web dashboard; drift alerts; correlate your laser drift with room temperature.</p></div>
+        <div class="tile"><span class="tag a">Tier A</span><h3>IP-controlled relay &amp; alarm node</h3><p>ESP32 with isolated inputs and low-voltage relay outputs controlled from a web page / bot / MQTT; fail-safe defaults, watchdog, authentication, event log.</p></div>
+        <div class="tile"><span class="tag a">Tier A</span><h3>General-purpose lab amplifier</h3><p>BNC in/out voltage or instrumentation amplifier with switchable gain, input protection, 50 Ω drive, offset trim. The ideal first PCB; measure its bandwidth and noise.</p></div>
+      </div>
+
+      <h2>Tier B — real analog, motion or mixed-signal content</h2>
+      <div class="grid">
+        <div class="tile"><span class="tag b">Tier B</span><h3>Photodetector with variable-gain TIA</h3><p>Photodiode + transimpedance amplifier with 2–3 gain ranges, bandwidth limiting, on-board ADC streaming, shielded enclosure. Layout quality actually matters here.</p></div>
+        <div class="tile"><span class="tag b">Tier B</span><h3>PID temperature controller</h3><p>Thermistor bridge + MOSFET heater or H-bridge TEC driver; digital PID with anti-windup; AI-assisted tuning from logged step responses; overnight mK stability plot.</p></div>
+        <div class="tile"><span class="tag b">Tier B</span><h3>Motorized filter wheel / rotation mount</h3><p>Stepper + optical index; homing and indexed positions; printed wheel for Ø25 mm optics — real tolerancing; repeatability measured with a laser.</p></div>
+        <div class="tile"><span class="tag b">Tier B</span><h3>Arbitrary waveform generator with BNC daughter board</h3><p>Teensy or ESP32-S3 + external DAC → buffered BNC output; waveform tables uploaded from Python; phone control via a web page the ESP32 serves. <em>Absorbed into the class instrument (the AWG/DAC half).</em></p></div>
+        <div class="tile"><span class="tag b">Tier B</span><h3>Precision ADC/DAC front-end</h3><p>16–24-bit converters, precision reference, anti-alias filters, BNC I/O — measurably better than any microcontroller's built-ins; ENOB measured. The shared hardware for several other projects.</p></div>
+        <div class="tile"><span class="tag b">Tier B</span><h3>Digitally controlled amplifier / filter</h3><p>Gain and cutoff set from an ESP32 (digipots, PGA or switched-capacitor filter) — adjustable from your phone; sweep the settings and plot the measured transfer function.</p></div>
+        <div class="tile"><span class="tag b">Tier B</span><h3>DDS function generator with a real timebase</h3><p>AD9833-class DDS to 12 MHz driven by the MCU; upgrade the clock with a TCXO or OCXO and add an external 10 MHz reference input; measure the improvement (beat note, Allan deviation). <em>Absorbed into the class instrument (the DDS half).</em></p></div>
+        <div class="tile"><span class="tag b">Tier B</span><h3>Digital filter box</h3><p>ADC → FIR/IIR/notch filters on a Teensy → DAC; coefficients designed in Python (scipy.signal); measure latency and response and compare with design.</p></div>
+      </div>
+
+      <h2>Tier C — ambitious</h2>
+      <div class="grid">
+        <div class="tile"><span class="tag c">Tier C</span><h3>Digital PID "baby lockbox"</h3><p>Analog error signal in → fast PID on a Teensy → piezo/current out; 10–50 kHz loop; GUI with scope view; minimum demo is locking a simulated plant, a real laser is stretch.</p></div>
+        <div class="tile"><span class="tag c">Tier C</span><h3>Lock-in amplifier (digital)</h3><p>Generate the reference, sample the signal, demodulate to X/Y (R/θ), stream to a host GUI with time-constant controls. Minimum demo: recover a 1 kHz modulated LED signal in room light. Best physics-per-component on the menu.</p></div>
+        <div class="tile"><span class="tag c">Tier C</span><h3>Multi-channel lab interlock &amp; status hub</h3><p>Aggregates door / flow / temperature / mains-OK signals into one wall box with relays, status panel, event log, web page and bot; watchdog design; escalation ladder as stretch.</p></div>
+      </div>
+
+      <p>Rejected for good reasons (ask if curious): anything switching mains, robot arms/gantries, wavemeters/spectrometers, high-voltage piezo drivers.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>
