@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workshop 3 – Firmware and basic mechanical design | Modern Experimental Techniques – Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link rel="stylesheet" href="style.css?v=20260901">
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index.html">Modern Experimental Techniques – Physics</a></h1>
+        <p class="brand-subtitle">Workshop 3 — Firmware and basic mechanical design (PCB housing) · Fri 2 Oct 2026 · 14:20–16:20 · R311, IAMS</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="preparation.html">Preparation</a></li>
+      <li><a href="lecture1.html">1 · AI</a></li>
+      <li><a href="lecture2.html">2 · PCBs</a></li>
+      <li><a class="active" href="lecture3.html">3 · Firmware &amp; Housing</a></li>
+      <li><a href="projects.html">Project</a></li>
+      <li><a href="https://tigp-experimental-methods.github.io/showcase-2026/">Showcase</a></li>
+      <li><a href="resources.html">Resources</a></li><li><a class="lang" href="lecture3-zh.html" lang="zh-Hant-TW">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>Workshop 3 — Firmware and basic mechanical design (PCB housing)</h1>
+      <p><strong>The slides: <em>Workshop 3: getting things made</em>.</strong> Nobody learns a CAD program (computer-aided design: the program a part is drawn in) today: Claude Code writes the geometry; you specify, look, check the numbers, slice and decide.</p>
+      <ul>
+        <li><strong>Setup check</strong> — your laptop with VS Code and Claude Code, OpenSCAD and Bambu Studio installed and opened once, the class repository up to date, your dev board and a USB-C data cable.</li>
+        <li><strong>Getting things made: the fabrication menu</strong> — two ways to a part: make it here (FDM printing on the Bambu P1S, the laser cutter, hand tools) or order it (CNC machining, sheet metal, resin and metal printing, EDM); typical times, costs and tolerances.</li>
+        <li><strong>Tips to make 3D prints and cut parts turn out right</strong> — layer direction and the 45° rule, walls and tolerances, nuts in pockets, materials, the slicer, the laser.</li>
+        <li><strong>From an idea to a file</strong> — design the way it will be made; the files (STEP, STL/3MF, DXF); the five CAD programs compared; reading OpenSCAD (a part as a short program of shapes, moves and combinations); the AI design loop: specify, generate, look, measure, slice, test.</li>
+        <li><strong>The housing — we build it together</strong> in OpenSCAD with Claude Code, in eight steps: specify · answer Claude's questions · generate · look · check the numbers · fix and make it yours · export and slice · the test coupon and your files.</li>
+        <li><strong>Pulling the course together</strong> — Project 3 is your instrument: the firmware and the app that use the class board, in your housing; your first firmware driver and app panel in sim mode; a great project website that shows what the app does, how to use it and what it can do (one repository, one website, one card); the presentation; the option of a video the AI renders for you.</li>
+        <li><strong>This was the last workshop</strong> — from here, build.</li>
+      </ul>
+      <p class="callout warn"><strong>Hard cutoff: Friday 9 October, 2 pm.</strong> The final housing files for 3D printing / laser cutting must be in for manufacturing then.</p>
+      <p>Prerequisite: <a href="preparation.html">OpenSCAD 2021.01 and Bambu Studio installed and opened once</a> (setup step 11). Bring your laptop and your dev board.</p>
+    </section>
+
+    <section class="card">
+      <h2>Detailed plan (follows the workshop outline above)</h2>
+      <p>The boards are on order (placed 28 September, back around 16 October), so <strong>everything on the firmware side runs in sim mode on the dev board</strong> (a build in which the firmware — the program on the microcontroller — fakes its hardware, so the app works on the bare board). You start your instrument's firmware with a driver and its app panel, wire one alarm rule, and design the housing.</p>
+
+      <h3>Firmware and app — a driver and its panel</h3>
+      <div class="grid">
+        <div class="tile"><h3>The block-driver interface</h3><p>Every driver is a folder <code>firmware/src/blocks/&lt;section&gt;_&lt;name&gt;/</code> implementing <code>name() / begin() / loop() / handle(cmd, reply) / status(out)</code>. You start from <code>blocks/template/</code>.</p></div>
+        <div class="tile"><h3>The protocol</h3><p>WebSocket (a live two-way connection between the phone page and the board) messages <code>{block, cmd, args}</code> in and <code>{block, status}</code> out; one panel module per driver in <code>host/pwa/panels/&lt;section&gt;.js</code>; <code>instrument.py</code> (a Python program on your PC) mirrors the same commands in Python.</p></div>
+        <div class="tile"><h3>Sim mode</h3><p>The <code>SIM</code> flag fakes the hardware so the whole app runs on a bare dev board — you work ahead of the boards and swap the flag off when they arrive.</p></div>
+        <div class="tile"><h3>One alarm rule per panel</h3><p>A driver's status → the base alarm engine → a module output + notification: A "AI1 above a threshold" or "no free induction decay seen" · B "output clipped" or "TRIG edge seen" · C "opto count jumped" or "a module output left on".</p></div>
+      </div>
+      <p><strong>E11: driver + panel in sim.</strong> Choose the part of the board your instrument needs first — the section you worked on in Workshop 2 is a natural start, not an obligation. <code>/tutor L3</code>: copy the template to <code>blocks/&lt;section&gt;_&lt;name&gt;/</code>; fill in the section's commands (A <code>read_all</code>, <code>set_range</code>, <code>capture</code> · B <code>set_dc</code>, <code>sine</code>, <code>pulse</code>, <code>dio</code> · C <code>module</code>, <code>module_all</code>, <code>opto_reset</code>); make the SIM branch return plausible values; add the panel and one alarm rule; flash (write the firmware onto the board over USB); see the panel react on the phone; open the pull request (a request to merge your changes into the shared project; someone reviews it first). The tutor generates the skeleton; you name the commands, write the SIM values, and explain one message round-trip before flashing. Sections that talk to each other are paired (B ↔ A for a waveform measured on an input, B ↔ C for a pulse that switches a module output). Done when the panel controls the section in sim and the pull request is open.</p>
+
+      <h3>Housing — part of Project 3</h3>
+      <div class="grid">
+        <div class="tile"><h3>Tips for printed and cut parts</h3><p>Nuts in pockets are the fastening: an M3 nut slides into a 5.8 mm hexagonal pocket, 2.5 mm deep, and the screw pulls it tight. Walls 2 mm; holes +0.3 mm (printed holes come out small); layers are the weak direction, so let the load run along them; 45° is the steepest overhang that prints without support. Print a test coupon first: it answers the fit for your printer. The PCB front panel is the face of the instrument, so the front cover is a plate with holes where the panel's parts are.</p></div>
+        <div class="tile"><h3>Your own design</h3><p>You write the specification yourself, from the <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/housing-brief.md" target="_blank" rel="noopener">housing brief</a>: what the housing must hold, the printing rules, the files to hand in, and the two board models. Those models, <code>hardware/release/class-board.stl</code> and <code>front-panel.stl</code> (STEP versions beside them), were exported from the final KiCad boards with <code>kicad-cli</code>, keeping only the connectors, LEDs and modules, so every dimension comes from the boards and none from a ruler. Ask Claude to ask you its questions before it writes code. Start by opening each board on its own in OpenSCAD, one <code>import()</code> line at a time, and looking at it; there is no example housing to copy, because the design is yours.</p></div>
+        <div class="tile"><h3>Output</h3><p><code>housing.scad</code>, <code>base.stl</code>, <code>cover.stl</code>, <code>coupon.stl</code> (STL: the 3D-print file), <code>cover.dxf</code> (DXF: the laser-cutting drawing) and a screenshot, in <code>docs/students/&lt;name&gt;/housing/</code>, by the cutoff. The institute prints and cuts them.</p></div>
+      </div>
+      <p><strong>E12: your housing.</strong> On the shared screen, and in your own Claude Code session with OpenSCAD beside it: write your specification from the brief, answer Claude's questions, let it write <code>housing.scad</code>, look at it and check the numbers in the console, fix it and make it yours, export the parts and slice them in Bambu Studio, add the test coupon, commit from Source Control. A design in another CAD program you already use is welcome too, if it fits the boards and meets the deadline. Done when the files are in your folder.</p>
+
+      <h3>From here — this was the last workshop: E11–E12</h3>
+      <p>The housing files by Friday 9 October, 2 pm; the driver + panel pull request; then your instrument: its firmware, its app and its project website; around 16 October, collect the boards and housings and assemble; 26–30 October, present. Improve your apps, build and have fun. Help: the tutor, then e-mail <a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a>.</p>
+      <ul>
+        <li><strong>E11 Driver + panel pull request.</strong> Finish the commands, one status value plotted, <strong>one alarm rule wired to the base alarm engine</strong> (a threshold on the driver's status → a module output → notification), CI green (continuous integration: the automatic build GitHub runs on every pull request passes); reviewed by a classmate.</li>
+        <li><strong>E12 Housing files</strong> to <code>docs/students/&lt;name&gt;/housing/</code> — <strong>by Friday 9 October, 2 pm</strong>.</li>
+        <li>Build your instrument: its firmware, its app and a great project website (what the app does, how to use it, examples, demonstrations, videos or animations); read workbook ch. 3.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="presentation">
+      <h2>Presentation and demonstration</h2>
+      <ul>
+        <li><strong>~Friday 16 October:</strong> collect the manufactured PCBs and housings.</li>
+        <li><strong>Assemble</strong> your ESP32, PCB and housing. Flash your own build without <code>SIM</code>, open your app, see your instrument move real hardware (for example A a voltage on AI1 and the receiver's I and Q · B a sine on AO1 into AI1, a TTL line and TRIG direction · C a module output switching, an opto count and a line on the OLED).</li>
+        <li><strong>Test and refine</strong> your firmware and app.</li>
+        <li><strong>26–30 October:</strong> present and demonstrate your project, app, website and video — about 15 minutes each. For example, make a video to describe your app and your instrument.</li>
+        <li><strong>Project websites and the wall:</strong> each project has its own public repository and project website (GitHub Pages). <strong>Project 3 — your instrument: firmware, app and housing — is one repository and one website</strong>, and the website deserves care: what the app does, how to use it, what it can do, examples for the user and demonstrations of its capability — screenshots, what was measured, videos or animations, a great interface — with links to your pull requests in <code>class-board-2026</code> and to the class repository (your repository may hold the housing CAD export, photos and the video); it is one card on the wall. All of them are on the <a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">class project wall</a>.</li>
+      </ul>
+      <p><strong>The demonstration</strong> is yours to shape: your instrument, your app and your website at work, in the order that shows them best; ask the tutor if you want help planning it.</p>
+    </section>
+
+    <section class="card">
+      <h2>Materials</h2>
+      <ul>
+        <li>Slides: <a href="slides/W3-getting-things-made.pdf" target="_blank" rel="noopener">Workshop 3: getting things made (PDF)</a>. Video recordings are not online.</li>
+        <li>Workbook on GitHub: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch3-day-3-week-3.md" target="_blank" rel="noopener">ch. 3 — Workshop 3</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch4-wrap-up-demo.md" target="_blank" rel="noopener">ch. 4 — presentation and demonstration</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chB-how-the-software-works.md" target="_blank" rel="noopener">ch. B How the software works</a> (self-study).</li>
+        <li>In the class repository: <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/PROTOCOL.md" target="_blank" rel="noopener">PROTOCOL.md</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/src/blocks/template" target="_blank" rel="noopener">blocks/template</a> (with the SIM branch and the alarm-engine hook) · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/host/pwa/panels/template.js" target="_blank" rel="noopener">panels/template.js</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/housing-brief.md" target="_blank" rel="noopener">the housing brief</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/housing-example-spec.md" target="_blank" rel="noopener">the example specification</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/tree/main/hardware/release" target="_blank" rel="noopener">hardware/release</a> (the reference <code>housing.scad</code> and the board meshes) · the cheat sheet in <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chC-cheat-sheets.md" target="_blank" rel="noopener">workbook ch. C §C.6</a>.</li>
+        <li>The tutor: <code>/tutor L3</code> and <code>/tutor HW3</code> in the class repository.</li>
+        <li>See also the <a href="resources.html#making">resources for getting things made</a>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · Institute of Atomic and Molecular Sciences, Academia Sinica</p></div>
+      <p><a href="index.html#contact">Contact</a></p>
+    </div>
+  </footer>
+</body>
+</html>

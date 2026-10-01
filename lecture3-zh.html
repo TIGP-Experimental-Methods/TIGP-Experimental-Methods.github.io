@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>工作坊 3：韌體與基礎機械設計（PCB 外殼）｜現代實驗技術－物理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <meta name="theme-color" content="#0e2a52">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260901">
+  <style>body{font-family:"Inter","Noto Sans TC",-apple-system,"Segoe UI",Arial,sans-serif}.brand-title,.card h1,.card h2{font-family:"Source Serif 4","Noto Serif TC",Georgia,serif}</style>
+</head>
+<body>
+  <header>
+    <div class="brand-wrap">
+      <div>
+        <h1 class="brand-title"><a href="index-zh.html">現代實驗技術－物理</a></h1>
+        <p class="brand-subtitle">工作坊 3 — 韌體與基礎機械設計（PCB 外殼）· 2026年10月2日（五）· 14:20–16:20 · 中研院原分所 311 室（R311）</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li><a href="index-zh.html">首頁</a></li>
+      <li><a href="preparation-zh.html">課前準備</a></li>
+      <li><a href="lecture1-zh.html">1 · AI</a></li>
+      <li><a href="lecture2-zh.html">2 · PCB</a></li>
+      <li><a class="active" href="lecture3-zh.html">3 · 韌體與外殼</a></li>
+      <li><a href="projects-zh.html">專題</a></li>
+      <li><a href="https://tigp-experimental-methods.github.io/showcase-2026/">成果展</a></li>
+      <li><a href="resources-zh.html">資源</a></li><li><a class="lang" href="lecture3.html" lang="en">English</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h1>工作坊 3 — 韌體與基礎機械設計（PCB 外殼）</h1>
+      <p><strong>投影片：<em>Workshop 3: getting things made</em>（工作坊 3：把東西做出來）。</strong>今天沒有人要學一套 CAD 軟體（computer-aided design，電腦輔助設計：畫零件用的程式）：Claude Code 寫出幾何形狀；你負責訂規格、看、核對數字、切片與做決定。</p>
+      <ul>
+        <li><strong>設備檢查</strong>——你的筆電裝好 VS Code 與 Claude Code，OpenSCAD 與 Bambu Studio 已安裝並開啟過一次，班級儲存庫（repository）已更新，帶開發板（dev board）與一條 USB-C 資料線。</li>
+        <li><strong>把東西做出來：製造選單</strong>——取得零件的兩條路：自己做（Bambu P1S FDM 列印、雷射切割機、手工具）或向外下單（CNC 加工、鈑金、樹脂與金屬列印、放電加工）；一般的時程、費用與公差。</li>
+        <li><strong>讓 3D 列印件與切割件做得成功的訣竅</strong>——層方向與 45° 規則、壁厚與公差、螺母槽（nut in a pocket）、材料、切片軟體、雷射。</li>
+        <li><strong>從構想到檔案</strong>——依製造方式來設計；檔案格式（STEP、STL/3MF、DXF）；五套 CAD 軟體的比較；讀懂 OpenSCAD（零件是一段由形狀、移動與組合構成的短程式）；AI 設計循環：訂規格、產生、看、量、切片、測試。</li>
+        <li><strong>外殼——我們一起做</strong>，用 OpenSCAD 與 Claude Code，分八步：訂規格 · 回答 Claude 的問題 · 產生 · 看 · 核對數字 · 修正並讓它成為你的 · 匯出與切片 · 測試片與你的檔案。</li>
+        <li><strong>把整門課串起來</strong>——專案 3 就是你的儀器：使用班級板的韌體與 App，裝在你的外殼裡；你的第一個韌體驅動程式與 App 面板在模擬模式下執行；一個很棒的專案網站，展示 App 做什麼、怎麼用、能做什麼（一個儲存庫、一個網站、一張卡片）；成果發表；由 AI 替你算圖製作影片的選項。</li>
+        <li><strong>這是最後一場工作坊</strong>——接下來，動手做。</li>
+      </ul>
+      <p class="callout warn"><strong>硬性截止：10月9日（五）下午 2 點。</strong>3D 列印／雷射切割用的最終外殼檔案必須在那時交付製造。</p>
+      <p>先修條件：<a href="preparation-zh.html">OpenSCAD 2021.01 與 Bambu Studio 已安裝並開啟過一次</a>（設定步驟 11）。請帶筆電與你的開發板。</p>
+    </section>
+
+    <section class="card">
+      <h2>詳細計畫（依上方工作坊大綱）</h2>
+      <p>電路板已經下單（9月28日送出，約 10月16日回來），所以<strong>韌體端的一切都在開發板上以模擬模式（SIM mode）執行</strong>（這種建置讓韌體（firmware，微控制器（microcontroller）上的程式）假造硬體，讓應用程式在光板上就能跑）。你要為你儀器的韌體寫好第一個驅動程式與它的應用程式面板、接上一條警報規則，並設計外殼。</p>
+
+      <h3>韌體與應用程式——一個驅動程式與它的面板</h3>
+      <div class="grid">
+        <div class="tile"><h3>區塊驅動程式介面</h3><p>每個驅動程式是一個資料夾 <code>firmware/src/blocks/&lt;section&gt;_&lt;name&gt;/</code>，實作 <code>name() / begin() / loop() / handle(cmd, reply) / status(out)</code>。你從 <code>blocks/template/</code> 開始。</p></div>
+        <div class="tile"><h3>通訊協定</h3><p>WebSocket（手機網頁與板子之間的即時雙向連線）訊息：進來的是 <code>{block, cmd, args}</code>，出去的是 <code>{block, status}</code>；每個驅動程式一個面板模組 <code>host/pwa/panels/&lt;section&gt;.js</code>；<code>instrument.py</code>（你電腦上的 Python 程式）在 Python 端鏡射同一組指令。</p></div>
+        <div class="tile"><h3>模擬模式</h3><p><code>SIM</code> 旗標假造硬體，讓整個應用程式在一塊光板的開發板上就能跑——你搶在電路板之前開工，板子到了再把旗標關掉。</p></div>
+        <div class="tile"><h3>每個面板一條警報規則</h3><p>驅動程式的狀態 → 基底警報引擎 → 模組輸出＋通知：A「AI1 超過門檻」或「看不到自由感應衰減」· B「輸出削波」或「看到 TRIG 邊緣」· C「光耦計數跳動」或「某路模組輸出忘了關」。</p></div>
+      </div>
+      <p><strong>E11：模擬模式下的驅動程式＋面板。</strong>先選出你的儀器最需要的那部分電路板——你在工作坊 2 參與的那個區塊是很自然的起點，但不是必須。<code>/tutor L3</code>：把範本複製到 <code>blocks/&lt;section&gt;_&lt;name&gt;/</code>；填入該區塊的指令（A <code>read_all</code>、<code>set_range</code>、<code>capture</code> · B <code>set_dc</code>、<code>sine</code>、<code>pulse</code>、<code>dio</code> · C <code>module</code>、<code>module_all</code>、<code>opto_reset</code>）；讓 SIM 分支回傳合理的數值；加上面板與一條警報規則；燒錄（flash：經 USB 把韌體寫進板子）；在手機上看到面板有反應；開拉取請求（pull request：請求把你的修改併入共用專案；會先有人審查）。家教（tutor）產生骨架；你替指令命名、寫 SIM 數值，並在燒錄前解釋一次訊息的往返。彼此對話的區塊會兩兩配對（B ↔ A：從 AO1 輸出的波形在輸入端量到；B ↔ C：一個脈衝去切換一路模組輸出）。面板能在模擬模式下控制區塊且拉取請求已開啟即完成。</p>
+
+      <h3>外殼——專案 3 的一部分</h3>
+      <div class="grid">
+        <div class="tile"><h3>列印件與切割件的訣竅</h3><p>螺母槽就是固定方式：M3 螺母滑進一個 5.8 mm 的六角槽、深 2.5 mm，螺絲把它鎖緊。壁厚 2 mm；孔加大 0.3 mm（印出來的孔會偏小）；層與層之間是最弱的方向，所以讓受力沿著層走；45° 是不加支撐還印得出來的最陡懸空角。先印一片測試片（test coupon）：它告訴你這台印表機的配合尺寸。PCB 前面板本身就是儀器的正面，所以前蓋就是一塊在面板零件位置開孔的平板。</p></div>
+        <div class="tile"><h3>你自己的設計</h3><p>規格由你自己寫，依據<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/housing-brief.md" target="_blank" rel="noopener">外殼簡報（brief）</a>：外殼要裝什麼、列印規則、要交的檔案，以及兩塊板子的模型。這些模型 <code>hardware/release/class-board.stl</code> 與 <code>front-panel.stl</code>（旁邊有 STEP 版本）是用 <code>kicad-cli</code> 從最終的 KiCad 電路板匯出的，只保留接頭、LED 與模組，所以每個尺寸都來自電路板，沒有一個來自尺。請 Claude 在寫程式碼之前先問你問題。先在 OpenSCAD 中一次開一塊板子（一行 <code>import()</code>）好好看它；沒有範例外殼可抄，因為設計是你自己的。</p></div>
+        <div class="tile"><h3>輸出</h3><p><code>housing.scad</code>、<code>base.stl</code>、<code>cover.stl</code>、<code>coupon.stl</code>（STL：3D 列印檔）、<code>cover.dxf</code>（DXF：雷射切割圖）與一張螢幕截圖，放在 <code>docs/students/&lt;name&gt;/housing/</code>，在截止前交出。由所方負責列印與切割。</p></div>
+      </div>
+      <p><strong>E12：你的外殼。</strong>在共用螢幕上，同時在你自己的 Claude Code 工作階段中、旁邊開著 OpenSCAD：依簡報寫出你的規格、回答 Claude 的問題、讓它寫出 <code>housing.scad</code>、看它並在主控台（console）核對數字、修正並讓它成為你的、匯出各零件並在 Bambu Studio 切片、加上測試片、從原始檔控制（Source Control）面板提交。用你已經會的其他 CAD 軟體做的設計也歡迎，只要裝得下板子並趕上截止。檔案放進你的資料夾即完成。</p>
+
+      <h3>接下來——這是最後一場工作坊：E11–E12</h3>
+      <p>外殼檔案在 10月9日（五）下午 2 點前；驅動程式＋面板的拉取請求；接著是你的儀器：它的韌體、App 與專案網站；約 10月16日領取電路板與外殼並組裝；10月26–30日發表。改進你的 App、動手做、玩得開心。需要協助：先問家教（tutor），再寄電子郵件至 <a href="mailto:s.p.bennetts@g.iams.sinica.edu.tw">s.p.bennetts@g.iams.sinica.edu.tw</a>。</p>
+      <ul>
+        <li><strong>E11 驅動程式＋面板的拉取請求。</strong>完成所有指令、繪出一個狀態值、<strong>一條接到基底警報引擎的警報規則</strong>（驅動程式狀態的門檻 → 模組輸出 → 通知）、CI 綠燈（持續整合（CI）：GitHub 對每個拉取請求自動執行的建置通過）；由一位同學審查。</li>
+        <li><strong>E12 外殼檔案</strong>放到 <code>docs/students/&lt;name&gt;/housing/</code>——<strong>10月9日（五）下午 2 點前</strong>。</li>
+        <li>打造你的儀器：它的韌體、應用程式與一個很棒的專案網站（App 做什麼、怎麼用、範例、示範、影片或動畫）；閱讀 workbook 第 3 章。</li>
+      </ul>
+    </section>
+
+    <section class="card" id="presentation">
+      <h2>成果發表與展示</h2>
+      <ul>
+        <li><strong>約 10月16日（五）：</strong>領取製作完成的 PCB 與外殼。</li>
+        <li><strong>組裝</strong>你的 ESP32、PCB 與外殼。燒錄不帶 <code>SIM</code> 的你自己的版本、打開你的 App、看到你的儀器驅動真實硬體（例如 A：AI1 上的一個電壓與接收器的 I、Q · B：從 AO1 輸出正弦波進 AI1、一條 TTL 線與 TRIG 方向 · C：一路模組輸出切換、一次光耦計數與 OLED 上的一行狀態）。</li>
+        <li><strong>測試並改進</strong>你的韌體與應用程式。</li>
+        <li><strong>10月26–30日：</strong>發表並展示你的專案、應用程式、網站與影片——每人約 15 分鐘。例如，做一支影片介紹你的應用程式與你的儀器。</li>
+        <li><strong>專案網站與專案牆：</strong>每個專案都有自己的公開儲存庫與專案網站（GitHub Pages）。<strong>專案 3——你的儀器：韌體、App 與外殼——是一個儲存庫、一個網站</strong>，而這個網站值得用心：App 做什麼、怎麼用、能做什麼，給使用者的範例與展現其能力的示範——螢幕截圖、量到了什麼、影片或動畫、很棒的介面——並連到你在 <code>class-board-2026</code> 的拉取請求與班級儲存庫（你的儲存庫可放外殼的 CAD 匯出檔、照片與影片）；在專案牆上是一張卡片。全部都在<a href="https://tigp-experimental-methods.github.io/showcase-2026/" target="_blank" rel="noopener">班級專案牆</a>上。</li>
+      </ul>
+      <p><strong>展示</strong>由你自己安排：你的儀器、你的 App 與你的網站實際運作，用最能呈現它們的順序；想規劃的話，請家教幫你。</p>
+    </section>
+
+    <section class="card">
+      <h2>教材</h2>
+      <ul>
+        <li>投影片：<a href="slides/W3-getting-things-made.pdf" target="_blank" rel="noopener">Workshop 3: getting things made（PDF）</a>。影片錄影不會上線。</li>
+        <li>GitHub 上的 workbook：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch3-day-3-week-3.md" target="_blank" rel="noopener">第 3 章 — 工作坊 3</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/ch4-wrap-up-demo.md" target="_blank" rel="noopener">第 4 章 — 成果發表與展示</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chB-how-the-software-works.md" target="_blank" rel="noopener">第 B 章 軟體如何運作</a>（自學）。</li>
+        <li>班級儲存庫（repository）中：<a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/PROTOCOL.md" target="_blank" rel="noopener">PROTOCOL.md</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/firmware/src/blocks/template" target="_blank" rel="noopener">blocks/template</a>（含 SIM 分支與警報引擎的鉤子（hook））· <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/host/pwa/panels/template.js" target="_blank" rel="noopener">panels/template.js</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/housing-brief.md" target="_blank" rel="noopener">外殼簡報</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/housing-example-spec.md" target="_blank" rel="noopener">範例規格</a> · <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/tree/main/hardware/release" target="_blank" rel="noopener">hardware/release</a>（參考檔 <code>housing.scad</code> 與電路板網格）· <a href="https://github.com/TIGP-Experimental-Methods/class-board-2026/blob/main/workbook/chC-cheat-sheets.md" target="_blank" rel="noopener">workbook 第 C 章 §C.6</a> 的速查表。</li>
+        <li>家教：班級儲存庫中的 <code>/tutor L3</code> 與 <code>/tutor HW3</code>。</li>
+        <li>另請參閱<a href="resources-zh.html#making">「把東西做出來」的資源</a>。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-stack">
+      <div><p>Taiwan International Graduate Program · 中央研究院原子與分子科學研究所</p></div>
+      <p><a href="index-zh.html#contact">聯絡方式</a></p>
+    </div>
+  </footer>
+</body>
+</html>
